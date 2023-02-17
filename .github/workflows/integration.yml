@@ -25,4 +25,5 @@ jobs:
       - name: Fail if build system is not detected
         if: hashFiles('pom.xml') == '' && hashFiles('gradlew') == ''
         run: |
-          echo "No build system
+          echo "No build system found"
+          exit 1
