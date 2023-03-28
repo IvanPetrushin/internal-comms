@@ -1,0 +1,19 @@
+.page-header-inner {
+    overflow: hidden;
+    background-color: darkred;
+}
+
+.header-link {
+    float: right;
+    display: block;
+    text-align: center;
+    padding: 18px 40px;
+}
+
+.header-link:hover {
+    background-color: bisque;
+}
+
+.header-logo {
+    float: left;
+}
