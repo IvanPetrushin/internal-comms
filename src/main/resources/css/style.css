@@ -1,17 +1,33 @@
+@font-face {
+    font-family: 'GolosTextWebRegular';
+    src: url("../fonts/Golos-Text_Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: GolosTextWebRegular,Arial,sans-serif;
+}
+
 .page-header-inner {
     overflow: hidden;
-    background-color: darkred;
+    padding: 20px 0 28px;
+    margin: 0 40px;
+    border-bottom: black 1px solid;
 }
 
 .header-link {
+    border-radius: 15px;
     float: right;
     display: block;
     text-align: center;
-    padding: 18px 40px;
+    font-weight: 400;
+    padding: 4px 14px;
 }
 
 .header-link:hover {
-    background-color: bisque;
+    background-color: lightpink;
+    transition: background-color .25s;
 }
 
 .header-logo {
