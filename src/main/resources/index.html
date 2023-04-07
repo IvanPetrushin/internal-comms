@@ -1,16 +1,14 @@
 <!DOCTYPE HTML>
 <html lang="ru">
 <head>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
     <title>Internal Comms Main Page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body class>
 <header class="page-header">
     <div class="page-header-inner">
-        <div>
-            <img class="header-logo" src="//../img/comp-logo-red.svg" alt="logo">
-        </div>
+        <img class="header-logo" src="./img/comp-logo-red.svg" alt="logo">
         <div class="user-name__header">
             <a class="header-link" href="../templates/projects.html">Проекты</a>
             <a class="header-link" href="../index.html">Главная</a>
@@ -23,10 +21,13 @@
         <div class="block project">
             <div class="project-header">
                 <a class="project-name">project name</a>
-                <a class="block expand collapsed"><</a>
+                <a class="expand collapsed"><</a>
             </div>
-            <div class="project-description">
+            <div class="project-description hidden">
                 В начале этой статьи объясняется, что свойства выравнивания, которые в настоящее время содержатся в спецификации Flexbox Level 1, также включены в спецификацию Box Alignment Level 3, которая в дальнейшем может расширить эти свойства и значения. Мы уже видели, как это произошло с введением значения space-evenly для свойств align-content и justify-content.
+            </div>
+            <div>
+                <a class="buttons">done</a>
             </div>
         </div>
         <div class="block project"></div>
@@ -46,6 +47,6 @@
 </main>
 <footer>
 </footer>
-<script src="../js/main.js"></script>
+<script src="../js/main.js" type="module"></script>
 </body>
 </html>
