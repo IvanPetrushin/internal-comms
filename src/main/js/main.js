@@ -34,6 +34,23 @@ class Project {
     }
 }
 
+function sortProjects(projects, keyField, way = true) {
+    let result = structuredClone(projects);
+    for (let i = 0; i < projects.length-1; i++) {
+        if ((projects[i][keyField] > projects[i+1][keyField]) && way) {
+            let swap = projects[i];
+            projects[i] = projects[i+1];
+            projects[i+1] = swap;
+        }
+        else {
+            let swap = projects[i+1];
+            projects[i+1] = projects[i];
+            projects[i] = swap;
+        }
+    }
+    return result
+}
+
 let project = new Project (
     'Проект для жоского отдыха',
     3,

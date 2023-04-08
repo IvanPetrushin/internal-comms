@@ -6,6 +6,8 @@
 }
 
 main {
+    flex-direction: column;
+    display: flex;
     margin: 0 40px;
 }
 
@@ -58,6 +60,11 @@ footer {
 
 .profile-list {
     list-style: none;
+}
+
+.new-project {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .block {
@@ -164,6 +171,14 @@ footer {
     padding: 5px;
     display: flex;
     justify-content: center;
+    text-decoration: none;
+    color: black;
+    user-select: none;
+}
+
+.button:hover {
+    color: #f13f34;
+    transition: 0.1s;
 }
 
 .hidden {
