@@ -15,15 +15,15 @@ iconsPass.forEach(icon => {
     });
 });
 
-// form.addEventListener('change', changeFormHandler)
-//
-// function changeFormHandler() {
-//     console.log(form.checkValidity());
-//     if (form.checkValidity()) {
-//         buttons.forEach(button => {
-//             button.removeAttribute('disabled');
-//         });
-//     }
-// }
+form.addEventListener('change', changeFormHandler)
+
+function changeFormHandler() {
+    console.log(form.checkValidity());
+    if (form.checkValidity()) {
+        buttons.forEach(button => {
+            button.removeAttribute('disabled');
+        });
+    }
+}
 
 
