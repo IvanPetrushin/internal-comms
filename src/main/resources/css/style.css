@@ -10,6 +10,7 @@ main {
 }
 
 body {
+    overflow-y: scroll;
     font-family: GolosTextWebRegular,Arial,sans-serif;
 }
 
@@ -170,4 +171,21 @@ footer {
 ::selection {
     background-color: #e6000e;
     color: #fff;
+}
+
+.file-list .file {
+    display: flex;
+    justify-content: space-between;
+}
+
+.file-list .file .file-delete {
+    user-select: none;
+}
+.file-list .file .file-delete:hover {
+    color: #f13f34;
+    transition: color 0.1s;
+ }
+
+input {
+    font-family: GolosTextWebRegular,Arial,sans-serif;
 }
