@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/modal.css">
+    <title>Проекты</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body class>
+<header>
+    <div class="page-header">
+        <img class="header-logo" src="./img/comp-logo-red.svg" alt="logo">
+        <div class="user-name__header">
+            <a class="header-link" href="./index.html"><h3>Проекты</h3></a>
+            <a class="header-link" href="./templates/forum.html"><h3>Вопросы</h3></a>
+            <div class="profile">
+                <ul class="profile-list">
+                    <li class="user">Ехоров Н. А.</li>
+                    <li class="user-group">СПб Лесной пр-кт 1а</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+<main>
+    <h1>Текущие проекты</h1>
+    <div class="new-project"><a class="button" href="./new-project.html">+Создать</a></div>
+    <div class="projects-window current">
+    </div>
+
+    <h1>Завершенные проекты</h1>
+    <div class="projects-window ended">
+    </div>
+
+</main>
+<footer>
+</footer>
+<span class="modal__temps hidden">
+    <a class="edit-files">
+        <div style="display: flex; flex-direction: column; padding: 5px">
+            Текущие файлы:
+            <ol class="file-list">
+                <li class="file" id="file-1">file.jpg<span class="file-delete">удалить</span></li>
+            </ol>
+            <div style="display: flex; justify-content: space-between">
+                <input type="file" id="load-file" name="load-file">
+                <input type="submit" id="add-file" value="Добавить файл">
+            </div>
+        </div>
+    </a>
+</span>
+<script src="../js/modal.js"></script>
+<script src="../js/main.js" type="module"></script>
+</body>
+</html>
