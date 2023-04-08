@@ -3,7 +3,7 @@
 <head>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/modal.css">
-    <title>Internal Comms Main Page</title>
+    <title>Проекты</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body class>
@@ -24,7 +24,7 @@
 </header>
 <main>
     <h1>Текущие проекты</h1>
-    <div class="block projects-window current">
+    <div class="projects-window current">
         <div class="block project">
             <div class="project-header">
                 <div class="project-header__items">
@@ -77,7 +77,7 @@
         </div>
     </div>
     <h1>Завершенные проекты</h1>
-    <div class="block projects-window ended">
+    <div class="projects-window ended">
 
         <div class="block empty">
             В данной категории еще нет проектов
@@ -90,8 +90,15 @@
 </footer>
 <span class="modal__temps hidden">
     <a class="edit-files">
-        <div class="block">
-            <input type="file" id="load-file" name="load-file">
+        <div style="display: flex; flex-direction: column; padding: 5px">
+            Текущие файлы:
+            <ol class="file-list">
+                <li class="file" id="file-1">file.jpg<span class="file-delete">удалить</span></li>
+            </ol>
+            <div style="display: flex; justify-content: space-between">
+                <input type="file" id="load-file" name="load-file">
+                <input type="submit" id="add-file" value="Добавить файл">
+            </div>
         </div>
     </a>
 </span>

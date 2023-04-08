@@ -1,2 +1,2 @@
 import './projectButtons.js'
-import './modalWindows.js'
+import './modalFilesEdit.js'
