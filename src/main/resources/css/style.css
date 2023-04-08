@@ -81,6 +81,10 @@ footer {
     justify-content: space-between;
 }
 
+.ended .project-header {
+    background-color: rgba(241,61,52,0.7);
+}
+
 .project-header__items {
 
 }
@@ -95,7 +99,7 @@ footer {
     user-select: none;
     margin: 5px;
     float: right;
-    padding: 0 5px;
+    padding: 1px 10px;
     font-weight: bold;
 }
 
@@ -141,6 +145,10 @@ footer {
     background-color: pink;
 }
 
+.ended .project-bottom {
+    background-color: rgba(255,192,203,0.7);
+}
+
 .project-bottom__info {
     list-style: none;
 }
@@ -161,6 +169,7 @@ footer {
 .hidden {
     visibility: hidden;
     height: 0;
+    transition: height 5s;
 }
 
 .empty {
