@@ -1,3 +1,5 @@
+import {projects, equalsEmp, currentUser} from "./main.js";
+
 const editFilesElement = document.querySelector('.modal__temps .edit-files');
 const editFilesModal = $modal({
     title: 'Изменение файлов',
@@ -8,17 +10,19 @@ const editFilesModal = $modal({
     ]
 });
 
-const editButton = document.querySelector('.action-file.edit');
-editButton.addEventListener('click',
-    function (evt){
-    editFilesModal.show();
-    drawFileList();
-});
+function editButtonsLogic() {
+    const editButtons = document.querySelectorAll('.action-file.edit');
+    for (let button of editButtons) {
+        button.addEventListener('click',
+            function () {
+                editFilesModal.show();
+                const index = Number(button.parentElement.parentElement.parentElement.classList.item(2));
+                drawFileList(projects[index].loadedFiles.find(value => equalsEmp(value.user, currentUser)).files);
+            });
+    }
+}
 
-// тестовый массив файлов, потом надо как-то связать с лежащими на  сервере файлами
-let files = ['file.jpg', 'another-file.pdf', 'other-file-final.docx'];
-
-function drawFileList() {
+function drawFileList(files) {
     const list = document.querySelector('.modal__body .file-list');
     list.innerHTML = ``;
     for (let file of files) {
@@ -28,3 +32,5 @@ function drawFileList() {
         list.appendChild(element);
     }
 }
+
+export {editButtonsLogic}
