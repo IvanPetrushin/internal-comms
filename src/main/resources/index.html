@@ -2,16 +2,23 @@
 <html lang="ru">
 <head>
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/modal.css">
     <title>Internal Comms Main Page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body class>
-<header class="page-header">
-    <div class="page-header-inner">
+<header>
+    <div class="page-header">
         <img class="header-logo" src="./img/comp-logo-red.svg" alt="logo">
         <div class="user-name__header">
-            <a class="header-link" href="../templates/projects.html">Проекты</a>
-            <a class="header-link" href="../index.html">Главная</a>
+            <a class="header-link" href="../templates/projects.html"><h3>Проекты</h3></a>
+            <a class="header-link" href="../templates/projects.html"><h3>Вопросы</h3></a>
+            <div class="profile">
+                <ul class="profile-list">
+                    <li class="user">Ехоров Н. А.</li>
+                    <li class="user-group">СПб Лесной пр-кт 1а</li>
+                </ul>
+            </div>
         </div>
     </div>
 </header>
@@ -21,8 +28,9 @@
         <div class="block project">
             <div class="project-header">
                 <div class="project-header__items">
-                    <a class="project-name">Project name</a>
-                    <a>short description</a>
+                    <a class="project-name">Проект для жоского отдыха</a>
+                    <a class="priority">приоритет: 3</a>
+                    <a class="expired">до 14.04.2023</a>
                 </div>
                 <a class="expand collapsed"><</a>
             </div>
@@ -36,19 +44,25 @@
                     <p>Также потом там чето еще ну в общем ладно всем хорошего настроения дасведвния всем пака.</p>
                 </div>
                 <div class="block project-files init">
-                    Файлы заказчика:
-                    <a href="file.jpg">file.jpg</a>,
-                    <a href="another_file.pdf">another_file.pdf</a>
+                    <div>
+                        Файлы заказчика:
+                        <a href="file.jpg">file.jpg</a>,
+                        <a href="another_file.pdf">another_file.pdf</a>
+                    </div>
+                    <a class="action-file download">Скачать все</a>
                 </div>
                 <div class="block project-files user">
-                    Файлы Вашего отчета:
-                    <a href="file.jpg">file.jpg</a>,
-                    <a href="another_file.pdf">another_file.pdf</a>
+                    <div>
+                        Файлы Вашего отчета:
+                        <a href="file.jpg">file.jpg</a>,
+                        <a href="another_file.pdf">another_file.pdf</a>
+                    </div>
+                    <a class="action-file edit">Изменить</a>
                 </div>
                 <div class="project-bottom">
                     <ul class="project-bottom__info">
-                        <li>Заказчик задачи: Тропик Т. Д. (Отдел кайфа)</li>
-                        <li>Исполнитель: Ехоров Н. А. (Магнит, Лесной пр-т 1а)</li>
+                        <li class="customer">Заказчик задачи: Тропик Т. Д. (Отдел кайфа)</li>
+                        <li class="executor">Исполнитель: Ехоров Н. А. (Магнит, Лесной пр-т 1а)</li>
                     </ul>
                     <div class="project-buttons">
                         <a class="block button">Отправить</a>
@@ -57,28 +71,15 @@
                 </div>
             </div>
         </div>
-        <div class="block project">
-            <div class="project-header">
-                <a class="project-name">project name 2</a>
-                <a class="expand collapsed"><</a>
-            </div>
-            <div class="project-content">
-                <div class="project-description">
-                    В начале этой статьи объясняется, что свойства выравнивания, которые в настоящее время содержатся в спецификации Flexbox Level 1, также включены в спецификацию Box Alignment Level 3, которая в дальнейшем может расширить эти свойства и значения. Мы уже видели, как это произошло с введением значения space-evenly для свойств align-content и justify-content.
-                </div>
-                <div>
-                    done
-                </div>
-            </div>
-        </div>
-        <div class="block empty">
+
+        <div class="block empty hidden">
             В данной категории еще нет проектов
         </div>
     </div>
     <h1>Завершенные проекты</h1>
     <div class="block projects-window ended">
 
-        <div class="block empty hidden">
+        <div class="block empty">
             В данной категории еще нет проектов
         </div>
     </div>
@@ -87,6 +88,14 @@
 </main>
 <footer>
 </footer>
+<span class="modal__temps hidden">
+    <a class="edit-files">
+        <div class="block">
+            <input type="file" id="load-file" name="load-file">
+        </div>
+    </a>
+</span>
+<script src="../js/modal.js"></script>
 <script src="../js/main.js" type="module"></script>
 </body>
 </html>
