@@ -3,7 +3,7 @@
 <head>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/modal.css">
-    <title>Проекты</title>
+    <title>Создание нового проекта</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body class>
@@ -23,13 +23,39 @@
     </div>
 </header>
 <main>
-    <h1>Текущие проекты</h1>
-    <div class="new-project"><a class="button" href="./new-project.html">+Создать</a></div>
-    <div class="projects-window current">
-    </div>
-
-    <h1>Завершенные проекты</h1>
-    <div class="projects-window ended">
+    <h1>Новый проект</h1>
+    <div class="new-project-window">
+        <form>
+            <label>Название проекта</label>
+            <div style="display: flex; flex-direction: row">
+                <label style="width: 50%; flex-direction: row">
+                    Приоритет:
+                    <div style="flex-direction: row; display: flex; width: 140px; justify-content: space-evenly">
+                        <label class="fake-radio" style="padding: 0" for="prior1">1</label>
+                        <input class="radio-button" type="radio" name="prior" id="prior1" checked>
+                        <label class="fake-radio" style="padding: 0" for="prior2">2</label>
+                        <input class="radio-button" type="radio" name="prior" id="prior2">
+                        <label class="fake-radio" style="padding: 0" for="prior3">3</label>
+                        <input class="radio-button" type="radio" name="prior" id="prior3">
+                        <label class="fake-radio" style="padding: 0" for="prior4">4</label>
+                        <input class="radio-button" type="radio" name="prior" id="prior4">
+                        <label class="fake-radio" style="padding: 0" for="prior5">5</label>
+                        <input class="radio-button" type="radio" name="prior" id="prior5">
+                    </div>
+                </label>
+                <label style="flex-direction: row">
+                    Выполнить до:
+                    <input id="expires" type="date" style="margin-left: 10px">
+                </label>
+            </div>
+            <label>
+                Описание проекта
+                <textarea rows="7" required></textarea>
+            </label>
+            <label>Файлы</label>
+            <label>Исполнители</label>
+            <input type="submit">
+        </form>
     </div>
 
 </main>
@@ -50,6 +76,7 @@
     </a>
 </span>
 <script src="../js/modal.js"></script>
-<script src="../js/main.js" type="module"></script>
+
+<script src="../js/newProject.js" type="module"></script>
 </body>
 </html>

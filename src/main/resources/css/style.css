@@ -9,6 +9,7 @@ main {
     flex-direction: column;
     display: flex;
     margin: 0 40px;
+    padding: 0 40px;
 }
 
 body {
@@ -19,6 +20,19 @@ body {
 footer {
     margin: 40px;
     border-top: 1px black solid;
+}
+
+label {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+textarea {
+    font-size: 1rem;
+    font-family: GolosTextWebRegular,Arial,sans-serif;
+    resize: vertical;
 }
 
 .page-header {
@@ -184,7 +198,6 @@ footer {
 .hidden {
     visibility: hidden;
     height: 0;
-    transition: height 5s;
 }
 
 .empty {
@@ -211,5 +224,29 @@ footer {
  }
 
 input {
+    font-size: 1rem;
     font-family: GolosTextWebRegular,Arial,sans-serif;
+}
+
+.fake-radio {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    text-align: center;
+    border: 1px black solid;
+}
+
+.fake-radio.checked {
+    background-color: pink;
+}
+
+.fake-radio:hover {
+    color: #f13f34;
+    transition: 0.1s;
+}
+
+.radio-button {
+    position: fixed;
+    opacity: 0;
+    pointer-events: none;
 }
