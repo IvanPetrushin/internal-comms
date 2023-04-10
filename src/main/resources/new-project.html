@@ -25,35 +25,44 @@
 <main>
     <h1>Новый проект</h1>
     <div class="new-project-window">
-        <form>
-            <label>Название проекта</label>
+        <form class="text-size">
+            <label>
+                Название проекта
+                <input class="text-size" type="text" style="width: 50%">
+            </label>
             <div style="display: flex; flex-direction: row">
-                <label style="width: 50%; flex-direction: row">
+                <label class="half-label">
                     Приоритет:
-                    <div style="flex-direction: row; display: flex; width: 140px; justify-content: space-evenly">
-                        <label class="fake-radio" style="padding: 0" for="prior1">1</label>
-                        <input class="radio-button" type="radio" name="prior" id="prior1" checked>
-                        <label class="fake-radio" style="padding: 0" for="prior2">2</label>
-                        <input class="radio-button" type="radio" name="prior" id="prior2">
-                        <label class="fake-radio" style="padding: 0" for="prior3">3</label>
-                        <input class="radio-button" type="radio" name="prior" id="prior3">
-                        <label class="fake-radio" style="padding: 0" for="prior4">4</label>
-                        <input class="radio-button" type="radio" name="prior" id="prior4">
-                        <label class="fake-radio" style="padding: 0" for="prior5">5</label>
-                        <input class="radio-button" type="radio" name="prior" id="prior5">
-                    </div>
+                    <span style="flex-direction: row; display: flex; width: 180px; justify-content: space-evenly">
+                        <a id="range-value">1</a>
+                        <input id="prior-range" name="priority" type="range" min="1" max="5" value="1">
+                    </span>
                 </label>
-                <label style="flex-direction: row">
+                <label class="half-label">
                     Выполнить до:
-                    <input id="expires" type="date" style="margin-left: 10px">
+                    <input class="text-size" id="expires" name="expires" type="date" style="margin-left: 10px">
                 </label>
             </div>
             <label>
                 Описание проекта
-                <textarea rows="7" required></textarea>
+                <textarea class="text-size" rows="7" required></textarea>
             </label>
-            <label>Файлы</label>
-            <label>Исполнители</label>
+            <div style="display: flex; flex-direction: row">
+                <label class="half-label vert">
+                    Файлы
+                    <span class="project-files" style="width: 100%; font-size: 1rem">
+                        <span></span>
+                        <a class="action-file edit">Изменить</a>
+                    </span>
+                </label>
+                <label class="half-label vert">
+                    Исполнители
+                    <span class="project-files" style="width: 100%; font-size: 1rem">
+                        <span></span>
+                        <a class="action-file edit">Изменить</a>
+                    </span>
+                </label>
+            </div>
             <input type="submit">
         </form>
     </div>
@@ -66,7 +75,7 @@
         <div style="display: flex; flex-direction: column; padding: 5px">
             Текущие файлы:
             <ol class="file-list">
-                <li class="file" id="file-1">file.jpg<span class="file-delete">удалить</span></li>
+
             </ol>
             <div style="display: flex; justify-content: space-between">
                 <input type="file" id="load-file" name="load-file">
@@ -76,7 +85,6 @@
     </a>
 </span>
 <script src="../js/modal.js"></script>
-
 <script src="../js/newProject.js" type="module"></script>
 </body>
 </html>

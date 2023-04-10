@@ -1,7 +1,3 @@
-import {editButtonsLogic} from './modalFilesEdit.js';
-import {drawProject} from "./drawProject.js";
-import {expandButtonLogic} from "./expandButtonLogic.js";
-
 class Employee {
     constructor(name, group) {
         this.name = name;
@@ -64,7 +60,7 @@ let project = new Project (
                     <p>Также потом там чето еще ну в общем ладно всем хорошего настроения дасведвния всем пака.</p>`,
     ['file.jpg','another-file.pdf'],
     new Employee('Тропик Т. Д.', 'Отдел кайфа'),
-     [
+    [
         new Employee('Ехоров Н. А.', 'Магнит на Лесном'),
         new Employee('Маковкин Н. В..', 'Магнит тоже где-то есть да'),
         new Employee('Петручин И. И.', 'Магнит в другом городе'),
@@ -83,7 +79,3 @@ projects[2].loadedFiles[0].files = ['print.txt','tested.svg'];
 const currentUser = new Employee('Ехоров Н. А.', 'Магнит на Лесном');
 
 export {equalsEmp, currentUser, projects};
-
-drawProject(projects);
-expandButtonLogic();
-editButtonsLogic();
