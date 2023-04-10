@@ -23,7 +23,6 @@ footer {
 }
 
 label {
-    font-size: 1.25rem;
     margin-bottom: 10px;
     display: flex;
     flex-direction: column;
@@ -148,6 +147,7 @@ textarea {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    box-sizing: border-box;
 }
 
 .action-file {
@@ -224,29 +224,19 @@ textarea {
  }
 
 input {
-    font-size: 1rem;
+
     font-family: GolosTextWebRegular,Arial,sans-serif;
 }
 
-.fake-radio {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    text-align: center;
-    border: 1px black solid;
+.half-label {
+    flex-direction: row;
+    width: 50%;
 }
 
-.fake-radio.checked {
-    background-color: pink;
+.half-label.vert {
+    flex-direction: column;
 }
 
-.fake-radio:hover {
-    color: #f13f34;
-    transition: 0.1s;
-}
-
-.radio-button {
-    position: fixed;
-    opacity: 0;
-    pointer-events: none;
+.text-size {
+    font-size: 1.25rem;
 }

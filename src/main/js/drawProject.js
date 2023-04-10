@@ -1,4 +1,4 @@
-import {equalsEmp, currentUser} from "./main.js";
+import {equalsEmp, currentUser} from "./data.js";
 
 function drawProject(projects) {
     for (let [index, project] of projects.entries()) {

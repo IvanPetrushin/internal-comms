@@ -1,4 +1,4 @@
-import {projects, equalsEmp, currentUser} from "./main.js";
+import {projects, equalsEmp, currentUser} from "./data.js";
 
 const editFilesElement = document.querySelector('.modal__temps .edit-files');
 const editFilesModal = $modal({
@@ -24,7 +24,8 @@ function editButtonsLogic() {
 
 function drawFileList(files) {
     const list = document.querySelector('.modal__body .file-list');
-    list.innerHTML = ``;
+    list.innerHTML = '';
+    console.log(list.innerHTML);
     for (let file of files) {
         const element = document.createElement('li');
         element.classList.add('file');
@@ -33,4 +34,4 @@ function drawFileList(files) {
     }
 }
 
-export {editButtonsLogic}
+export {editButtonsLogic, drawFileList};
