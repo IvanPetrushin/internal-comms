@@ -28,22 +28,22 @@ function checkInputsSignIn(){
 inputsSignUp.forEach(function(el){
     el.addEventListener('input', checkInputsSignUp, false);
 });
+
 function checkInputsSignUp(){
     let empty = inputsSignUp.filter(function(el){
         return el.value.trim() === '';
     }).length;
     signUpButton.disabled = empty !== 0;
 }
-
-// signUpButton.addEventListener('click', () => {
-//     if (document.getElementById('password-sign-up').value === document.getElementById('password-sign-up-again').value) {
-//         return true
-//     } else {
-//         alert("Не совпадают пароли")
-//         signUpButton.disabled = true
-//         return false
-//     }
-// })
+signUpButton.addEventListener('click', () => {
+    if (document.getElementById('password-sign-up').value === document.getElementById('password-sign-up-again').value) {
+        return true
+    } else {
+        alert("Не совпадают пароли")
+        signUpButton.disabled = true
+        return false
+    }
+})
 
 checkInputsSignUp()
 checkInputsSignIn()
