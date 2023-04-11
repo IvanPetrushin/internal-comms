@@ -67,7 +67,7 @@ let project = new Project (
     ],
     [
         new UserToFiles((new Employee('Ехоров Н. А.', 'Магнит на Лесном')), ['file.jpg', 'another-file.pdf', 'other-file-final.docx']),
-        new UserToFiles((new Employee('Маковкин Н. В..', 'Магнит тоже где-то есть да')), []),
+        new UserToFiles((new Employee('Маковкин Н. В.', 'Магнит тоже где-то есть да')), []),
         new UserToFiles((new Employee('Петручин И. И.', 'Магнит в другом городе')), [])
     ]
 );
@@ -77,5 +77,11 @@ projects[2].expired = false;
 projects[2].loadedFiles[0].files = ['print.txt','tested.svg'];
 
 const currentUser = new Employee('Ехоров Н. А.', 'Магнит на Лесном');
+const executorsList = [
+    new Employee('Маковкин Н. В.', 'Магнит тоже где-то есть да'),
+    new Employee('Петручин И. И.', 'Магнит в другом городе'),
+    new Employee('Тропинин Н. Д.', 'Какой-нибудь еще магнит'),
+    new Employee('Тропич Т. Д.', 'Магнит косметик')
+];
 
-export {equalsEmp, currentUser, projects};
+export {equalsEmp, currentUser, projects, executorsList};

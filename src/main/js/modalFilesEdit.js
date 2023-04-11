@@ -1,21 +1,21 @@
-import {projects, equalsEmp, currentUser} from "./data.js";
+import {currentUser, equalsEmp, projects} from "./data.js";
 
-const editFilesElement = document.querySelector('.modal__temps .edit-files');
-const editFilesModal = $modal({
-    title: 'Изменение файлов',
-    content: editFilesElement.innerHTML,
-    footerButtons: [
-        {class: 'btn btn__cancel', text: 'Отмена', handler: 'modalHandlerCancel'},
-        {class: 'btn btn__ok', text: 'Сохранить', handler: 'modalHandlerOk'}
-    ]
-});
+function createModal(template) {
+    const editFilesElement = document.querySelector(`.modal__temps .${template}`);
+    const elementHtml = structuredClone(editFilesElement.innerHTML);
+    editFilesElement.innerHTML = '';
+    return $modal({
+        title: 'Изменение файлов',
+        content: elementHtml
+    })
+}
 
-function editButtonsLogic() {
+function editButtonsLogic(modalWin) {
     const editButtons = document.querySelectorAll('.action-file.edit');
     for (let button of editButtons) {
         button.addEventListener('click',
             function () {
-                editFilesModal.show();
+                modalWin.show();
                 const index = Number(button.parentElement.parentElement.parentElement.classList.item(2));
                 drawFileList(projects[index].loadedFiles.find(value => equalsEmp(value.user, currentUser)).files);
             });
@@ -25,7 +25,6 @@ function editButtonsLogic() {
 function drawFileList(files) {
     const list = document.querySelector('.modal__body .file-list');
     list.innerHTML = '';
-    console.log(list.innerHTML);
     for (let file of files) {
         const element = document.createElement('li');
         element.classList.add('file');
@@ -34,4 +33,4 @@ function drawFileList(files) {
     }
 }
 
-export {editButtonsLogic, drawFileList};
+export {editButtonsLogic, drawFileList, createModal};
