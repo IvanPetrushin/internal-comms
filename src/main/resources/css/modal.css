@@ -27,7 +27,7 @@
 
 @media (min-width: 576px) {
     .modal__content {
-        max-width: 500px;
+        max-width: 550px;
         margin: 50px auto;
     }
 }

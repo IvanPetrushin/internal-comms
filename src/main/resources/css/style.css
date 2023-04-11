@@ -8,7 +8,7 @@
 main {
     flex-direction: column;
     display: flex;
-    margin: 0 40px;
+    margin: 0 200px 0 150px;
     padding: 0 40px;
 }
 
@@ -26,6 +26,7 @@ label {
     margin-bottom: 10px;
     display: flex;
     flex-direction: column;
+    font-weight: bold;
 }
 
 textarea {
@@ -148,6 +149,7 @@ textarea {
     flex-direction: row;
     justify-content: space-between;
     box-sizing: border-box;
+    font-weight: normal;
 }
 
 .action-file {
@@ -223,9 +225,28 @@ textarea {
     transition: color 0.1s;
  }
 
+.executors-list .file {
+    display: flex;
+    justify-content: space-between;
+}
+
+.executors-list .file .executor-delete {
+    user-select: none;
+}
+.executors-list .file .executor-delete:hover {
+    color: #f13f34;
+    transition: color 0.1s;
+}
+
 input {
 
     font-family: GolosTextWebRegular,Arial,sans-serif;
+}
+
+select {
+    font-family: GolosTextWebRegular,Arial,sans-serif;
+    font-size: 1rem;
+    overflow-y: scroll;
 }
 
 .half-label {
@@ -239,4 +260,8 @@ input {
 
 .text-size {
     font-size: 1.25rem;
+}
+
+.project-files__list-item {
+    margin-right: 5px;
 }

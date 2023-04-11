@@ -26,16 +26,16 @@
     <h1>Новый проект</h1>
     <div class="new-project-window">
         <form class="text-size">
-            <label>
+            <label style="width: 50%">
                 Название проекта
-                <input class="text-size" type="text" style="width: 50%">
+                <input class="text-size" type="text">
             </label>
             <div style="display: flex; flex-direction: row">
                 <label class="half-label">
                     Приоритет:
                     <span style="flex-direction: row; display: flex; width: 180px; justify-content: space-evenly">
                         <a id="range-value">1</a>
-                        <input id="prior-range" name="priority" type="range" min="1" max="5" value="1">
+                        <input id="prior-range" name="priority" type="range" min="1" max="5" value="1" oninput="document.getElementById('range-value').textContent = this.value">
                     </span>
                 </label>
                 <label class="half-label">
@@ -51,15 +51,15 @@
                 <label class="half-label vert">
                     Файлы
                     <span class="project-files" style="width: 100%; font-size: 1rem">
-                        <span></span>
+                        <span class="project-files__list"></span>
                         <a class="action-file edit">Изменить</a>
                     </span>
                 </label>
                 <label class="half-label vert">
                     Исполнители
                     <span class="project-files" style="width: 100%; font-size: 1rem">
-                        <span></span>
-                        <a class="action-file edit">Изменить</a>
+                        <ul class="project-executors__list"></ul>
+                        <a class="action-file executors">Изменить</a>
                     </span>
                 </label>
             </div>
@@ -78,8 +78,22 @@
 
             </ol>
             <div style="display: flex; justify-content: space-between">
-                <input type="file" id="load-file" name="load-file">
-                <input type="submit" id="add-file" value="Добавить файл">
+                <label class="block button" for="load-file">Добавить файлы</label>
+                <input type="file" id="load-file" style="visibility: hidden">
+            </div>
+        </div>
+    </a>
+    <a class="edit-executors">
+        <div style="display: flex; flex-direction: column; padding: 5px">
+            Выбранные исполнители:
+            <ol class="executors-list">
+
+            </ol>
+            <div>
+                <label for="load-executors">Добавить исполнителя</label>
+                <select id="load-executors" style="width: 100%">
+                    <option value="">Выберите исполнителя</option>
+                </select>
             </div>
         </div>
     </a>
