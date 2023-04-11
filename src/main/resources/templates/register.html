@@ -15,8 +15,7 @@
                 <div class="sign-in-htm">
                     <div class="group">
                         <label for="email-sign-in" class="label">Email</label>
-                        <input data-rule="sign-in" id="email-sign-in" type="email" class="input">
-
+                        <input data-rule="sign-in" id="email-sign-in" type="email" data-type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="input">
                     </div>
                     <div class="group">
                         <label for="password-sign-in" class="label">Пароль</label>
@@ -44,7 +43,7 @@
                     </div>
                     <div class="group">
                         <label for="shop-group" class="label">Подразделение</label>
-                        <input data-rule="sign-up" id="shop-group" type="text" class="input" pattern="" placeholder="Введите число">
+                        <input data-rule="sign-up" id="shop-group" type="text" class="input" pattern="^\d+" placeholder="Введите число без пробелов">
                     </div>
                     <div class="group">
                         <label for="password-sign-up" class="label">Пароль</label>
@@ -58,7 +57,7 @@
                     </div>
                     <div class="group">
                         <label for="email-sign-up" class="label">Email</label>
-                        <input data-rule="sign-up" id="email-sign-up" type="email" class="input">
+                        <input data-rule="sign-up" id="email-sign-up" type="email" data-type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="input">
                     </div>
                     <div class="group">
                         <input id="check_ruk" type="checkbox" class="check">
