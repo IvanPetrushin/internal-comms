@@ -18,6 +18,11 @@ iconsPass.forEach(icon => {
 inputsSignIn.forEach(function(el){
     el.addEventListener('input', checkInputsSignIn, false);
 });
+
+inputsSignUp.forEach(function(el){
+    el.addEventListener('input', checkInputsSignUp, false);
+});
+
 function checkInputsSignIn(){
     let empty = inputsSignIn.filter(function(el){
         return el.value.trim() === '';
@@ -25,25 +30,12 @@ function checkInputsSignIn(){
     signInButton.disabled = empty !== 0;
 }
 
-inputsSignUp.forEach(function(el){
-    el.addEventListener('input', checkInputsSignUp, false);
-});
-
 function checkInputsSignUp(){
     let empty = inputsSignUp.filter(function(el){
         return el.value.trim() === '';
     }).length;
     signUpButton.disabled = empty !== 0;
 }
-signUpButton.addEventListener('click', () => {
-    if (document.getElementById('password-sign-up').value === document.getElementById('password-sign-up-again').value) {
-        return true
-    } else {
-        alert("Не совпадают пароли")
-        signUpButton.disabled = true
-        return false
-    }
-})
 
 checkInputsSignUp()
 checkInputsSignIn()
@@ -54,8 +46,7 @@ let shopGroup = document.getElementById("shop-group")
 let password = document.getElementById("password-sign-up")
 let email = document.getElementById("email-sign-up")
 let dataJSON
-//console.log(dataJSON)
-signUpButton.addEventListener("click", () => {
+signUpButton.addEventListener('click', () => {
     let data = {
         "UserName":userName.value,
         "UserSurname":userSurname.value,
@@ -64,6 +55,11 @@ signUpButton.addEventListener("click", () => {
         "email":email.value
     }
     dataJSON = JSON.stringify(data)
+    if (document.getElementById('password-sign-up').value === document.getElementById('password-sign-up-again').value) {
+        return true
+    } else {
+        alert("Не совпадают пароли")
+        signUpButton.disabled = true
+        return false
+    }
 })
-
-
