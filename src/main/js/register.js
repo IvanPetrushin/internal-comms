@@ -47,15 +47,15 @@ let password = document.getElementById("password-sign-up")
 let email = document.getElementById("email-sign-up")
 let dataJSON
 signUpButton.addEventListener('click', () => {
-    let data = {
-        "UserName":userName.value,
-        "UserSurname":userSurname.value,
-        "shopGroup":shopGroup.value,
-        "password":password.value,
-        "email":email.value
-    }
-    dataJSON = JSON.stringify(data)
     if (document.getElementById('password-sign-up').value === document.getElementById('password-sign-up-again').value) {
+        let data = {
+            "UserName":userName.value,
+            "UserSurname":userSurname.value,
+            "shopGroup":shopGroup.value,
+            "password":password.value,
+            "email":email.value
+        }
+        dataJSON = JSON.stringify(data)
         return true
     } else {
         alert("Не совпадают пароли")
