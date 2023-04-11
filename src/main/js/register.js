@@ -48,5 +48,22 @@ signUpButton.addEventListener('click', () => {
 checkInputsSignUp()
 checkInputsSignIn()
 
+let userName = document.getElementById("user_sign-up")
+let userSurname = document.getElementById("surname_sign-up")
+let shopGroup = document.getElementById("shop-group")
+let password = document.getElementById("password-sign-up")
+let email = document.getElementById("email-sign-up")
+let dataJSON
+//console.log(dataJSON)
+signUpButton.addEventListener("click", () => {
+    let data = {
+        "UserName":userName.value,
+        "UserSurname":userSurname.value,
+        "shopGroup":shopGroup.value,
+        "password":password.value,
+        "email":email.value
+    }
+    dataJSON = JSON.stringify(data)
+})
 
 
