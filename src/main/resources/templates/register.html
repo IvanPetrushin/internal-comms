@@ -15,13 +15,13 @@
                 <div class="sign-in-htm">
                     <div class="group">
                         <label for="email-sign-in" class="label">Email</label>
-                        <input id="email-sign-in" type="email" class="input" required>
+                        <input data-rule="sign-in" id="email-sign-in" type="email" class="input">
 
                     </div>
                     <div class="group">
-                        <label for="pass" class="label">Пароль</label>
+                        <label for="password-sign-in" class="label">Пароль</label>
                         <span class="pass-icon" id="pass-icon" type="img"><img src="../img/eye.png" style="width: 30px"></span>
-                        <input id="pass" type="password" class="input" data-type="password" pattern="\S+" required>
+                        <input data-rule="sign-in" id="password-sign-in" type="password" class="input" data-type="password">
                     </div>
                     <div class="group">
                         <input id="check-rem" type="checkbox" class="check" checked>
@@ -29,36 +29,36 @@
                     </div>
                     <div class="group">
                         <form action="../index.html">
-                            <input type="submit" class="button" value="Войти" disabled>
+                            <input type="submit" id="sign-up" class="button" value="войти">
                         </form>
                     </div>
                 </div>
                 <div class="sign-up-htm">
                     <div class="group">
                         <label for="user_sign-up" class="label">Имя</label>
-                        <input id="user_sign-up" type="text" class="input" pattern="[А-я]" required>
+                        <input data-rule="sign-up" id="user_sign-up" type="text" class="input">
                     </div>
                     <div class="group">
                         <label for="surname_sign-up" class="label">Фамилия</label>
-                        <input id="surname_sign-up" type="text" class="input" pattern="[А-я]" required>
+                        <input data-rule="sign-up" id="surname_sign-up" type="text" class="input">
                     </div>
                     <div class="group">
                         <label for="shop-group" class="label">Подразделение</label>
-                        <input id="shop-group" type="text" class="input" placeholder="Введите число" pattern="\d+" required>
+                        <input data-rule="sign-up" id="shop-group" type="text" class="input" placeholder="Введите число">
                     </div>
                     <div class="group">
-                        <label for="pass" class="label">Пароль</label>
+                        <label for="password-sign-up" class="label">Пароль</label>
                         <span class="pass-icon" id="pass-icon" type="img"><img src="../img/eye.png" style="width: 30px"></span>
-                        <input id="pass" type="password" class="input" data-type="password" pattern="\S+" required>
+                        <input data-rule="sign-up" id="password-sign-up" type="password" class="input" data-type="password">
                     </div>
                     <div class="group">
-                        <label for="pass" class="label">Пароль еще раз</label>
+                        <label for="password-sign-up-again" class="label">Пароль еще раз</label>
                         <span class="pass-icon" id="pass-icon" type="img"><img src="../img/eye.png" style="width: 30px"></span>
-                        <input id="pass" type="password" class="input" data-type="password" pattern="\S+" required>
+                        <input data-rule="sign-up" id="password-sign-up-again" type="password" class="input" data-type="password">
                     </div>
                     <div class="group">
-                        <label for="email" class="label">Email</label>
-                        <input id="email" type="email" class="input" required>
+                        <label for="email-sign-up" class="label">Email</label>
+                        <input data-rule="email-sign-up" id="email-sign-up" type="email" class="input">
                     </div>
                     <div class="group">
                         <input id="check_ruk" type="checkbox" class="check">
@@ -66,7 +66,7 @@
                     </div>
                     <div class="group">
                         <form action="../index.html">
-                            <input type="submit" class="button" value="регистрация" disabled>
+                            <input type="submit" id="sign-up" class="button" value="регистрация">
                         </form>
                 </div>
             </div>
