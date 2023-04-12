@@ -70,9 +70,14 @@ function drawProject(projects) {
         projectBottom.appendChild(projectBottomInfo);
         projectBottom.appendChild(projectButtons);
 
-        projectContent.appendChild(description);
-        projectContent.appendChild(initFiles);
-        projectContent.appendChild(userFiles);
+        const projectContentInner = document.createElement('div');
+        projectContentInner.classList.add('project-content__inner');
+
+        projectContentInner.appendChild(description);
+        projectContentInner.appendChild(initFiles);
+        projectContentInner.appendChild(userFiles);
+
+        projectContent.appendChild(projectContentInner)
         projectContent.appendChild(projectBottom);
 
         block.appendChild(projectHeader);
