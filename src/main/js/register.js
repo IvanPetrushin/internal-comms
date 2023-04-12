@@ -1,3 +1,5 @@
+import fetch from "node-fetch";
+
 const inputsPass = document.querySelectorAll('input[type=password]');
 const iconsPass = document.querySelectorAll('span[type=img]');
 const signUpButton = document.getElementById('sign-up');
