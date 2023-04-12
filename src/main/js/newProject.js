@@ -1,5 +1,6 @@
 import {createModal} from "./modalFilesEdit.js";
 import {executorsList} from "./data.js";
+import "./headerProfile.js";
 
 let currentDate = new Date;
 currentDate.setTime(Date.now());
