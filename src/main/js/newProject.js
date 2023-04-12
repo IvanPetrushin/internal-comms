@@ -126,7 +126,7 @@ function editButtonsLogic(modalWin) {
             modalWin.show();
             const inputFile = document.getElementById('load-file');
             inputFile.onchange = function () {
-                if (!(inputFile.files in currentFiles)) {
+                if (namesOfFiles(currentFiles).every(value => inputFile.files[0].name != value)) {
                     currentFiles.push(inputFile.files);
                 }
                 console.log(currentFiles.length);
