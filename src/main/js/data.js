@@ -1,7 +1,15 @@
+class Group {
+    constructor(name, isHead) {
+        this.name = name;
+        this.isHead = isHead;
+    }
+}
+
 class Employee {
-    constructor(name, group) {
+    constructor(name, group, isHead = false) {
         this.name = name;
         this.group = group;
+        this.isHead = isHead;
     }
 }
 
@@ -76,7 +84,7 @@ projects[1].expired = false;
 projects[2].expired = false;
 projects[2].loadedFiles[0].files = ['print.txt','tested.svg'];
 
-const currentUser = new Employee('Ехоров Н. А.', 'Магнит на Лесном');
+const currentUser = new Employee('Ехоров Н. А.', 'Магнит на Лесном', true);
 const executorsList = [
     new Employee('Маковкин Н. В.', 'Магнит тоже где-то есть да'),
     new Employee('Петручин И. И.', 'Магнит в другом городе'),

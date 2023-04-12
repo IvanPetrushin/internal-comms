@@ -39,6 +39,7 @@ textarea {
 }
 
 .page-header {
+    /* height: 75px; */
     /*background: white;*/
     display: flex;
     flex-direction: row;
@@ -50,14 +51,22 @@ textarea {
     border-bottom: black 1px solid;
 }
 
+.header-name {
+    display: flex;
+    width: 50%;
+}
+
 .header-logo {
     height: 70px;
+    width: 20%;
+    border-right: 1px black solid;
 }
 
 .user-name__header {
     width: 50%;
     display: flex;
     justify-content: right;
+    align: right;
 }
 
 .header-link {
@@ -86,6 +95,10 @@ textarea {
     list-style: none;
 }
 
+.su {
+    color: #f13f34;
+}
+
 .page-content {
     min-height: 700px;
     padding: 0 40px 30px 40px;
@@ -109,20 +122,21 @@ textarea {
 
 .project {
     margin: 5px;
+    background-image: url("../img/topography.svg");
 }
+
 
 .project-header {
     display: flex;
     flex-direction: row;
-    background-image: linear-gradient(to right, rgba(241,61,52,1), transparent 40%), url("../img/topography.svg");
-    /*background-color: rgba(241, 63, 52, 1);*/
-
+    background-color: rgba(241, 63, 52, 0.8);
     padding: 5px;
     justify-content: space-between;
 }
 
 .ended .project-header {
-    background-color: rgba(241,61,52,0.7);
+    /*background-color: rgba(241, 63, 52, 0.5);*/
+    background-color: rgba(192,192,192,0.7);
 }
 
 .project-header__items {
@@ -154,6 +168,7 @@ textarea {
 }
 
 .project-content {
+    background-image: none;
     display: flex;
     flex-direction: column;
 }
@@ -181,15 +196,18 @@ textarea {
     transition: color .1s;
 }
 
+.project-content__inner {
+    background: white;
+}
+
 .project-bottom {
     display: flex;
     justify-content: space-between;
-    background-color: rgba(255, 192, 203, 1);
-    background-image: url("../img/topography.svg");
+    background-color: rgba(255, 192, 203, 0.8);
 }
 
 .ended .project-bottom {
-    background-color: rgba(255,192,203,0.7);
+    background-color: rgba(192,192,192,0.5);
 }
 
 .project-bottom__info {
