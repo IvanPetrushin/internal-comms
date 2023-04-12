@@ -8,17 +8,20 @@
 main {
     flex-direction: column;
     display: flex;
-    margin: 0 200px 0 150px;
-    padding: 0 40px;
+    margin: 0 40px;
+    /* padding: 40px 0; */
+    background-image: url("../img/topography.svg");
+    /*background-size: 80px;*/
 }
 
 body {
+
     overflow-y: scroll;
     font-family: GolosTextWebRegular,Arial,sans-serif;
 }
 
 footer {
-    margin: 40px;
+    /* margin: 40px; */
     border-top: 1px black solid;
 }
 
@@ -36,6 +39,7 @@ textarea {
 }
 
 .page-header {
+    /*background: white;*/
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -51,8 +55,9 @@ textarea {
 }
 
 .user-name__header {
+    width: 50%;
     display: flex;
-    justify-content: center;
+    justify-content: right;
 }
 
 .header-link {
@@ -66,14 +71,25 @@ textarea {
 }
 
 .header-link:hover {
-    background-color: lightpink;
-    transition: background-color .25s;
+    color: #f78c85;
+    /*background-image: url("../img/bathroom-floor.svg");*/
+    transition: color .25s;
 }
 
-.profile {}
+.profile {
+    width: 30%;
+    /*background-image: url("../img/topography.svg");*/
+    background-position-y: revert;
+}
 
 .profile-list {
     list-style: none;
+}
+
+.page-content {
+    padding: 0 40px 30px 40px;
+    margin: 0 15% 0 10%;
+    background-color: white;
 }
 
 .new-project {
@@ -264,4 +280,8 @@ select {
 
 .project-files__list-item {
     margin-right: 5px;
+}
+
+.send-form {
+
 }
