@@ -1,8 +1,5 @@
 const inputsPass = document.querySelectorAll('input[type=password]');
 const iconsPass = document.querySelectorAll('span[type=img]');
-const inputsSignIn = [].slice.call(document.querySelectorAll('input[data-rule="sign-in"]'));
-const inputsSignUp = [].slice.call(document.querySelectorAll('input[data-rule="sign-up"]'));
-const signInButton = document.getElementById('sign-in');
 const signUpButton = document.getElementById('sign-up');
 iconsPass.forEach(icon => {
     icon.addEventListener('click', () => {
@@ -15,30 +12,6 @@ iconsPass.forEach(icon => {
         });
     });
 });
-inputsSignIn.forEach(function(el){
-    el.addEventListener('input', checkInputsSignIn, false);
-});
-
-inputsSignUp.forEach(function(el){
-    el.addEventListener('input', checkInputsSignUp, false);
-});
-
-function checkInputsSignIn(){
-    let empty = inputsSignIn.filter(function(el){
-        return el.value.trim() === '';
-    }).length;
-    signInButton.disabled = empty !== 0;
-}
-
-function checkInputsSignUp(){
-    let empty = inputsSignUp.filter(function(el){
-        return el.value.trim() === '';
-    }).length;
-    signUpButton.disabled = empty !== 0;
-}
-
-checkInputsSignUp()
-checkInputsSignIn()
 
 let userName = document.getElementById("user_sign-up")
 let userSurname = document.getElementById("surname_sign-up")
@@ -46,8 +19,11 @@ let shopGroup = document.getElementById("shop-group")
 let password = document.getElementById("password-sign-up")
 let email = document.getElementById("email-sign-up")
 let dataJSON
+
+let passwordSignUp = document.getElementById('password-sign-up')
+let passwordSignUpAgain =  document.getElementById('password-sign-up-again')
 signUpButton.addEventListener('click', () => {
-    if (document.getElementById('password-sign-up').value === document.getElementById('password-sign-up-again').value) {
+    if (passwordSignUp.value === passwordSignUpAgain.value) {
         let data = {
             "UserName":userName.value,
             "UserSurname":userSurname.value,
@@ -56,10 +32,20 @@ signUpButton.addEventListener('click', () => {
             "email":email.value
         }
         dataJSON = JSON.stringify(data)
-        return true
     } else {
         alert("Не совпадают пароли")
         signUpButton.disabled = true
-        return false
+    }
+})
+
+passwordSignUpAgain.addEventListener('change', () => {
+    if (passwordSignUpAgain.value === passwordSignUp.value) {
+        signUpButton.disabled = false
+    }
+})
+
+passwordSignUp.addEventListener('change', () => {
+    if (passwordSignUpAgain.value === passwordSignUp.value) {
+        signUpButton.disabled = false
     }
 })

@@ -6,73 +6,67 @@
     <title>signin-signup</title>
 </head>
 <body>
-<form>
     <div class="login-wrap">
         <div class="login-html">
             <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Вход</label>
             <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">регистрация</label>
             <div class="login-form">
+                <form>
                 <div class="sign-in-htm">
                     <div class="group">
                         <label for="email-sign-in" class="label">Email</label>
-                        <input data-rule="sign-in" id="email-sign-in" type="email" data-type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="input">
+                        <input data-rule="sign-in" id="email-sign-in" type="email" data-type="email" class="input" required>
                     </div>
                     <div class="group">
                         <label for="password-sign-in" class="label">Пароль</label>
-                        <span class="pass-icon" id="pass-icon" type="img"><img src="../img/eye.png" style="width: 30px"></span>
-                        <input data-rule="sign-in" id="password-sign-in" type="password" class="input" data-type="password">
+                        <span class="pass-icon" id="pass-icon_1" type="img"><img src="../img/eye.png" style="width: 30px" alt=""></span>
+                        <input data-rule="sign-in" id="password-sign-in" type="password" class="input" data-type="password" required>
                     </div>
                     <div class="group">
                         <input id="check-rem" type="checkbox" class="check" checked>
                         <label for="check-rem"><span class="icon"></span> Запомнить</label>
                     </div>
                     <div class="group">
-                        <form >
-                            <input type="submit" id="sign-in" class="button" value="войти" formaction="../index.html">
-                        </form>
+                        <input type="submit" id="sign-in" class="button" value="войти" formaction="../index.html">
                     </div>
                 </div>
+                </form>
+                <form>
                 <div class="sign-up-htm">
                     <div class="group">
                         <label for="user_sign-up" class="label">Имя</label>
-                        <input data-rule="sign-up" id="user_sign-up" type="text" class="input">
+                        <input data-rule="sign-up" id="user_sign-up" type="text" class="input" required>
                     </div>
                     <div class="group">
                         <label for="surname_sign-up" class="label">Фамилия</label>
-                        <input data-rule="sign-up" id="surname_sign-up" type="text" class="input">
+                        <input data-rule="sign-up" id="surname_sign-up" type="text" class="input" required>
                     </div>
                     <div class="group">
                         <label for="shop-group" class="label">Подразделение</label>
-                        <input data-rule="sign-up" id="shop-group" type="text" class="input" pattern="^\d+" placeholder="Введите число без пробелов">
+                        <input data-rule="sign-up" id="shop-group" type="text" class="input" required>
                     </div>
                     <div class="group">
                         <label for="password-sign-up" class="label">Пароль</label>
-                        <span class="pass-icon" id="pass-icon" type="img"><img src="../img/eye.png" style="width: 30px"></span>
-                        <input data-rule="sign-up" id="password-sign-up" type="password" class="input" data-type="password">
+                        <span class="pass-icon" id="pass-icon_2" type="img"><img src="../img/eye.png" style="width: 30px" alt=""></span>
+                        <input data-rule="sign-up" id="password-sign-up" type="password" class="input" data-type="password" required>
                     </div>
                     <div class="group">
                         <label for="password-sign-up-again" class="label">Пароль еще раз</label>
-                        <span class="pass-icon" id="pass-icon" type="img"><img src="../img/eye.png" style="width: 30px"></span>
-                        <input data-rule="sign-up" id="password-sign-up-again" type="password" class="input" data-type="password">
+                        <span class="pass-icon" id="pass-icon_3" type="img"><img src="../img/eye.png" style="width: 30px " alt=""></span>
+                        <input data-rule="sign-up" id="password-sign-up-again" type="password" class="input" data-type="password" required>
                     </div>
                     <div class="group">
                         <label for="email-sign-up" class="label">Email</label>
-                        <input data-rule="sign-up" id="email-sign-up" type="email" data-type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="input">
+                        <input data-rule="sign-up" id="email-sign-up" type="email" data-type="email" class="input" required>
                     </div>
                     <div class="group">
-                        <input id="check_ruk" type="checkbox" class="check">
-                        <label for="check_ruk"><span class="icon"></span> Я руководитель</label>
+                        <input type="submit" id="sign-up" class="button" value="регистрация" formaction="../index.html">
                     </div>
-                    <div class="group">
-                        <form>
-                            <input type="submit" id="sign-up" class="button" value="регистрация" formaction="../index.html">
-                        </form>
                 </div>
+                </form>
             </div>
         </div>
     </div>
-    </div>
-</form>
 </body>
 <script type="module" src="../../js/register.js"></script>
 </html>
