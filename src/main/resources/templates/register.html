@@ -11,7 +11,7 @@
             <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Вход</label>
             <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">регистрация</label>
             <div class="login-form">
-                <form>
+                <form id="sign-in-form">
                 <div class="sign-in-htm">
                     <div class="group">
                         <label for="email-sign-in" class="label">Email</label>
@@ -27,11 +27,11 @@
                         <label for="check-rem"><span class="icon"></span> Запомнить</label>
                     </div>
                     <div class="group">
-                        <input type="submit" id="sign-in" class="button" value="войти" formaction="../index.html">
+                        <input type="submit" id="sign-in-button" class="button" value="войти" formaction="../index.html">
                     </div>
                 </div>
                 </form>
-                <form>
+                <form id="sign-up-form">
                 <div class="sign-up-htm">
                     <div class="group">
                         <label for="user_sign-up" class="label">Имя</label>
@@ -60,7 +60,7 @@
                         <input data-rule="sign-up" id="email-sign-up" type="email" data-type="email" class="input" required>
                     </div>
                     <div class="group">
-                        <input type="submit" id="sign-up" class="button" value="регистрация" formaction="../index.html">
+                        <input type="submit" id="sign-up-button" class="button" value="регистрация" formaction="../index.html">
                     </div>
                 </div>
                 </form>
@@ -68,5 +68,6 @@
         </div>
     </div>
 </body>
-<script type="module" src="../../js/register.js"></script>
+<script type="module" src="../../js/registerLogic.js"></script>
+<script type="module" src="../../js/registerRequests.js"></script>
 </html>
