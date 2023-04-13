@@ -11,11 +11,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class QuestionService {
-    /* TODO
-    setName
-    setText
-    setRating
-     */
     @Autowired
     private QuestionRepo questionRepo;
     @Autowired
@@ -26,10 +21,10 @@ public class QuestionService {
         QuestionEntity entity = questionRepo.save(new QuestionEntity(question.getName(), question.getText(), question.getRating(), question.getUser()));
         return new Question(entity.getId(),entity.getName());
     }
-    public Question getOneQuestion(Long id){
+    public Question get(Long id){
         QuestionEntity question = questionRepo.findById(id).get();
         UserEntity entity = question.getUser();
-        User user = new User(entity.getId(), entity.getUsername(), entity.getPassword(), entity.getMail(), entity.getRole(), entity.getDescription());
+        User user = new User(entity.getId(), entity.getUsername(), entity.getPassword());
         return new Question(question.getId(), question.getName(), question.getText(), question.getRating(), user);
     }
     public Long delete(Long id){

@@ -25,7 +25,7 @@ public class QuestionController {
     @GetMapping("/{id}")
     public ResponseEntity getOneQuestion(@PathVariable Long id){
         try{
-            return ResponseEntity.ok(questionService.getOneQuestion(id));
+            return ResponseEntity.ok(questionService.get(id));
         }catch (Exception e){
             return ResponseEntity.badRequest().body("Error");
         }

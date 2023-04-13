@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Data
 @AllArgsConstructor
 @RequiredArgsConstructor
@@ -12,8 +15,8 @@ public class Task {
     @NotNull private Long id;
     @NotNull private String name;
     private String description;
-    private String time; // Нужен класс для времени
-    private String condition; // Нужен класс для состояния задания
-    private String priority; // Нужен класс для приоритета
-    private Group group;
+    private String deadline;
+    private Integer priority;
+    private Group owner;
+    private Map<Long, Boolean> groups = new HashMap();
 }

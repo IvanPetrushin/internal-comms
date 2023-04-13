@@ -15,6 +15,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @GetMapping
+    public String Hello() {
+        return "Hello";
+    }
+
     @PostMapping
     public ResponseEntity registration(@RequestBody User user){
         try{
@@ -27,7 +32,7 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity getOneUser(@PathVariable Long id){
         try{
-            return ResponseEntity.ok(userService.getOneUser(id));
+            return ResponseEntity.ok(userService.get(id));
         }catch (Exception e){
             return ResponseEntity.badRequest().body("Error");
         }

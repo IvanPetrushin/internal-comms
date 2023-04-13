@@ -3,7 +3,6 @@ package internalcomms.Entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 import javax.persistence.*;
 
@@ -13,8 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "question_entity")
 public class QuestionEntity {
-    @NonNull
-    @Id private Long id;
+     private Long id;
     private String name;
     private String text;
     private int rating;
@@ -37,5 +35,23 @@ public class QuestionEntity {
     @JoinColumn(name="USER_ID", nullable=false)
     public UserEntity getUser() {
         return user;
+    }
+    @Column
+    @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE)
+    public Long getId() {
+        return id;
+    }
+    @Column
+    public String getName() {
+        return name;
+    }
+    @Column
+    public String getText() {
+        return text;
+    }
+    @Column
+    public int getRating() {
+        return rating;
     }
 }

@@ -13,8 +13,6 @@ public class Group {
     @NonNull private Long id;
     @NonNull private String name;
     private String description;
-    private List<User> users;
-    private List<Task> tasks;
-
-
+    private List<Long> users;
+    private List<Long> tasks;
 }
