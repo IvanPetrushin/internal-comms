@@ -1,20 +1,16 @@
 package internalcomms.Models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @RequiredArgsConstructor
 public class Group {
     @NonNull private Long id;
     @NonNull private String name;
     private String description;
-    private List<User> users;
-    private List<Task> tasks;
-
-
+    private List<Long> users;
+    private List<Long> tasks;
 }
