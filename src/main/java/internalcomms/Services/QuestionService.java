@@ -17,15 +17,15 @@ public class QuestionService {
     private UserRepo userRepo;
 
     public Question create(QuestionEntity question, Long userID){
-        question.setUser(userRepo.findById(userID).get());
-        QuestionEntity entity = questionRepo.save(new QuestionEntity(question.getName(), question.getText(), question.getRating(), question.getUser()));
+        //question.setUser(userRepo.findById(userID).get());
+        QuestionEntity entity = questionRepo.save(new QuestionEntity(question.getName(), question.getText(), question.getRating()));
         return new Question(entity.getId(),entity.getName());
     }
     public Question get(Long id){
         QuestionEntity question = questionRepo.findById(id).get();
-        UserEntity entity = question.getUser();
-        User user = new User(entity.getId(), entity.getUsername(), entity.getPassword());
-        return new Question(question.getId(), question.getName(), question.getText(), question.getRating(), user);
+        //UserEntity entity = question.getUser();
+        //User user = new User(entity.getId(), entity.getUsername(), entity.getPassword());
+        return new Question(question.getId(), question.getName(), question.getText(), question.getRating());
     }
     public Long delete(Long id){
         questionRepo.findById(id);

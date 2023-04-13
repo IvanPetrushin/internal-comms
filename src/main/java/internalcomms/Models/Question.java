@@ -1,8 +1,5 @@
 package internalcomms.Models;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
@@ -12,5 +9,5 @@ public class Question {
     private final String name;
     private String text;
     private int rating;
-    private User user;
+    //private User user;
 }

@@ -12,11 +12,11 @@ import javax.persistence.*;
 @Entity
 @Table(name = "question_entity")
 public class QuestionEntity {
-     private Long id;
+    private Long id;
     private String name;
     private String text;
     private int rating;
-    private UserEntity user;
+    //private UserEntity user;
 
     public QuestionEntity(String name, String text, int rating) {
         this.name = name;
@@ -24,18 +24,11 @@ public class QuestionEntity {
         this.rating = rating;
     }
 
-    public QuestionEntity(String name, String text, int rating, UserEntity user) {
-        this.name = name;
-        this.text = text;
-        this.rating = rating;
-        this.user = user;
-    }
-
-    @ManyToOne
-    @JoinColumn(name="USER_ID", nullable=false)
-    public UserEntity getUser() {
-        return user;
-    }
+    //@ManyToOne
+    //@JoinColumn(name="USER_ID", nullable=false)
+    //public UserEntity getUser() {
+    //    return user;
+    //}
     @Column
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)

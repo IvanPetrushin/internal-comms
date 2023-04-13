@@ -19,7 +19,7 @@ public class UserEntity {
     private String mail;
     private String description;
     private Long group;
-    private List<QuestionEntity> questions;
+    //private List<QuestionEntity> questions;
 
     public UserEntity(String username, String password) {
         this.username = username;
@@ -32,34 +32,33 @@ public class UserEntity {
         this.mail = mail;
         this.group = group;
     }
-
-    @Column
+    @Column(name = "group_id")
     public Long getGroup() {
         return group;
     }
-    @OneToMany(cascade=ALL, mappedBy="user")
-    public List<QuestionEntity> getQuestions() {
-        return questions;
-    }
-    @Column
+    //@OneToMany(cascade=ALL, mappedBy="user")
+    //public List<QuestionEntity> getQuestions() {
+    //    return questions;
+    //}
+    @Column(name = "id")
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     public Long getId() {
         return id;
     }
-    @Column
+    @Column(name = "username")
     public String getUsername() {
         return username;
     }
-    @Column
+    @Column(name = "password")
     public String getPassword() {
         return password;
     }
-    @Column
+    @Column(name = "mail")
     public String getMail() {
         return mail;
     }
-    @Column
+    @Column(name = "description")
     public String getDescription() {
         return description;
     }
