@@ -10,7 +10,7 @@ main {
     display: flex;
     margin: 0 40px;
     /* padding: 40px 0; */
-    background-image: url("../img/topography.svg");
+    background-image:  url("../img/topography.svg");
     /*background-size: 80px;*/
 }
 
@@ -21,7 +21,7 @@ body {
 }
 
 footer {
-    /* margin: 40px; */
+    margin: 0 40px;
     border-top: 1px black solid;
 }
 
@@ -36,6 +36,11 @@ textarea {
     font-size: 1rem;
     font-family: GolosTextWebRegular,Arial,sans-serif;
     resize: vertical;
+}
+
+a {
+    text-decoration: none;
+    color: black;
 }
 
 .page-header {
@@ -104,6 +109,7 @@ textarea {
     padding: 0 40px 30px 40px;
     margin: 0 15% 0 10%;
     background-color: white;
+    /* box-shadow: inset 0px 0px 20px 0px black; */
 }
 
 .new-project {
@@ -304,6 +310,10 @@ select {
     margin-right: 5px;
 }
 
-.send-form {
+i {
+    font-style: normal;
+}
 
+.invalid {
+    color: #f13f34;
 }

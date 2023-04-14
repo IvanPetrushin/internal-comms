@@ -1,7 +1,9 @@
 class Group {
-    constructor(name, isHead) {
+    constructor(name, description, isHead = false, mail = 'example@magnit.ru') {
         this.name = name;
+        this.description = description;
         this.isHead = isHead;
+        this.mail = mail;
     }
 }
 
@@ -25,7 +27,7 @@ class UserToFiles {
 }
 
 class Project {
-    constructor(name, priority, expires, expired, description, creatorFiles, creator, executors, loadedFiles) {
+    constructor(name, priority, expires, expired = false, description, creatorFiles, creator, executors, loadedFiles) {
         this.name = name;
         this.priority = priority;
         this.expires = expires;
@@ -56,16 +58,16 @@ function sortProjects(projects, keyField, way = true) {
 }
 
 let project = new Project (
-    'Проект для жоского отдыха',
+    'Проект среднего размера, сотрудников до 500 человек.',
     3,
     '14.04.2023',
     true,
-    `<h4>В проекте надо сделать:</h4>
+    `<h4>Цель проекта: описание всех ключевых бизнес-процессов и разработка комплексной электронной модели (бизнес-архитектуры) банка в рамках стратегии ускоренного развития.</h4>
                     <ul>
-                        <li>В начале этой статьи объясняется, что свойства выравнивания, которые в настоящее время содержатся в спецификации Flexbox Level 1, также включены в спецификацию Box Alignment Level 3, которая в дальнейшем может расширить эти свойства и значения. Мы уже видели, как это произошло с введением значения space-evenly для свойств align-content и justify-content.</li>
-                        <li>Sadly, column boxes cannot be styled at present. The anonymous boxes that make up your columns can't be targeted in any way, meaning it isn't possible to change a box's background color or have one column larger than the others. Perhaps in future versions of the specification it might be. For now, however, we are able to change the spacing and add lines between columns.</li>
+                        <li>Команда проекта: 3 главных бизнес-аналитика плюс более 30 аналитиков в подразделениях, каждый из которых прорабатывает свой собственный бизнес-процесс (но это не основная их деятельность по должностным инструкциям). Есть полная поддержка высшего руководства и выделены все необходимые ресурсы.</li>
+                        <li>Цель проекта была успешно достигнута за 1 год, разработано более 1300 графических моделей бизнес-процессов в нотации Cross Functional FlowChart, создана электронная база знаний (веб-сайт) по всей деятельности банка для всех сотрудников. Большое внимание уделялось обучению и консультациям не только бизнес-аналитиков, но и всех исполнителей бизнес-процессов.</li>
                     </ul>
-                    <p>Также потом там чето еще ну в общем ладно всем хорошего настроения дасведвния всем пака.</p>`,
+                    <p>На второй год банк поставил более сложные задачи и тоже успешно их выполнил: проработка операционных рисков в процессах, разработка показателей KPI и их постоянный мониторинг, автоматизация процессов и развитие ИТ-архитектуры, расчёт себестоимости процессов и снижение издержек, применение методик менеджмента качества и много другое.</p>`,
     ['file.jpg','another-file.pdf'],
     new Employee('Тропик Т. Д.', 'Отдел кайфа'),
     [
@@ -85,6 +87,7 @@ projects[2].expired = false;
 projects[2].loadedFiles[0].files = ['print.txt','tested.svg'];
 
 const currentUser = new Employee('Ехоров Н. А.', 'Магнит на Лесном', true);
+const currentGroup = new Group('Магнит на Лесном', 'Подразделение №1942, Супермаркет Магнит, СПб, Лесной пр-кт, 1А', true);
 const executorsList = [
     new Employee('Маковкин Н. В.', 'Магнит тоже где-то есть да'),
     new Employee('Петручин И. И.', 'Магнит в другом городе'),
@@ -92,4 +95,4 @@ const executorsList = [
     new Employee('Тропич Т. Д.', 'Магнит косметик')
 ];
 
-export {equalsEmp, currentUser, projects, executorsList};
+export {equalsEmp, currentUser, projects, executorsList, currentGroup};

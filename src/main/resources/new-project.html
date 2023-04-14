@@ -18,8 +18,8 @@
             <a class="header-link" href="./templates/forum.html"><h3>Вопросы</h3></a>
             <div class="profile">
                 <ul class="profile-list">
-                    <li class="user">Ехоров Н. А.</li>
-                    <li class="user-group">СПб Лесной пр-кт 1а</li>
+                    <li class="user">Фамилия И. О.</li>
+                    <li class="user-group">Подразделение</li>
                 </ul>
             </div>
         </div>
@@ -29,10 +29,10 @@
     <div class="page-content">
         <h1>Новый проект</h1>
         <div class="new-project-window">
-            <form class="text-size">
-                <label style="width: 50%">
+            <form class="text-size" method="post">
+                <label style="width: 60%">
                     Название проекта
-                    <input class="text-size" type="text" required>
+                    <input class="text-size" type="text" id="name" minlength="10" maxlength="70" required>
                 </label>
                 <div style="display: flex; flex-direction: row">
                     <label class="half-label">
@@ -44,12 +44,13 @@
                     </label>
                     <label class="half-label">
                         Выполнить до:
-                        <input class="text-size" id="expires" name="expires" type="date" style="margin-left: 10px">
+                        <input class="text-size" id="expires" name="expires" type="date" style="margin-left: 10px" required>
                     </label>
                 </div>
                 <label>
                     Описание проекта
-                    <textarea class="text-size" rows="7" required></textarea>
+                    <textarea class="text-size" id="description" rows="7" required></textarea>
+                    <a style="font-size: small; font-weight: normal"><i class="invalid" id="desc-length">0</i>/<i id="max-desc-length">500</i></a>
                 </label>
                 <div style="display: flex; flex-direction: row">
                     <label class="half-label vert">
@@ -68,7 +69,7 @@
                     </label>
                 </div>
                 <div style="display: flex; flex-direction: row; justify-content: center">
-                    <input class="send-form text-size" type="submit">
+                    <input class="send-form text-size" id="submit-button" type="button" value="Отправить" disabled>
                 </div>
             </form>
         </div>

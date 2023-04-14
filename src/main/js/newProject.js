@@ -20,14 +20,61 @@ var observer = new MutationObserver(function (mutations) {
     mutations.forEach(function () {
         updateFilesList();
         updateExecutorsList();
+        validateForm();
     });
 });
 var config = {attributes: true};
 targets.forEach(target => observer.observe(target, config));
 createExecutorsList();
 
+const minLengthDescr = 50;
+const maxLengthDescr = 1000;
+const minLengthName = 10;
+
+const textarea = document.querySelector('textarea');
+textarea.maxLength = maxLengthDescr;
+document.getElementById('max-desc-length').textContent = maxLengthDescr;
+textarea.oninput = function () {
+    document.getElementById('desc-length').textContent = this.value.length
+    if (this.value.length >= minLengthDescr) {
+        document.getElementById('desc-length').classList.remove('invalid');
+    } else {
+        document.getElementById('desc-length').classList.add('invalid');
+    }
+};
+
+const serverURL = 'https://jsonplaceholder.typicode.com/posts';
+
+const submitButton = document.getElementById('submit-button');
+submitButton.onclick = async function () {
+    try {
+        const project = {
+            name: document.getElementById('name').value,
+            priority: document.getElementById('prior-range').value,
+            deadline: document.getElementById('expires').value,
+            description: document.getElementById('description').value,
+            files: currentFiles,
+            executors: currentExecutors
+        };
+        let response = (await fetch(serverURL, {
+            method: 'POST',
+            body: JSON.stringify(project),
+            headers: {'Content-Type': 'application/json'}
+        })).json();
+        console.log(response);
+    }catch (error) {
+        console.error('Error: ', error);
+    }
+};
 
 // functions
+
+function validateForm () {
+    const projectName = document.getElementById('name').value;
+    const deadline = document.getElementById('expires').value;
+    const description = document.getElementById('description').value;
+    document.getElementById('submit-button').disabled = !(projectName.length >= minLengthName && deadline !== "" && description.length >= minLengthDescr && currentExecutors.length > 0);
+}
 
 // EXECUTORS PART ---------------------------------------------------
 function updateExecutorsList() {
