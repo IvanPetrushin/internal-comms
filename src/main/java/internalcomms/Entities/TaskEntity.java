@@ -9,6 +9,7 @@ import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Setter
@@ -24,8 +25,8 @@ public class TaskEntity {
     private String deadline;
     private Integer priority;
     private Long owner;
-    //файлы заказчика
-    //файлы исполнителей(мапа)
+    private List<String> ownerFiles;//файлы заказчика
+    private Map<Long, String> files;//файлы исполнителей(мапа)
     private Map<Long, Boolean> groups = new HashMap(); //Группа и состояние выполнения
 
     public TaskEntity(String name, String description, String deadline, Integer priority, Long owner, Map<Long, Boolean> groups) {
@@ -75,5 +76,15 @@ public class TaskEntity {
     @Column
     public Map<Long, Boolean> getGroups() {
         return groups;
+    }
+    @Type(type = "json")
+    @Column
+    public List<String> getOwnerFiles() {
+        return ownerFiles;
+    }
+    @Type(type = "json")
+    @Column
+    public Map<Long, String> getFiles() {
+        return files;
     }
 }
