@@ -65,7 +65,7 @@ function drawProject(projects) {
 
         const projectButtons = document.createElement('div');
         projectButtons.classList.add('project-buttons');
-        projectButtons.innerHTML = `<a class="block button" href="./templates/forum.html">Вопросы</a><a class="block button">Отправить</a>`;
+        projectButtons.innerHTML = `<a class="block button" href="../resources/forum.html">Вопросы</a><a class="block button">Отправить</a>`;
 
         projectBottom.appendChild(projectBottomInfo);
         projectBottom.appendChild(projectButtons);

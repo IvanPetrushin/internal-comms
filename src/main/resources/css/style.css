@@ -71,7 +71,6 @@ a {
     width: 50%;
     display: flex;
     justify-content: right;
-    align: right;
 }
 
 .header-link {
@@ -85,7 +84,7 @@ a {
 }
 
 .header-link:hover {
-    color: #f78c85;
+    color: #e30616;
     /*background-image: url("../img/bathroom-floor.svg");*/
     transition: color .25s;
 }
@@ -101,7 +100,8 @@ a {
 }
 
 .su {
-    color: #f13f34;
+    /*color: #f9df13;*/
+    background-color: #f9df13;
 }
 
 .page-content {
@@ -119,34 +119,39 @@ a {
 
 .block {
     border-radius: 15px;
-    border: 1px black solid;
+    border: 1px #f39daa solid;
     align-items: flex-start;
     flex-direction: column;
     margin: 5px;
     overflow: hidden;
 }
 
+.ended .block {
+    border-color: #c6c6c6;
+}
+
 .project {
     margin: 5px;
-    background-image: url("../img/topography.svg");
+    /*background-image: url("../img/topography.svg");*/
 }
 
 
 .project-header {
     display: flex;
     flex-direction: row;
-    background-color: rgba(241, 63, 52, 0.8);
+    background-color: #f39daa;
+    /*background-image: url("../img/topography-white.svg");*/
     padding: 5px;
     justify-content: space-between;
 }
 
 .ended .project-header {
-    /*background-color: rgba(241, 63, 52, 0.5);*/
-    background-color: rgba(192,192,192,0.7);
+    background-color:#c6c6c6;
+    /*background-image: url("../img/topography-white.svg");*/
 }
 
 .project-header__items {
-
+    color: #f9df13;
 }
 
 .project-name {
@@ -198,7 +203,7 @@ a {
 }
 
 .action-file:hover {
-    color: #f13f34;
+    color: #e30616;
     transition: color .1s;
 }
 
@@ -209,11 +214,13 @@ a {
 .project-bottom {
     display: flex;
     justify-content: space-between;
-    background-color: rgba(255, 192, 203, 0.8);
+    background-color: rgba(243, 157, 170);
+    background-image: url("../img/topography-white.svg");
+    background-position: 50% 100%;
 }
 
 .ended .project-bottom {
-    background-color: rgba(192,192,192,0.5);
+    background-color: #d6d6d6;
 }
 
 .project-bottom__info {
@@ -237,7 +244,7 @@ a {
 }
 
 .button:hover {
-    color: #f13f34;
+    color: #e30616;
     transition: 0.1s;
 }
 
@@ -265,7 +272,7 @@ a {
     user-select: none;
 }
 .file-list .file .file-delete:hover {
-    color: #f13f34;
+    color: #e30616;
     transition: color 0.1s;
  }
 
@@ -278,7 +285,7 @@ a {
     user-select: none;
 }
 .executors-list .file .executor-delete:hover {
-    color: #f13f34;
+    color: #e30616;
     transition: color 0.1s;
 }
 
@@ -315,5 +322,5 @@ i {
 }
 
 .invalid {
-    color: #f13f34;
+    color: #e30616;
 }
