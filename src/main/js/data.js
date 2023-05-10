@@ -1,3 +1,5 @@
+const URL = 'http://localhost:8080'
+
 class Group {
     constructor(name, description, isHead = false, mail = 'example@magnit.ru') {
         this.name = name;
@@ -85,6 +87,9 @@ let projects = [project, structuredClone(project), structuredClone(project)];
 projects[1].expired = false;
 projects[2].expired = false;
 projects[2].loadedFiles[0].files = ['print.txt','tested.svg'];
+
+let response = await fetch(URL + '/tasks/679');
+projects = response.json();
 
 const currentUser = new Employee('Ехоров Н. А.', 'Магнит на Лесном', true);
 const currentGroup = new Group('Магнит на Лесном', 'Подразделение №1942, Супермаркет Магнит, СПб, Лесной пр-кт, 1А', true);

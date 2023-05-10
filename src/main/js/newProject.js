@@ -1,5 +1,5 @@
 import {createModal} from "./modalFilesEdit.js";
-import {executorsList} from "./data.js";
+import {currentUser, executorsList} from "./data.js";
 import "./headerProfile.js";
 
 let currentDate = new Date;
@@ -43,7 +43,7 @@ textarea.oninput = function () {
     }
 };
 
-const serverURL = 'https://jsonplaceholder.typicode.com/posts';
+const serverURL = 'http://localhost:8080/tasks'; //'https://jsonplaceholder.typicode.com/posts';
 
 const submitButton = document.getElementById('submit-button');
 submitButton.onclick = async function () {
@@ -53,11 +53,14 @@ submitButton.onclick = async function () {
             priority: document.getElementById('prior-range').value,
             deadline: document.getElementById('expires').value,
             description: document.getElementById('description').value,
-            files: currentFiles,
-            executors: currentExecutors
+            //files: currentFiles,
+            groups: currentExecutors,
+            owner: currentUser
         };
+        console.log(JSON.stringify(project));
         let response = (await fetch(serverURL, {
             method: 'POST',
+            mode: 'no-cors',
             body: JSON.stringify(project),
             headers: {'Content-Type': 'application/json'}
         })).json();
