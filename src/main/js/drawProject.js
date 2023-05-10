@@ -13,7 +13,7 @@ function drawProject(projects) {
         headerItems.classList.add('project-header__items');
         headerItems.innerHTML += `<a class="project-name">${project.name} </a>`;
         headerItems.innerHTML += `<a class="priority">приоритет: ${project.priority} </a>`;
-        headerItems.innerHTML += `<a class="expires">до ${project.expires}</a>`;
+        headerItems.innerHTML += `<a class="expires">до ${project.deadline}</a>`;
 
         projectHeader.appendChild(headerItems);
         projectHeader.innerHTML += `<a class="expand collapsed"><</a>`;
@@ -21,7 +21,7 @@ function drawProject(projects) {
         const projectContent = document.createElement('div');
         projectContent.classList.add('project-content', 'hidden');
 
-        const description = document.createElement('div');
+        const description = document.createElement('pre');
         description.classList.add('project-description');
         description.innerHTML = project.description;
 
@@ -29,7 +29,7 @@ function drawProject(projects) {
         initFiles.classList.add('block', 'project-files', 'init');
 
         let div = document.createElement('div');
-        div.textContent = 'Файлы заказчика: '
+        div.textContent = 'Связанные файлы: '
         for (let file of project.ownerFiles) {
             div.innerHTML += `<a href="/server/${file}">${file}</a>, `;
         }
@@ -37,23 +37,47 @@ function drawProject(projects) {
         initFiles.appendChild(div);
         initFiles.innerHTML += `<a class="action-file download">Скачать все</a>`;
 
-        const userFiles = document.createElement('div');
-        userFiles.classList.add('block', 'project-files', 'user');
+        const userBlocks = document.createElement('div');
+        // Отрисовка разного интерфейса для созданных и исполняемых проектов
+        if (project.owner.id !== currentUser.id) {
+            const userFiles = document.createElement('div');
+            userFiles.classList.add('block', 'project-files', 'user');
 
-        div = document.createElement('div');
-        div.textContent = 'Файлы Вашего отчета: '
-        let currentUserFiles = [];
-        for (let element of project.loadedFiles) {
-            if (equalsEmp(element.user, currentUser)) {
-                currentUserFiles = element.files;
+            div = document.createElement('div');
+            div.textContent = 'Файлы Вашего отчета: '
+            let currentUserFiles = [];
+            for (let key of Object.keys(project.groups)) {
+                if (key === currentUser.id) {
+                    currentUserFiles = project.groups[key];
+                }
+            }
+            for (let file of currentUserFiles) {
+                div.innerHTML += `<a href="/server/${file}">${file}</a>, `;
+            }
+
+            userFiles.appendChild(div);
+            userFiles.innerHTML += `<a class="action-file edit">Изменить</a>`;
+            userBlocks.appendChild(userFiles);
+        }
+        else {
+            initFiles.style.marginBottom = '15px';
+            for (let key of Object.keys(project.groups)) {
+                const userFiles = document.createElement('div');
+                userFiles.classList.add('block', 'project-files', 'user');
+
+                div = document.createElement('div');
+                div.textContent = `Отчет ${key}: `
+
+                let currentUserFiles = project.groups[key];
+                for (let file of currentUserFiles) {
+                    div.innerHTML += `<a href="/server/${file}">${file}</a>, `;
+                }
+
+                userFiles.appendChild(div);
+                userFiles.innerHTML += `<a class="action-file edit">Принять</a>`;
+                userBlocks.appendChild(userFiles);
             }
         }
-        for (let file of currentUserFiles) {
-            div.innerHTML += `<a href="/server/${file}">${file}</a>, `;
-        }
-
-        userFiles.appendChild(div);
-        userFiles.innerHTML += `<a class="action-file edit">Изменить</a>`;
 
         const projectBottom = document.createElement('div');
         projectBottom.classList.add('project-bottom');
@@ -75,7 +99,7 @@ function drawProject(projects) {
 
         projectContentInner.appendChild(description);
         projectContentInner.appendChild(initFiles);
-        projectContentInner.appendChild(userFiles);
+        projectContentInner.appendChild(userBlocks);
 
         projectContent.appendChild(projectContentInner)
         projectContent.appendChild(projectBottom);
@@ -85,7 +109,7 @@ function drawProject(projects) {
 
 
         let projectWindow;
-        if (project.expired) {
+        if (Date.parse(project.deadline) < Date.now()) {
             projectWindow = document.querySelector('.projects-window.ended');
             block.querySelector('.action-file.edit').textContent = '';
             block.querySelector('.project-buttons').textContent = '';
@@ -95,11 +119,11 @@ function drawProject(projects) {
         }
         projectWindow.appendChild(block);
     }
-    if (projects.filter(item => item.expired).length === 0) {
+    if (projects.filter(item => Date.parse(item.deadline) < Date.now()).length === 0) {
         let window = document.querySelector('.projects-window.ended');
         window.innerHTML = `<div class="block empty">В данной категории еще нет проектов</div>`;
     }
-    if (projects.filter(item => !item.expired).length === 0) {
+    if (projects.filter(item => Date.parse(item.deadline) > Date.now()).length === 0) {
         let window = document.querySelector('.projects-window.current');
         window.innerHTML = `<div class="block empty">В данной категории еще нет проектов</div>`;
     }

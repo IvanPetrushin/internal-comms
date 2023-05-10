@@ -9,8 +9,9 @@ class Group {
     }
 }
 
-class Employee {
-    constructor(name, group, isHead = false) {
+class User {
+    constructor(id, name, group, isHead = false) {
+        this.id = id;
         this.name = name;
         this.group = group;
         this.isHead = isHead;
@@ -71,16 +72,16 @@ let project = new Project (
                     </ul>
                     <p>На второй год банк поставил более сложные задачи и тоже успешно их выполнил: проработка операционных рисков в процессах, разработка показателей KPI и их постоянный мониторинг, автоматизация процессов и развитие ИТ-архитектуры, расчёт себестоимости процессов и снижение издержек, применение методик менеджмента качества и много другое.</p>`,
     ['file.jpg','another-file.pdf'],
-    new Employee('Тропик Т. Д.', 'Отдел кайфа'),
+    new User('Тропик Т. Д.', 'Отдел кайфа'),
     [
-        new Employee('Ехоров Н. А.', 'Магнит на Лесном'),
-        new Employee('Маковкин Н. В..', 'Магнит тоже где-то есть да'),
-        new Employee('Петручин И. И.', 'Магнит в другом городе'),
+        new User('Ехоров Н. А.', 'Магнит на Лесном'),
+        new User('Маковкин Н. В..', 'Магнит тоже где-то есть да'),
+        new User('Петручин И. И.', 'Магнит в другом городе'),
     ],
     [
-        new UserToFiles((new Employee('Ехоров Н. А.', 'Магнит на Лесном')), ['file.jpg', 'another-file.pdf', 'other-file-final.docx']),
-        new UserToFiles((new Employee('Маковкин Н. В.', 'Магнит тоже где-то есть да')), []),
-        new UserToFiles((new Employee('Петручин И. И.', 'Магнит в другом городе')), [])
+        new UserToFiles((new User('Ехоров Н. А.', 'Магнит на Лесном')), ['file.jpg', 'another-file.pdf', 'other-file-final.docx']),
+        new UserToFiles((new User('Маковкин Н. В.', 'Магнит тоже где-то есть да')), []),
+        new UserToFiles((new User('Петручин И. И.', 'Магнит в другом городе')), [])
     ]
 );
 let projects = [project, structuredClone(project), structuredClone(project)];
@@ -89,15 +90,25 @@ projects[2].expired = false;
 projects[2].loadedFiles[0].files = ['print.txt','tested.svg'];
 
 let response = await fetch(URL + '/tasks/679');
-projects = response.json();
+let tempProject = JSON.parse(JSON.stringify(await response.json()));
+tempProject.ownerFiles = [];
+tempProject.groups = {123: ['file.jpg', 'another.pdf'], 302: []};
+console.log(typeof tempProject.loadedFiles)
+projects = [tempProject];
+response = await fetch(URL + '/tasks/355');
+tempProject = JSON.parse(JSON.stringify(await response.json()));
+tempProject.ownerFiles = [];
+tempProject.groups = {123: ['another.pdf'], 32: ['file.png']};
+projects.push(tempProject);
+console.log(projects);
 
-const currentUser = new Employee('Ехоров Н. А.', 'Магнит на Лесном', true);
+const currentUser = new User(13, 'Ехоров Н. А.', 'Магнит на Лесном', true);
 const currentGroup = new Group('Магнит на Лесном', 'Подразделение №1942, Супермаркет Магнит, СПб, Лесной пр-кт, 1А', true);
 const executorsList = [
-    new Employee('Маковкин Н. В.', 'Магнит тоже где-то есть да'),
-    new Employee('Петручин И. И.', 'Магнит в другом городе'),
-    new Employee('Тропинин Н. Д.', 'Какой-нибудь еще магнит'),
-    new Employee('Тропич Т. Д.', 'Магнит косметик')
+    new User(123,'Маковкин Н. В.', 'Магнит тоже где-то есть да'),
+    new User(302, 'Петручин И. И.', 'Магнит в другом городе'),
+    new User(964, 'Тропинин Н. Д.', 'Какой-нибудь еще магнит'),
+    new User(32, 'Тропич Т. Д.', 'Магнит косметик')
 ];
 
 export {equalsEmp, currentUser, projects, executorsList, currentGroup};

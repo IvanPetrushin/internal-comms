@@ -324,3 +324,7 @@ i {
 .invalid {
     color: #e30616;
 }
+
+pre {
+    font: inherit;
+}
