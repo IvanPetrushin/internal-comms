@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(maxAge = 3600)//origins = "http://localhost:63342",
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -33,7 +34,7 @@ public class UserController {
     }
 
     @GetMapping("/username")
-    public ResponseEntity findByUsername(@RequestParam(name="username") String username){
+    public ResponseEntity findByUsername(@RequestParam(defaultValue = "World") String username){
         try{
             return ResponseEntity.ok(userService.findByUsername(username));
         }catch (UserNotFoundException e){
