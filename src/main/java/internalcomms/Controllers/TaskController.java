@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/tasks")
 public class TaskController {
@@ -14,9 +16,11 @@ public class TaskController {
     private TaskService taskService;
 
     @PostMapping
-    public ResponseEntity create(@RequestBody Task task, @RequestParam(name="groupID") Long groupID){
+    public ResponseEntity create(@RequestBody Task task,
+                                 @RequestParam(name="groupID") Long groupID,
+                                 @RequestBody List<Long> groupsId){ // Необходимо уточнить, какая информация принимается на вход при создании задания
         try{
-            return ResponseEntity.ok(taskService.create(new TaskEntity(task.getName(), task.getDescription(), task.getTime(), task.getCondition(), task.getPriority()), groupID));
+            return ResponseEntity.ok(taskService.create(new TaskEntity(task.getName(), task.getDescription(), task.getDeadline(), task.getPriority(), groupID), groupsId));
         }catch (Exception e){
             return ResponseEntity.badRequest().body("Error");
         }
@@ -25,7 +29,7 @@ public class TaskController {
     @GetMapping("/{id}")
     public ResponseEntity getOneTask(@PathVariable Long id){
         try{
-            return ResponseEntity.ok(taskService.getOneTask(id));
+            return ResponseEntity.ok(taskService.get(id));
         }catch (Exception e){
             return ResponseEntity.badRequest().body("Error");
         }

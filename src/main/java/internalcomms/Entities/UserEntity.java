@@ -13,28 +13,53 @@ import static javax.persistence.CascadeType.ALL;
 @Entity
 @Table(name = "user_entity")
 public class UserEntity {
-    @GeneratedValue(strategy =  GenerationType.SEQUENCE)
-    @Id private Long id;
+    private Long id;
     private String username;
     private String password;
     private String mail;
-    private String role; //Нужен отдельный класс для ролей
     private String description;
-    private GroupEntity group;
-    private List<QuestionEntity> questions;
+    private Long group;
+    //private List<QuestionEntity> questions;
 
     public UserEntity(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    @ManyToOne
-    @JoinColumn(name="GROUP_ID", nullable=false)
-    public GroupEntity getGroup() {
+    public UserEntity(String username, String password, String mail, Long group) {
+        this.username = username;
+        this.password = password;
+        this.mail = mail;
+        this.group = group;
+    }
+    @Column(name = "group_id")
+    public Long getGroup() {
         return group;
     }
-    @OneToMany(cascade=ALL, mappedBy="user")
-    public List<QuestionEntity> getQuestions() {
-        return questions;
+    //@OneToMany(cascade=ALL, mappedBy="user")
+    //public List<QuestionEntity> getQuestions() {
+    //    return questions;
+    //}
+    @Column(name = "id")
+    @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE)
+    public Long getId() {
+        return id;
+    }
+    @Column(name = "username")
+    public String getUsername() {
+        return username;
+    }
+    @Column(name = "password")
+    public String getPassword() {
+        return password;
+    }
+    @Column(name = "mail")
+    public String getMail() {
+        return mail;
+    }
+    @Column(name = "description")
+    public String getDescription() {
+        return description;
     }
 }

@@ -23,16 +23,16 @@ public class GroupController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity getOneGroup(@PathVariable Long id){
+    public ResponseEntity get(@PathVariable Long id){
         try{
-            return ResponseEntity.ok(groupService.getOneGroup(id));
+            return ResponseEntity.ok(groupService.get(id));
         }catch (Exception e){
             return ResponseEntity.badRequest().body("Error");
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteTask(@PathVariable Long id){
+    public ResponseEntity delete(@PathVariable Long id){
         try {
             return ResponseEntity.ok(groupService.delete(id));
         }catch (Exception e){

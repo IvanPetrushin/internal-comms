@@ -1,25 +1,25 @@
 package internalcomms.Entities;
 
+import com.vladmihalcea.hibernate.type.json.JsonStringType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.util.List;
-
-import static javax.persistence.CascadeType.ALL;
 
 @Data
 @NoArgsConstructor
 @Entity
 @Table(name = "group_entity")
+@TypeDef(name = "json", typeClass = JsonStringType.class)
 public class GroupEntity {
-    @NonNull
-    @Id private Long id;
+    private Long id;
     private String name;
     private String description;
-    private List<UserEntity> users;
-    private List<TaskEntity> tasks;
+    private List<Long> users;
+    private List<Long> tasks;
 
     public GroupEntity(String name, String description) {
         this.name = name;
@@ -27,12 +27,29 @@ public class GroupEntity {
     }
 
 
-    @OneToMany(cascade=ALL, mappedBy="group")
-    public List<TaskEntity> getTasks() {
+    @Type(type = "json")
+    @Column
+    public List<Long> getTasks() {
         return tasks;
     }
-    @OneToMany(cascade=ALL, mappedBy="group")
-    public List<UserEntity> getUsers() {
+    @Type(type = "json")
+    @Column
+    public List<Long> getUsers() {
         return users;
+    }
+
+    @Column
+    @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE)
+    public Long getId() {
+        return id;
+    }
+    @Column
+    public String getName() {
+        return name;
+    }
+    @Column
+    public String getDescription() {
+        return description;
     }
 }
