@@ -23,7 +23,7 @@ public class TaskService {
             groups.put(l, false);
         }
         TaskEntity entity = taskRepo.save(new TaskEntity(task.getName(), task.getDescription(), task.getDeadline(), task.getPriority(),task.getOwner(), groups));
-        return new Task(entity.getId(),entity.getName());
+        return new Task(entity.getId(),entity.getName()); //Необходимо уточнить, что нужно возвращать при создании задания
     }
     public Task get(Long id){
         TaskEntity task = taskRepo.findById(id).get();

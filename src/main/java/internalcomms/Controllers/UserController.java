@@ -14,11 +14,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping
-    public String Hello() {
-        return "Hello";
-    }
-
     @PostMapping
     public ResponseEntity registration(@RequestBody User user){
         try{

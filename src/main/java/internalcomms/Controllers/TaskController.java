@@ -16,7 +16,9 @@ public class TaskController {
     private TaskService taskService;
 
     @PostMapping
-    public ResponseEntity create(@RequestBody Task task, @RequestParam(name="groupID") Long groupID, @RequestBody List<Long> groupsId){
+    public ResponseEntity create(@RequestBody Task task,
+                                 @RequestParam(name="groupID") Long groupID,
+                                 @RequestBody List<Long> groupsId){ // Необходимо уточнить, какая информация принимается на вход при создании задания
         try{
             return ResponseEntity.ok(taskService.create(new TaskEntity(task.getName(), task.getDescription(), task.getDeadline(), task.getPriority(), groupID), groupsId));
         }catch (Exception e){
