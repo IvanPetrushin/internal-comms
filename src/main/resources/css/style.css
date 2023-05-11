@@ -22,7 +22,7 @@ body {
 
 footer {
     margin: 0 40px;
-    border-top: 1px black solid;
+    border-top: 1px #c6c6c6 solid;
 }
 
 label {
@@ -53,7 +53,7 @@ a {
     justify-content: space-between;
     padding: 15px 0 15px;
     margin: 0 40px;
-    border-bottom: black 1px solid;
+    border-bottom: #c6c6c6 1px solid;
 }
 
 .header-name {
@@ -64,7 +64,7 @@ a {
 .header-logo {
     height: 70px;
     width: 20%;
-    border-right: 1px black solid;
+    border-right: #c6c6c6 1px solid;
 }
 
 .user-name__header {
@@ -80,7 +80,7 @@ a {
     flex-direction: column;
     justify-content: center;
     padding: 5px 30px;
-    border-right: 1px black solid;
+    border-right: 1px #c6c6c6 solid;
 }
 
 .header-link:hover {
@@ -327,4 +327,36 @@ i {
 
 pre {
     font: inherit;
+}
+
+.chat-window {
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.message {
+    display: flex;
+    padding: 5px;
+    max-width: 70%;
+    min-width: 20%;
+}
+
+.message-time {
+    color: #706f6f;
+    font-size: 0.75em;
+    width: 100%;
+    text-align: end;
+}
+
+.message-owner {
+    font-size: 0.9em;
+}
+
+.message-field {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.message-field.foe {
+    flex-direction: row;
 }

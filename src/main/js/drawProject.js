@@ -12,7 +12,8 @@ function drawProject(projects) {
         const headerItems = document.createElement('div');
         headerItems.classList.add('project-header__items');
         headerItems.innerHTML += `<a class="project-name">${project.name} </a>`;
-        headerItems.innerHTML += `<a class="priority">приоритет: ${project.priority} </a>`;
+        const tempString = '✦'.repeat(project.priority);
+        headerItems.innerHTML += `<a class="priority">приоритет: ${tempString} </a>`;
         headerItems.innerHTML += `<a class="expires">до ${project.deadline}</a>`;
 
         projectHeader.appendChild(headerItems);

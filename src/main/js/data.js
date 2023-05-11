@@ -89,6 +89,7 @@ projects[1].expired = false;
 projects[2].expired = false;
 projects[2].loadedFiles[0].files = ['print.txt','tested.svg'];
 
+// /task?groupID=509
 let response = await fetch(URL + '/tasks/679');
 let tempProject = JSON.parse(JSON.stringify(await response.json()));
 tempProject.ownerFiles = [];
@@ -111,4 +112,4 @@ const executorsList = [
     new User(32, 'Тропич Т. Д.', 'Магнит косметик')
 ];
 
-export {equalsEmp, currentUser, projects, executorsList, currentGroup};
+export {equalsEmp, currentUser, projects, executorsList, currentGroup, URL};
