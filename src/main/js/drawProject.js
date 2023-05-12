@@ -1,4 +1,4 @@
-import {equalsEmp, currentUser} from "./data.js";
+import {equalsEmp, currentUser, URL} from "./data.js";
 
 function drawProject(projects) {
     for (let [index, project] of projects.entries()) {
@@ -40,45 +40,45 @@ function drawProject(projects) {
 
         const userBlocks = document.createElement('div');
         // Отрисовка разного интерфейса для созданных и исполняемых проектов
-        if (project.owner.id !== currentUser.id) {
-            const userFiles = document.createElement('div');
-            userFiles.classList.add('block', 'project-files', 'user');
-
-            div = document.createElement('div');
-            div.textContent = 'Файлы Вашего отчета: '
-            let currentUserFiles = [];
-            for (let key of Object.keys(project.groups)) {
-                if (key === currentUser.id) {
-                    currentUserFiles = project.groups[key];
-                }
-            }
-            for (let file of currentUserFiles) {
-                div.innerHTML += `<a href="/server/${file}">${file}</a>, `;
-            }
-
-            userFiles.appendChild(div);
-            userFiles.innerHTML += `<a class="action-file edit">Изменить</a>`;
-            userBlocks.appendChild(userFiles);
-        }
-        else {
-            initFiles.style.marginBottom = '15px';
-            for (let key of Object.keys(project.groups)) {
-                const userFiles = document.createElement('div');
-                userFiles.classList.add('block', 'project-files', 'user');
-
-                div = document.createElement('div');
-                div.textContent = `Отчет ${key}: `
-
-                let currentUserFiles = project.groups[key];
-                for (let file of currentUserFiles) {
-                    div.innerHTML += `<a href="/server/${file}">${file}</a>, `;
-                }
-
-                userFiles.appendChild(div);
-                userFiles.innerHTML += `<a class="action-file edit">Принять</a>`;
-                userBlocks.appendChild(userFiles);
-            }
-        }
+        // if (project.owner.id !== currentUser.id) {
+        //     const userFiles = document.createElement('div');
+        //     userFiles.classList.add('block', 'project-files', 'user');
+        //
+        //     div = document.createElement('div');
+        //     div.textContent = 'Файлы Вашего отчета: '
+        //     let currentUserFiles = [];
+        //     for (let key of Object.keys(project.groups)) {
+        //         if (key === currentUser.id) {
+        //             currentUserFiles = project.groups[key];
+        //         }
+        //     }
+        //     for (let file of currentUserFiles) {
+        //         div.innerHTML += `<a href="/server/${file}">${file}</a>, `;
+        //     }
+        //
+        //     userFiles.appendChild(div);
+        //     userFiles.innerHTML += `<a class="action-file edit">Изменить</a>`;
+        //     userBlocks.appendChild(userFiles);
+        // }
+        // else {
+        //     initFiles.style.marginBottom = '15px';
+        //     for (let key of Object.keys(project.groups)) {
+        //         const userFiles = document.createElement('div');
+        //         userFiles.classList.add('block', 'project-files', 'user');
+        //
+        //         div = document.createElement('div');
+        //         div.textContent = `Отчет ${key}: `
+        //
+        //         let currentUserFiles = project.groups[key];
+        //         for (let file of currentUserFiles) {
+        //             div.innerHTML += `<a href="/server/${file}">${file}</a>, `;
+        //         }
+        //
+        //         userFiles.appendChild(div);
+        //         userFiles.innerHTML += `<a class="action-file edit">Принять</a>`;
+        //         userBlocks.appendChild(userFiles);
+        //     }
+        // }
 
         const projectBottom = document.createElement('div');
         projectBottom.classList.add('project-bottom');
@@ -90,7 +90,7 @@ function drawProject(projects) {
 
         const projectButtons = document.createElement('div');
         projectButtons.classList.add('project-buttons');
-        projectButtons.innerHTML = `<a class="block button" href="../resources/forum.html">Вопросы</a><a class="block button">Отправить</a>`;
+        projectButtons.innerHTML = `<a class="block button" href="${URL}/tasks/${project.id}">Подробнее</a><a class="block button">Отправить</a>`;
 
         projectBottom.appendChild(projectBottomInfo);
         projectBottom.appendChild(projectButtons);

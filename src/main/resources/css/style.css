@@ -151,7 +151,7 @@ a {
 }
 
 .project-header__items {
-    color: #f9df13;
+    /* color: #f9df13; */
 }
 
 .project-name {
@@ -241,6 +241,7 @@ a {
     text-decoration: none;
     color: black;
     user-select: none;
+    align-items: center;
 }
 
 .button:hover {
@@ -359,4 +360,33 @@ pre {
 
 .message-field.foe {
     flex-direction: row;
+}
+
+.big-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* padding-inline: 5px; */
+    border-bottom: 1px #d6d6d6 solid;
+}
+
+.project-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.pre-description {
+    font-size: 1em;
+    margin-left: 20px;
+}
+
+.message-textarea {
+    background-color: white;
+    width: 70%;
+    padding: 5px 10px;
+}
+
+.admin {
+    border: 2px solid #e30616;
 }
