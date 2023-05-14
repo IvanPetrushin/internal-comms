@@ -1,55 +1,48 @@
 package internalcomms.Entities;
 
 import com.vladmihalcea.hibernate.type.json.JsonStringType;
+import internalcomms.Models.Group;
+import internalcomms.Models.Task;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
-
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "group_entity")
 @TypeDef(name = "json", typeClass = JsonStringType.class)
+@Table(name = "group_entity")
 public class GroupEntity {
+    @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private Long id;
+    @Column(name = "NAME", nullable = false)
     private String name;
+    @Column(name = "DESCRIPTION")
     private String description;
-    private List<Long> users;
-    private List<Long> tasks;
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
+    private List<UserEntity> users = new ArrayList<>();
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "groups")
+    private List<TaskEntity> tasks = new ArrayList<>();
     public GroupEntity(String name, String description) {
         this.name = name;
         this.description = description;
     }
-
-
-    @Type(type = "json")
-    @Column
-    public List<Long> getTasks() {
-        return tasks;
-    }
-    @Type(type = "json")
-    @Column
-    public List<Long> getUsers() {
-        return users;
-    }
-
-    @Column
-    @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE)
-    public Long getId() {
-        return id;
-    }
-    @Column
-    public String getName() {
-        return name;
-    }
-    @Column
-    public String getDescription() {
-        return description;
+    public Group entityToModel(){
+        List<Task> createdTasks = new ArrayList<>();
+        List<Task> executableTasks = new ArrayList<>();
+        for (var t:tasks) {
+            if(t.getGroupsForTask().stream().filter(x->x.getGroupID()==id).findFirst().get().getIsHead()) {
+                createdTasks.add(t.entityToModel());
+            }else{
+                executableTasks.add(t.entityToModel());
+            }
+        }
+        return new Group(id,name,description,createdTasks,executableTasks);
     }
 }

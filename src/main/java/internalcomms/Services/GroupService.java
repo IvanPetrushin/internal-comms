@@ -10,13 +10,21 @@ import org.springframework.stereotype.Service;
 public class GroupService {
     @Autowired
     private GroupRepo groupRepo;
-    public Group create(GroupEntity group) {
-        GroupEntity entity = groupRepo.save(new GroupEntity(group.getName(), group.getDescription()));
-        return new Group(entity.getId(),entity.getName());
+    public String create(Group group) {
+        groupRepo.save(new GroupEntity(group.getName(), group.getDescription()));
+        return"Group " + group.getName() + " created";
     }
     public Group get(Long id){
         GroupEntity group = groupRepo.findById(id).get();
-        return new Group(group.getId(), group.getName(), group.getDescription(), group.getUsers(), group.getTasks());
+        return group.entityToModel();
+    }
+    public Group findByName(String name){
+        GroupEntity group = groupRepo.findByName(name);
+        return group.entityToModel();
+    }
+    public Group getTasks(Long id){
+        GroupEntity group = groupRepo.findById(id).get();
+        return group.entityToModel();
     }
     public Long delete(Long id) {
         groupRepo.deleteById(id);

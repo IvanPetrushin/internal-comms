@@ -1,65 +1,44 @@
 package internalcomms.Entities;
 
+import com.vladmihalcea.hibernate.type.json.JsonStringType;
+import internalcomms.Models.User;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
-
-import static javax.persistence.CascadeType.ALL;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@TypeDef(name = "json", typeClass = JsonStringType.class)
 @Table(name = "user_entity")
 public class UserEntity {
+    @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private Long id;
+    @Column(name = "NAME", nullable = false)
     private String username;
+    @Column(name = "PASS", nullable = false)
     private String password;
+    @Column(name = "MAIL", nullable = false)
     private String mail;
-    private String description;
-    private Long group;
-    //private List<QuestionEntity> questions;
-
-    public UserEntity(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    public UserEntity(String username, String password, String mail, Long group) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "GROUP_ID")
+    private GroupEntity group;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<MessageEntity> messages = new ArrayList<>();
+    public UserEntity(String username, String password, String mail, GroupEntity group) {
         this.username = username;
         this.password = password;
         this.mail = mail;
         this.group = group;
     }
-    @Column(name = "group_id")
-    public Long getGroup() {
-        return group;
-    }
-    //@OneToMany(cascade=ALL, mappedBy="user")
-    //public List<QuestionEntity> getQuestions() {
-    //    return questions;
-    //}
-    @Column(name = "id")
-    @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE)
-    public Long getId() {
-        return id;
-    }
-    @Column(name = "username")
-    public String getUsername() {
-        return username;
-    }
-    @Column(name = "password")
-    public String getPassword() {
-        return password;
-    }
-    @Column(name = "mail")
-    public String getMail() {
-        return mail;
-    }
-    @Column(name = "description")
-    public String getDescription() {
-        return description;
+    public User entityToModel(){
+        return new User(id, username, password, mail, group.entityToModel());
     }
 }
