@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/modal.css">
+    <title>Создание нового проекта</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body class>
+<header>
+    <div class="page-header">
+        <div class="header-name">
+            <img class="header-logo" src="../img/comp-logo-red.svg" alt="logo">
+            <h1 style="padding-left: 40px">Создание нового проекта</h1>
+        </div>
+        <div class="user-name__header">
+            <a class="header-link" href="index.html"><h3>Проекты</h3></a>
+            <a class="header-link" href="forum.html"><h3>Вопросы</h3></a>
+            <div class="profile">
+                <ul class="profile-list">
+                    <li class="user">Фамилия И. О.</li>
+                    <li class="user-group">Подразделение</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+<main>
+    <div class="page-content">
+        <h1>Новый проект</h1>
+        <div class="new-project-window">
+            <form class="text-size" method="post">
+                <label style="width: 60%">
+                    Название проекта
+                    <input class="text-size" type="text" id="name" minlength="10" maxlength="70" required>
+                </label>
+                <div style="display: flex; flex-direction: row">
+                    <label class="half-label">
+                        Приоритет:
+                        <span style="flex-direction: row; display: flex; width: 180px; justify-content: space-evenly">
+                            <a id="range-value">1</a>
+                            <input id="prior-range" name="priority" type="range" min="1" max="5" value="1" oninput="document.getElementById('range-value').textContent = this.value">
+                        </span>
+                    </label>
+                    <label class="half-label">
+                        Выполнить до:
+                        <input class="text-size" id="expires" name="expires" type="date" style="margin-left: 10px" required>
+                    </label>
+                </div>
+                <label>
+                    Описание проекта
+                    <textarea class="text-size" id="description" rows="7" required></textarea>
+                    <a style="font-size: small; font-weight: normal"><i class="invalid" id="desc-length">0</i>/<i id="max-desc-length">500</i></a>
+                </label>
+                <div style="display: flex; flex-direction: row">
+                    <label class="half-label vert">
+                        Файлы
+                        <span class="project-files" style="width: 100%; font-size: 1rem">
+                            <span class="project-files__list"></span>
+                            <a class="action-file edit">Изменить</a>
+                        </span>
+                    </label>
+                    <label class="half-label vert">
+                        Исполнители
+                        <span class="project-files" style="width: 100%; font-size: 1rem">
+                            <ul class="project-executors__list"></ul>
+                            <a class="action-file executors">Изменить</a>
+                        </span>
+                    </label>
+                </div>
+                <div style="display: flex; flex-direction: row; justify-content: center">
+                    <input class="send-form text-size" id="submit-button" type="button" value="Отправить" disabled>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+<footer>
+    <ul>
+        <!--<li>links</li>
+        <li>links</li>
+        <li>links</li>
+        <li>links</li>
+        <li>links</li>-->
+    </ul>
+</footer>
+<span class="modal__temps hidden">
+    <a class="edit-files">
+        <div style="display: flex; flex-direction: column; padding: 5px">
+            Текущие файлы:
+            <ol class="file-list">
+
+            </ol>
+            <div style="display: flex; justify-content: space-between">
+                <label class="block button" for="load-file">Добавить файлы</label>
+                <input type="file" id="load-file" style="visibility: hidden">
+            </div>
+        </div>
+    </a>
+    <a class="edit-executors">
+        <div style="display: flex; flex-direction: column; padding: 5px">
+            Выбранные исполнители:
+            <ol class="executors-list">
+
+            </ol>
+            <div>
+                <label for="load-executors">Добавить исполнителя</label>
+                <select id="load-executors" style="width: 100%">
+                    <option value="">Выберите исполнителя</option>
+                </select>
+            </div>
+        </div>
+    </a>
+</span>
+<script src="../../js/modal.js"></script>
+<script src="../../js/newProject.js" type="module"></script>
+</body>
+</html>

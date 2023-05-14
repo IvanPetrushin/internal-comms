@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/modal.css">
+    <title>Проекты</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body class>
+<header>
+    <div class="page-header">
+        <div class="header-name">
+            <img class="header-logo" src="../img/comp-logo-red.svg" alt="logo">
+            <h1 style="padding-left: 40px">Ваши проекты</h1>
+        </div>
+        <div class="user-name__header">
+            <a class="header-link" href="./index.html"><h3>Проекты</h3></a>
+            <a class="header-link" href="forum.html"><h3>Вопросы</h3></a>
+            <div class="profile">
+                <ul class="profile-list">
+                    <li class="user">Фамилия И. О.</li>
+                    <li class="user-group">Подразделение</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+<main>
+    <div class="page-content">
+        <h1>Текущие проекты</h1>
+        <div class="new-project hidden"><a class="button" href="new-project.html">+Создать</a></div>
+        <div class="projects-window current">
+            <div class="block project hidden">
+                <div class="project-header">
+                    <div class="project-header__items">
+                        <a class="project-name">Проект для жоского отдыха</a>
+                        <a class="priority">приоритет: 3</a>
+                        <a class="expires">до 14.04.2023</a>
+                    </div>
+                    <a class="expand collapsed"><</a>
+                </div>
+                <div class="project-content hidden">
+                    <div class="project-description">
+                        <h4>В проекте надо сделать:</h4>
+                        <ul>
+                            <li>В начале этой статьи объясняется, что свойства выравнивания, которые в настоящее время содержатся в спецификации Flexbox Level 1, также включены в спецификацию Box Alignment Level 3, которая в дальнейшем может расширить эти свойства и значения. Мы уже видели, как это произошло с введением значения space-evenly для свойств align-content и justify-content.</li>
+                            <li>Sadly, column boxes cannot be styled at present. The anonymous boxes that make up your columns can't be targeted in any way, meaning it isn't possible to change a box's background color or have one column larger than the others. Perhaps in future versions of the specification it might be. For now, however, we are able to change the spacing and add lines between columns.</li>
+                        </ul>
+                        <p>Также потом там чето еще ну в общем ладно всем хорошего настроения дасведвния всем пака.</p>
+                    </div>
+                    <div class="block project-files init" style="margin-bottom: 15px">
+                        <div>
+                            Связанные файлы:
+                            <a href="file.jpg">file.jpg</a>,
+                            <a href="another_file.pdf">another_file.pdf</a>
+                        </div>
+                        <a class="action-file download">Скачать все</a>
+                    </div>
+                    <div class="block project-files user" style="background-color: white">
+                        <div>
+                            Магнит Литейный пр-кт отчет:
+                            <a href="file.jpg">file.jpg</a>,
+                            <a href="another_file.pdf">another_file.pdf</a>
+                        </div>
+                        <a class="action-file edit">Принять</a>
+                    </div>
+                    <div class="block project-files user" style="background-color: white">
+                        <div>
+                            Магнит Литейный пр-кт отчет:
+                            <a href="file.jpg">file.jpg</a>,
+                            <a href="another_file.pdf">another_file.pdf</a>
+                        </div>
+                        <a class="action-file edit">Принять</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <h1>Завершенные проекты</h1>
+        <div class="projects-window ended">
+
+        </div>
+    </div>
+
+</main>
+<footer>
+</footer>
+<span class="modal__temps hidden">
+    <a class="edit-files">
+        <div style="display: flex; flex-direction: column; padding: 5px">
+            Текущие файлы:
+            <ol class="file-list">
+                <li class="file" id="file-1">file.jpg<span class="file-delete">удалить</span></li>
+            </ol>
+            <div style="display: flex; justify-content: space-between">
+                <input type="file" id="load-file" name="load-file">
+                <input type="submit" id="add-file" value="Добавить файл">
+            </div>
+        </div>
+    </a>
+</span>
+<script src="../../js/modal.js"></script>
+<script src="../../js/projectsPage.js" type="module"></script>
+</body>
+</html>

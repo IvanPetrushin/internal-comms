@@ -3,7 +3,7 @@ plugins {
 	id 'application'
 	id 'org.springframework.boot' version '2.7.8'
 	id 'io.spring.dependency-management' version '1.1.0'
-	id 'org.jetbrains.kotlin.jvm' version '1.8.0'
+	id 'org.jetbrains.kotlin.jvm' version '1.7.10'
 }
 
 group = 'com.example'
@@ -31,6 +31,10 @@ dependencies {
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	// https://mvnrepository.com/artifact/org.springframework/spring-web
+	implementation 'org.springframework:spring-web'
+
 }
 
 tasks.named('test') {

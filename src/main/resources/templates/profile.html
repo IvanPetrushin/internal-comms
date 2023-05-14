@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/modal.css">
+    <meta charset="UTF-8">
+    <title>Профиль пользователя</title>
+</head>
+<body>
+<header>
+    <div class="page-header">
+        <div class="header-name">
+            <img class="header-logo" src="../img/comp-logo-red.svg" alt="logo">
+            <h1 style="padding-left: 40px">Профиль пользователя</h1>
+        </div>
+        <div class="user-name__header">
+            <a class="header-link" href="index.html"><h3>Проекты</h3></a>
+            <a class="header-link" href="forum.html"><h3>Вопросы</h3></a>
+            <a class="profile">
+                <ul class="profile-list">
+                    <li class="user">Фамилия И. О.</li>
+                    <li class="user-group">Подразделение</li>
+                </ul>
+            </a>
+        </div>
+    </div>
+</header>
+<main>
+    <div class="page-content text-size">
+        <h3>Подразделение:</h3>
+        <a class="profile-group"></a>
+        <h3>Описание подразделения:</h3>
+        <span style="display: flex; justify-content: space-between"><a class="profile-group-description"></a><a class="su">СОЗДАТЕЛЬ ПРОЕКТОВ</a></span>
+        <h3>Контакты:</h3>
+        <a class="profile-group-mail">e-mail: </a>
+        <div class="">
+
+        </div>
+    </div>
+</main>
+<footer>
+
+</footer>
+<span class="modal__temps hidden">
+    <a class="edit-files">
+        <div style="display: flex; flex-direction: column; padding: 5px">
+            Текущие файлы:
+            <ol class="file-list">
+
+            </ol>
+            <div style="display: flex; justify-content: space-between">
+                <label class="block button" for="load-file">Добавить файлы</label>
+                <input type="file" id="load-file" style="visibility: hidden">
+            </div>
+        </div>
+    </a>
+    <a class="edit-executors">
+        <div style="display: flex; flex-direction: column; padding: 5px">
+            Выбранные исполнители:
+            <ol class="executors-list">
+
+            </ol>
+            <div>
+                <label for="load-executors">Добавить исполнителя</label>
+                <select id="load-executors" style="width: 100%">
+                    <option value="">Выберите исполнителя</option>
+                </select>
+            </div>
+        </div>
+    </a>
+</span>
+<script src="../../js/modal.js"></script>
+<script src="../../js/profile.js" type="module"></script>
+</body>
+</html>
