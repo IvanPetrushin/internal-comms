@@ -1,38 +1,36 @@
 package internalcomms.Models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.vladmihalcea.hibernate.type.json.JsonStringType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.jetbrains.annotations.NotNull;
-import org.springframework.web.multipart.MultipartFile;
+import org.hibernate.annotations.TypeDef;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
 public class Task {
-    @NotNull private Long id;
-    @NotNull private String name;
+    private Long id;
+    private String name;
     private String description;
     private String deadline;
     private Integer priority;
     private Group owner;
-    private List<MultipartFile> ownerFiles;
-    private Map<Group, String> files = new HashMap();
-    private Map<Long, Boolean> groups = new HashMap();
-
-    public Task(@NotNull Long id, @NotNull String name, String description, String deadline, Integer priority, Group owner, Map<Long, Boolean> groups) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.deadline = deadline;
-        this.priority = priority;
-        this.owner = owner;
-        this.groups = groups;
+    //todo private List<MultipartFile> ownerFiles;
+    private List<GroupForTask> groups;
+    private List<Message> messages;
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @TypeDef(name = "json", typeClass = JsonStringType.class)
+    public static class GroupForTask {
+        @JsonProperty("condition")
+        private Boolean condition = false;
+        @JsonProperty("group")
+        private Group group;
+        //todo files
     }
 }
