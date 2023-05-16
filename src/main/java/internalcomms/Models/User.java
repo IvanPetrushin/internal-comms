@@ -23,11 +23,6 @@ public class User {
     private String mail;
     @Column(name = "GROUP", nullable = false)
     private Group group;
-    public User(Long id, String username, String password) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-    }
     public User(Long id, String username, Group group) {
         this.id = id;
         this.username = username;

@@ -6,6 +6,9 @@ import internalcomms.Repositories.GroupRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class GroupService {
     @Autowired
@@ -21,6 +24,14 @@ public class GroupService {
     public Group findByName(String name){
         GroupEntity group = groupRepo.findByName(name);
         return group.entityToModel();
+    }
+    public List<Group> getAll(){
+        List<Group> newGroups = new ArrayList<>();
+        var groups = groupRepo.findAll();
+        for(var g: groups){
+            newGroups.add(g.entityToModel());
+        }
+        return newGroups;
     }
     public Group getTasks(Long id){
         GroupEntity group = groupRepo.findById(id).get();

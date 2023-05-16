@@ -3,7 +3,6 @@ package internalcomms.Services;
 import internalcomms.Entities.GroupEntity;
 import internalcomms.Entities.UserEntity;
 import internalcomms.Exceptions.UserNotFoundException;
-import internalcomms.Models.Group;
 import internalcomms.Models.User;
 import internalcomms.Repositories.GroupRepo;
 import internalcomms.Repositories.UserRepo;
@@ -26,10 +25,18 @@ public class UserService {
     public User get(Long id) {
         UserEntity user = userRepo.findById(id).get();
         return user.entityToModel();
-
     }
+
     public User findByUsername(String username) throws UserNotFoundException {
         UserEntity user = userRepo.findByUsername(username);
+        if (user == null) {
+            throw new UserNotFoundException("User not found");
+        }
+        return user.entityToModel();
+    }
+
+    public User findByMail(String mail) throws UserNotFoundException {
+        UserEntity user = userRepo.findByMail(mail);
         if (user == null) {
             throw new UserNotFoundException("User not found");
         }
