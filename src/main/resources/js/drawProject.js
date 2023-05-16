@@ -31,8 +31,10 @@ function drawProject(projects) {
 
         let div = document.createElement('div');
         div.textContent = 'Связанные файлы: '
-        for (let file of project.ownerFiles) {
-            div.innerHTML += `<a href="/server/${file}">${file}</a>, `;
+        if (project.ownerFiles !== undefined) {
+            for (let file of project.ownerFiles) {
+                div.innerHTML += `<a href="/server/${file}">${file}</a>, `;
+            }
         }
 
         initFiles.appendChild(div);
@@ -40,45 +42,47 @@ function drawProject(projects) {
 
         const userBlocks = document.createElement('div');
         // Отрисовка разного интерфейса для созданных и исполняемых проектов
-        // if (project.owner.id !== currentUser.id) {
-        //     const userFiles = document.createElement('div');
-        //     userFiles.classList.add('block', 'project-files', 'user');
-        //
-        //     div = document.createElement('div');
-        //     div.textContent = 'Файлы Вашего отчета: '
-        //     let currentUserFiles = [];
-        //     for (let key of Object.keys(project.groups)) {
-        //         if (key === currentUser.id) {
-        //             currentUserFiles = project.groups[key];
-        //         }
-        //     }
-        //     for (let file of currentUserFiles) {
-        //         div.innerHTML += `<a href="/server/${file}">${file}</a>, `;
-        //     }
-        //
-        //     userFiles.appendChild(div);
-        //     userFiles.innerHTML += `<a class="action-file edit">Изменить</a>`;
-        //     userBlocks.appendChild(userFiles);
-        // }
-        // else {
-        //     initFiles.style.marginBottom = '15px';
-        //     for (let key of Object.keys(project.groups)) {
-        //         const userFiles = document.createElement('div');
-        //         userFiles.classList.add('block', 'project-files', 'user');
-        //
-        //         div = document.createElement('div');
-        //         div.textContent = `Отчет ${key}: `
-        //
-        //         let currentUserFiles = project.groups[key];
-        //         for (let file of currentUserFiles) {
-        //             div.innerHTML += `<a href="/server/${file}">${file}</a>, `;
-        //         }
-        //
-        //         userFiles.appendChild(div);
-        //         userFiles.innerHTML += `<a class="action-file edit">Принять</a>`;
-        //         userBlocks.appendChild(userFiles);
-        //     }
-        // }
+        if (project.owner.id !== currentUser.groupid) {
+            const userFiles = document.createElement('div');
+            userFiles.classList.add('block', 'project-files', 'user');
+
+            div = document.createElement('div');
+            div.textContent = 'Файлы Вашего отчета: '
+            let currentUserFiles = [];
+            for (let key of Object.keys(project.groups)) {
+                if (key === currentUser.id) {
+                    currentUserFiles = project.groups[key];
+                }
+            }
+            for (let file of currentUserFiles) {
+                div.innerHTML += `<a href="/server/${file}">${file}</a>, `;
+            }
+
+            userFiles.appendChild(div);
+            userFiles.innerHTML += `<a class="action-file edit">Изменить</a>`;
+            userBlocks.appendChild(userFiles);
+        }
+        else {
+            initFiles.style.marginBottom = '15px';
+            for (let tempGroup of project.groups) {
+                const userFiles = document.createElement('div');
+                userFiles.classList.add('block', 'project-files', 'user');
+
+                div = document.createElement('div');
+                div.textContent = `Отчет ${tempGroup.group.name} (${tempGroup.group.id}): `
+
+                let currentUserFiles = project.groups[tempGroup];
+                if (currentUserFiles !== undefined) {
+                    for (let file of currentUserFiles) {
+                        div.innerHTML += `<a href="/server/${file}">${file}</a>, `;
+                    }
+                }
+
+                userFiles.appendChild(div);
+                userFiles.innerHTML += `<a class="action-file edit">Принять</a>`;
+                userBlocks.appendChild(userFiles);
+            }
+        }
 
         const projectBottom = document.createElement('div');
         projectBottom.classList.add('project-bottom');

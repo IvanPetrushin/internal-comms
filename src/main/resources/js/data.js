@@ -1,7 +1,8 @@
 const URL = 'http://localhost:8080'
 
 class Group {
-    constructor(name, description, isHead = false, mail = 'example@magnit.ru') {
+    constructor(id, name, description, isHead = false, mail = 'example@magnit.ru') {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.isHead = isHead;
@@ -10,10 +11,10 @@ class Group {
 }
 
 class User {
-    constructor(id, name, group, isHead = false) {
+    constructor(id, name, groupid, isHead = false) {
         this.id = id;
         this.name = name;
-        this.group = group;
+        this.groupid = groupid;
         this.isHead = isHead;
     }
 }
@@ -89,27 +90,28 @@ projects[1].expired = false;
 projects[2].expired = false;
 projects[2].loadedFiles[0].files = ['print.txt','tested.svg'];
 
-// /task?groupID=509
-let response = await fetch(URL + '/tasks/679');
+const currentUser = new User(13, 'Ехоров Н. А.', 30, true);
+
+let response = await fetch(`${URL}/groups/${currentUser.groupid}`);
 let tempProject = JSON.parse(JSON.stringify(await response.json()));
-tempProject.ownerFiles = [];
-tempProject.groups = {123: ['file.jpg', 'another.pdf'], 302: []};
-console.log(typeof tempProject.loadedFiles)
-projects = [tempProject];
-response = await fetch(URL + '/tasks/355');
-tempProject = JSON.parse(JSON.stringify(await response.json()));
-tempProject.ownerFiles = [];
-tempProject.groups = {123: ['another.pdf'], 32: ['file.png']};
-projects.push(tempProject);
+console.log(tempProject);
+projects = tempProject.executableTasks;
+projects.push.apply(projects, tempProject.createdTasks);
+// projects.push(tempProject.createdTasks);
 console.log(projects);
 
-const currentUser = new User(13, 'Ехоров Н. А.', 'Магнит на Лесном', true);
-const currentGroup = new Group('Магнит на Лесном', 'Подразделение №1942, Супермаркет Магнит, СПб, Лесной пр-кт, 1А', true);
+const currentGroup = new Group(30, 'Магнит на Лесном', 'Подразделение №1942, Супермаркет Магнит, СПб, Лесной пр-кт, 1А', true);
+
+
 const executorsList = [
-    new User(123,'Маковкин Н. В.', 'Магнит тоже где-то есть да'),
-    new User(302, 'Петручин И. И.', 'Магнит в другом городе'),
-    new User(964, 'Тропинин Н. Д.', 'Какой-нибудь еще магнит'),
-    new User(32, 'Тропич Т. Д.', 'Магнит косметик')
+    currentGroup,
+    new Group(31, 'Новая группа 1', 'Описание группы'),
+    new Group(32, 'Новая группа 2', 'Описание группы'),
+    new Group(33, 'Отдел кайфа', 'Описание группы'),
+    new Group(34, 'Отдел маркетинга', 'Описание группы'),
+    new Group(35, 'Новая группа 5', 'Описание группы'),
 ];
+
+//fetch(URL+'/groups')
 
 export {equalsEmp, currentUser, projects, executorsList, currentGroup, URL};
