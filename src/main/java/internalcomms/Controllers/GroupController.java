@@ -38,6 +38,14 @@ public class GroupController {
             return ResponseEntity.badRequest().body("Error");
         }
     }
+    @GetMapping("/")
+    public ResponseEntity getAll(){
+        try{
+            return ResponseEntity.ok(groupService.getAll());
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body("Error");
+        }
+    }
     @GetMapping("/{id}/tasks")
     public ResponseEntity getTasks(@PathVariable Long id){
         try{

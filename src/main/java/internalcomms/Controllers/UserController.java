@@ -41,6 +41,16 @@ public class UserController {
             return ResponseEntity.badRequest().body("Error");
         }
     }
+    @GetMapping("/mail")
+    public ResponseEntity findByMail(@RequestParam("mail") String mail){
+        try{
+            return ResponseEntity.ok(userService.findByMail(mail));
+        }catch (UserNotFoundException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body("Error");
+        }
+    }
     @DeleteMapping("/{id}")
     public ResponseEntity deleteUser(@PathVariable Long id){
         try {

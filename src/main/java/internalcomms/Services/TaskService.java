@@ -8,7 +8,6 @@ import internalcomms.Repositories.TaskCondRepo;
 import internalcomms.Repositories.TaskRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,18 +27,14 @@ public class TaskService {
         var gft = taskCondRepo.save(new TaskEntity.GroupForTask(true, false, task.getOwner().getId(),savedTask));
         groups.add(gft);
         groupEntities.add(groupRepo.findById(task.getOwner().getId()).get());
-        for (var group:task.getGroups()) {
-            gft = taskCondRepo.save(new TaskEntity.GroupForTask(false, false, group.getGroup().getId(),savedTask));
+        for (var id:task.getGroupsId()) {
+            gft = taskCondRepo.save(new TaskEntity.GroupForTask(false, false, id, savedTask));
             groups.add(gft);
-            groupEntities.add(groupRepo.findById(group.getGroup().getId()).get());
+            groupEntities.add(groupRepo.findById(id).get());
         }
         savedTask.setGroupsForTask(groups);
         savedTask.setGroups(groupEntities);
-        try {
-            taskRepo.save(savedTask);
-        }catch (Exception e){
-         System.out.println("HI");
-        }
+        taskRepo.save(savedTask);
         return "Task " + task.getName() + " created.";
     }
     public Task get(Long id){
