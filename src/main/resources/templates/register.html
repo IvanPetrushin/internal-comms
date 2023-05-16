@@ -1,3 +1,73 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="ru">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <link rel="stylesheet" href="../css/register.css">-->
+<!--    <title>signin-signup</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <div class="login-wrap">-->
+<!--        <div class="login-html">-->
+<!--            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Вход</label>-->
+<!--            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">регистрация</label>-->
+<!--            <div class="login-form">-->
+<!--                <form id="sign-in-form">-->
+<!--                <div class="sign-in-htm">-->
+<!--                    <div class="group">-->
+<!--                        <label for="email-sign-in" class="label">Email</label>-->
+<!--                        <input data-rule="sign-in" id="email-sign-in" type="email" data-type="email" class="input" required>-->
+<!--                    </div>-->
+<!--                    <div class="group">-->
+<!--                        <label for="password-sign-in" class="label">Пароль</label>-->
+<!--                        <span class="pass-icon" id="pass-icon_1" type="img"><img src="../img/eye.png" style="width: 30px" alt=""></span>-->
+<!--                        <input data-rule="sign-in" id="password-sign-in" type="password" class="input" data-type="password" required>-->
+<!--                    </div>-->
+<!--                    <div class="group">-->
+<!--                        <input type="submit" id="sign-in-button" class="button" value="войти" formaction="./index.html">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                </form>-->
+<!--                <form id="sign-up-form">-->
+<!--                <div class="sign-up-htm">-->
+<!--                    <div class="group">-->
+<!--                        <label for="user_sign-up" class="label">Имя</label>-->
+<!--                        <input data-rule="sign-up" id="user_sign-up" type="text" class="input" required>-->
+<!--                    </div>-->
+<!--                    <div class="group">-->
+<!--                        <label for="surname_sign-up" class="label">Фамилия</label>-->
+<!--                        <input data-rule="sign-up" id="surname_sign-up" type="text" class="input" required>-->
+<!--                    </div>-->
+<!--                    <div class="group">-->
+<!--                        <label for="shop-group" class="label">Подразделение</label>-->
+<!--                        <input data-rule="sign-up" id="shop-group" type="text" class="input" required>-->
+<!--                    </div>-->
+<!--                    <div class="group">-->
+<!--                        <label for="password-sign-up" class="label">Пароль</label>-->
+<!--                        <span class="pass-icon" id="pass-icon_2" type="img"><img src="../img/eye.png" style="width: 30px" alt=""></span>-->
+<!--                        <input data-rule="sign-up" id="password-sign-up" type="password" class="input" data-type="password" required>-->
+<!--                    </div>-->
+<!--                    <div class="group">-->
+<!--                        <label for="password-sign-up-again" class="label">Пароль еще раз</label>-->
+<!--                        <span class="pass-icon" id="pass-icon_3" type="img"><img src="../img/eye.png" style="width: 30px " alt=""></span>-->
+<!--                        <input data-rule="sign-up" id="password-sign-up-again" type="password" class="input" data-type="password" required>-->
+<!--                    </div>-->
+<!--                    <div class="group">-->
+<!--                        <label for="email-sign-up" class="label">Email</label>-->
+<!--                        <input data-rule="sign-up" id="email-sign-up" type="email" data-type="email" class="input" required>-->
+<!--                    </div>-->
+<!--                    <div class="group">-->
+<!--                        <input type="submit" id="sign-up-button" class="button" value="регистрация" formaction="./index.html">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</body>-->
+<!--<script type="module" src="../../js/registerLogic.js"></script>-->
+<!--<script type="module" src="../../js/registerRequests.js"></script>-->
+<!--</html>-->
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -6,63 +76,19 @@
     <title>signin-signup</title>
 </head>
 <body>
-    <div class="login-wrap">
-        <div class="login-html">
-            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Вход</label>
-            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">регистрация</label>
-            <div class="login-form">
-                <form id="sign-in-form">
-                <div class="sign-in-htm">
-                    <div class="group">
-                        <label for="email-sign-in" class="label">Email</label>
-                        <input data-rule="sign-in" id="email-sign-in" type="email" data-type="email" class="input" required>
-                    </div>
-                    <div class="group">
-                        <label for="password-sign-in" class="label">Пароль</label>
-                        <span class="pass-icon" id="pass-icon_1" type="img"><img src="../img/eye.png" style="width: 30px" alt=""></span>
-                        <input data-rule="sign-in" id="password-sign-in" type="password" class="input" data-type="password" required>
-                    </div>
-                    <div class="group">
-                        <input type="submit" id="sign-in-button" class="button" value="войти" formaction="../index.html">
-                    </div>
-                </div>
-                </form>
-                <form id="sign-up-form">
-                <div class="sign-up-htm">
-                    <div class="group">
-                        <label for="user_sign-up" class="label">Имя</label>
-                        <input data-rule="sign-up" id="user_sign-up" type="text" class="input" required>
-                    </div>
-                    <div class="group">
-                        <label for="surname_sign-up" class="label">Фамилия</label>
-                        <input data-rule="sign-up" id="surname_sign-up" type="text" class="input" required>
-                    </div>
-                    <div class="group">
-                        <label for="shop-group" class="label">Подразделение</label>
-                        <input data-rule="sign-up" id="shop-group" type="text" class="input" required>
-                    </div>
-                    <div class="group">
-                        <label for="password-sign-up" class="label">Пароль</label>
-                        <span class="pass-icon" id="pass-icon_2" type="img"><img src="../img/eye.png" style="width: 30px" alt=""></span>
-                        <input data-rule="sign-up" id="password-sign-up" type="password" class="input" data-type="password" required>
-                    </div>
-                    <div class="group">
-                        <label for="password-sign-up-again" class="label">Пароль еще раз</label>
-                        <span class="pass-icon" id="pass-icon_3" type="img"><img src="../img/eye.png" style="width: 30px " alt=""></span>
-                        <input data-rule="sign-up" id="password-sign-up-again" type="password" class="input" data-type="password" required>
-                    </div>
-                    <div class="group">
-                        <label for="email-sign-up" class="label">Email</label>
-                        <input data-rule="sign-up" id="email-sign-up" type="email" data-type="email" class="input" required>
-                    </div>
-                    <div class="group">
-                        <input type="submit" id="sign-up-button" class="button" value="регистрация" formaction="../index.html">
-                    </div>
-                </div>
-                </form>
-            </div>
+<form class="login">
+    <fieldset>
+        <legend class="legend">Вход в систему</legend>
+        <div class="input">
+            <input type="email" placeholder="Email" id="email-sign-in" required />
         </div>
-    </div>
+        <div class="input">
+            <span class="pass-icon" id="pass-icon" type="img"><img src="../img/eye.png" style="width: 30px " alt=""></span>
+            <input type="password" placeholder="Пароль" id="password-sign-in" required />
+        </div>
+        <button type="submit" class="submit" formaction="./index.html" id="sign-in-button">Войти</button>
+    </fieldset>
+</form>
 </body>
 <script type="module" src="../js/registerLogic.js"></script>
 <script type="module" src="../js/registerRequests.js"></script>
