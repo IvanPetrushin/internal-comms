@@ -1,30 +1,36 @@
 package internalcomms.Models;
 
 import lombok.*;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
+    @Id
+    @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private Long id;
+    @Column(name = "NAME", nullable = false)
     private String username;
-    private String password = "";
-    private String mail = "";
-    private String description = "";
-    private Group group = new Group();
-    //private List<Question> questions;
-
-    public User(@NonNull Long id, @NonNull String username, String password) {
+    @Column(name = "PASS", nullable = false)
+    private String password;
+    @Column(name = "MAIL", nullable = false)
+    private String mail;
+    @Column(name = "GROUP", nullable = false)
+    private Group group;
+    public User(Long id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
     }
-
-    public User(Long id, String username, String password, String mail, String description) {
+    public User(Long id, String username, Group group) {
         this.id = id;
         this.username = username;
-        this.password = password;
-        this.mail = mail;
-        this.description = description;
+        this.group = group;
     }
 }
