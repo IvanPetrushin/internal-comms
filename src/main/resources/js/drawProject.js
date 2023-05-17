@@ -23,7 +23,7 @@ async function drawProject(projects) {
         const projectContent = document.createElement('div');
         projectContent.classList.add('project-content', 'hidden');
 
-        const description = document.createElement('pre');
+        const description = document.createElement('div');
         description.classList.add('project-description');
         description.innerHTML = project.description;
 
@@ -70,7 +70,7 @@ async function drawProject(projects) {
                 userFiles.classList.add('block', 'project-files', 'user');
 
                 div = document.createElement('div');
-                div.innerHTML = `<i class="status"></i>Отчет ${tempGroup.group.name}<i class="mini">(${tempGroup.group.id})</i>: `
+                div.innerHTML = `<i class="status"></i>Отчет <a href="${URL}/group/${tempGroup.group.id}">${tempGroup.group.name}</a><i class="mini">(${tempGroup.group.id})</i>: `
 
                 let currentUserFiles = project.groups[tempGroup];
                 if (currentUserFiles !== undefined) {
@@ -116,7 +116,7 @@ async function drawProject(projects) {
 
         const projectButtons = document.createElement('div');
         projectButtons.classList.add('project-buttons');
-        projectButtons.innerHTML = `<a class="block button" href="${URL}/tasks/${project.id}">Подробнее</a>`;
+        projectButtons.innerHTML = `<a class="block button" href="${URL}/projects/${project.id}">Подробнее</a>`;
 
         projectBottom.appendChild(projectBottomInfo);
         projectBottom.appendChild(projectButtons);

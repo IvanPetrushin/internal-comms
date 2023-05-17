@@ -60,14 +60,18 @@ submitButton.onclick = async function () {
             groupsId: executorsIDs, //id исполнителей
         };
         console.log(JSON.stringify(body));
-        let response = (await fetch(serverURL, {
+        let response = await fetch(serverURL, {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {'Content-Type': 'application/json'}
-        })).json();
+        });
         console.log(response);
+        alert('Проект успешно создан!');
+        location.reload();
     }catch (error) {
         console.error('Error: ', error);
+        alert('Что-то пошло не так...\nПопробуйте еще раз');
+        location.reload();
     }
 };
 
