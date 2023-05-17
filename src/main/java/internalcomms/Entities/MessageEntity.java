@@ -21,7 +21,7 @@ public class MessageEntity {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private Long id;
-    @Column(name = "TEXT", nullable = false)
+    @Column(name = "TEXT", nullable = false,columnDefinition = "TEXT")
     private String text;
     @Column(name = "TIME", nullable = false)
     private String time;

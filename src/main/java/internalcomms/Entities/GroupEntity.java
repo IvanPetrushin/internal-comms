@@ -23,18 +23,22 @@ public class GroupEntity {
     private Long id;
     @Column(name = "NAME", nullable = false)
     private String name;
-    @Column(name = "DESCRIPTION")
+    @Column(name = "DESCRIPTION",columnDefinition = "TEXT")
     private String description;
     @Column(name = "CREAT")
     private Boolean creatable;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
     private List<UserEntity> users = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
+    private List<Attachment> files = new ArrayList<>();
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "groups")
     private List<TaskEntity> tasks = new ArrayList<>();
-    public GroupEntity(String name, String description) {
+    public GroupEntity(String name, String description, Boolean creatable) {
         this.name = name;
         this.description = description;
+        this.creatable = creatable;
     }
+
     public Group entityToModel(){
         List<Task> createdTasks = new ArrayList<>();
         List<Task> executableTasks = new ArrayList<>();
