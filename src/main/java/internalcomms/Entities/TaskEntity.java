@@ -4,6 +4,9 @@ import com.vladmihalcea.hibernate.type.json.JsonStringType;
 import internalcomms.Models.Group;
 import internalcomms.Models.Message;
 import internalcomms.Models.Task;
+import internalcomms.ResponseData;
+import org.springframework.web.client.RestTemplate;
+import internalcomms.Services.AttachmentServiceImpl;
 import lombok.*;
 import org.hibernate.annotations.TypeDef;
 
@@ -47,14 +50,27 @@ public class TaskEntity {
 
     public Task entityToModel() {
         Group owner = null;
+        List<ResponseData> ownerFiles = new ArrayList<>();
         List<Task.GroupForTask> groups = new ArrayList<>();
         for(var g: groupsForTask){
             GroupEntity ge = this.groups.stream().filter(x->x.getId()==g.groupID).findFirst().get();
-            if(g.getIsHead()) owner = new Group(ge.getId(),ge.getName());
-            else groups.add(new Task.GroupForTask(g.condition,new Group(ge.getId(),ge.getName())));
+            List<ResponseData> rd = new ArrayList<>();
+            for (var f:g.files) {
+                rd.add(getFile(f.getId()));
+            }
+            if(g.getIsHead()) {
+                owner = new Group(ge.getId(), ge.getName());
+                ownerFiles = rd;
+            }
+            else {
+                groups.add(new Task.GroupForTask(g.condition, new Group(ge.getId(), ge.getName()), rd));
+            }
         }
         List<Message> messages = this.messages.stream().map(x->x.entityToModel()).toList();
-        return new Task(id,name, description, deadline,priority, owner, groups, messages);
+        return new Task(id,name, description, deadline,priority, owner, ownerFiles, groups, messages);
+    }
+    public ResponseData getFile(String id){
+        return new RestTemplate().getForObject("http://localhost:8080/load/" + id, ResponseData.class);
     }
     @Data
     @NoArgsConstructor
@@ -71,7 +87,8 @@ public class TaskEntity {
         private Boolean condition = false;
         @Column(name="GROUP_ID")
         private Long groupID;
-        //todo files
+        @OneToMany(cascade=ALL, mappedBy="task")
+        private List<Attachment> files = new ArrayList<>();
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name="TASK_ID")
         private TaskEntity task_cond;

@@ -13,7 +13,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@CrossOrigin(maxAge = 3600)
 @RestController
+@RequestMapping("/files")
 public class AttachmentController {
     @Autowired
     private AttachmentServiceImpl attachmentServiceImpl;
@@ -23,7 +28,7 @@ public class AttachmentController {
     }
 
     @PostMapping("/upload")
-    public ResponseData uploadFile(@RequestParam("file")MultipartFile file) throws Exception {
+    public ResponseData uploadFiles(@RequestParam("file")MultipartFile file) throws Exception {
         Attachment attachment = null;
         String downloadURl = "";
         attachment = attachmentServiceImpl.saveAttachment(file);
@@ -37,11 +42,40 @@ public class AttachmentController {
                 file.getContentType(),
                 file.getSize());
     }
+    @PostMapping("/uploads")
+    public List<ResponseData> uploadFiles(@RequestParam("files")List<MultipartFile> files, @RequestParam("taskID")Long taskID) throws Exception {
+        List<ResponseData> responseData = new ArrayList<>();
+        List<Attachment> attachments = attachmentServiceImpl.saveAttachments(files, taskID);
+        for (int i = 0; i < files.size(); i++) {
+            String downloadURl = ServletUriComponentsBuilder.fromCurrentContextPath()
+                    .path("/download/")
+                    .path(attachments.get(i).getId())
+                    .toUriString();
+            responseData.add(new ResponseData(attachments.get(i).getFileName(),
+                    downloadURl,
+                    files.get(i).getContentType(),
+                    files.get(i).getSize()));
+        }
+        return responseData;
+    }
+    @GetMapping("/load/{fileId}")
+    public ResponseData loadFile(@PathVariable String fileId) throws Exception {
+        ResponseData responseData = null;
+        Attachment attachment = attachmentServiceImpl.getAttachment(fileId);
+        String downloadURl = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/download/")
+                .path(attachment.getId())
+                .toUriString();
+        responseData= new ResponseData(attachment.getFileName(),
+                downloadURl,
+                attachment.getFileType(),
+                attachment.getData().length);
 
+        return responseData;
+    }
     @GetMapping("/download/{fileId}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileId) throws Exception {
-        Attachment attachment = null;
-        attachment = attachmentServiceImpl.getAttachment(fileId);
+        Attachment attachment = attachmentServiceImpl.getAttachment(fileId);
         return  ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(attachment.getFileType()))
                 .header(HttpHeaders.CONTENT_DISPOSITION,
@@ -49,4 +83,18 @@ public class AttachmentController {
                                 + "\"")
                 .body(new ByteArrayResource(attachment.getData()));
     }
+    //@GetMapping("/download")
+    //public List<ResponseEntity<Resource>> downloadFiles(@RequestParam("files")List<String> filesId) throws Exception {
+    //    List<ResponseEntity<Resource>> responseEntities = new ArrayList<>();
+    //    List<Attachment> attachments = attachmentServiceImpl.getAttachments(filesId);
+    //    for (int i = 0; i < filesId.size(); i++) {
+    //        responseEntities.add(ResponseEntity.ok()
+    //                .contentType(MediaType.parseMediaType(attachments.get(i).getFileType()))
+    //                .header(HttpHeaders.CONTENT_DISPOSITION,
+    //                        "attachment; filename=\"" + attachments.get(i).getFileName()
+    //                                + "\"")
+    //                .body(new ByteArrayResource(attachments.get(i).getData())));
+    //    }
+    //    return responseEntities;
+    //}
 }
