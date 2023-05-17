@@ -1,5 +1,5 @@
 import {signInButton, dataSignIn} from "./registerLogic.js"
-const url = 'http://localhost:8080/users/'
+const url = 'http://localhost:8080/users/login'
 
 //let response = await fetch(url)
 
