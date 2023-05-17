@@ -1,5 +1,6 @@
 //package internalcomms.config;
 //
+/**MVC конфигурация для дальнейшего создания аунтефикации**/
 //import org.springframework.context.annotation.Configuration;
 //import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 //import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
