@@ -56,14 +56,13 @@ submitButton.onclick = async function () {
             description: document.getElementById('description').value,
             deadline: document.getElementById('expires').value,
             priority: Number(document.getElementById('prior-range').value),
-            owner: {'id': currentUser.groupid},
+            owner: {id: currentUser.group.id},
             groupsId: executorsIDs, //id исполнителей
         };
-        const jsonbody = JSON.stringify(body);
         console.log(JSON.stringify(body));
         let response = (await fetch(serverURL, {
             method: 'POST',
-            body: JSON.stringify(body), //jsonbody.slice(0, jsonbody.length-1) + ',"groups":[' + executorsIDs.join(',') + ']}',
+            body: JSON.stringify(body),
             headers: {'Content-Type': 'application/json'}
         })).json();
         console.log(response);
