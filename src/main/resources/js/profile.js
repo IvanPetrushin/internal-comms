@@ -1,6 +1,12 @@
 import "./headerProfile.js";
-import {currentUser, currentGroup} from "./data.js";
+import {URL} from "./data.js";
 
-document.querySelector('.profile-group').textContent = currentUser.group;
-document.querySelector('.profile-group-description').textContent = currentGroup.description;
-document.querySelector('.profile-group-mail').textContent = `e-mail: ${currentGroup.mail}`;
+const tempLink = location.href.split('/');
+const user = tempLink[tempLink.length-1];
+let response = await fetch(`${URL}/users/${user}` );
+let userObj = JSON.parse(JSON.stringify(await response.json()));
+console.log(userObj);
+
+document.querySelector('.profile-username').textContent = userObj.username;
+document.querySelector('.profile-group').innerHTML = `<a href="${URL}/group/${userObj.group.id}">${userObj.group.name}</a>`;
+document.querySelector('.profile-group-mail').textContent = `e-mail: ${userObj.mail}`;
