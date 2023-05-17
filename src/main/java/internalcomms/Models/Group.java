@@ -12,30 +12,22 @@ public class Group {
     private Long id;
     private String name;
     private String description;
+    private Boolean creatable;
     private List<User> users;
     private List<Task> createdTasks;
     private List<Task> executableTasks;
 
-    public Group(Long id, String name, String description, List<Task> createdTasks, List<Task> executableTasks) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.createdTasks = createdTasks;
-        this.executableTasks = executableTasks;
-    }
-
-    public Group(Long id, String name, String description) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-    }
-
-    public Group(Long id) {
-        this.id = id;
-    }
-
     public Group(Long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Group(Long id, String name, String description, Boolean creatable, List<Task> createdTasks, List<Task> executableTasks) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.creatable = creatable;
+        this.createdTasks = createdTasks;
+        this.executableTasks = executableTasks;
     }
 }

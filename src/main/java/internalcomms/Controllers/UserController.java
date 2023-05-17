@@ -41,6 +41,16 @@ public class UserController {
             return ResponseEntity.badRequest().body("Error");
         }
     }
+    @GetMapping("/login")
+    public ResponseEntity login(@RequestParam("mail") String mail, @RequestParam("password") String password){
+        try{
+            return ResponseEntity.ok(userService.login(mail, password));
+        }catch (UserNotFoundException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body("Error");
+        }
+    }
     @DeleteMapping("/{id}")
     public ResponseEntity deleteUser(@PathVariable Long id){
         try {

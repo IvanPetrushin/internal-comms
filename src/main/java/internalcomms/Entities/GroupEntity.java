@@ -25,6 +25,8 @@ public class GroupEntity {
     private String name;
     @Column(name = "DESCRIPTION")
     private String description;
+    @Column(name = "CREAT")
+    private Boolean creatable;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
     private List<UserEntity> users = new ArrayList<>();
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "groups")
@@ -43,6 +45,6 @@ public class GroupEntity {
                 executableTasks.add(t.entityToModel());
             }
         }
-        return new Group(id,name,description,createdTasks,executableTasks);
+        return new Group(id,name,description,creatable,createdTasks,executableTasks);
     }
 }

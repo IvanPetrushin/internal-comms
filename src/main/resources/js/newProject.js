@@ -1,5 +1,5 @@
 import {createModal} from "./modalFilesEdit.js";
-import {currentUser, executorsList} from "./data.js";
+import {currentUser, executorsList, URL} from "./data.js";
 import "./headerProfile.js";
 
 let currentDate = new Date;
@@ -43,25 +43,26 @@ textarea.oninput = function () {
     }
 };
 
-const serverURL = 'http://localhost:8080/tasks'; //'https://jsonplaceholder.typicode.com/posts';
+const serverURL = URL + '/tasks'; //'https://jsonplaceholder.typicode.com/posts';
 
 const submitButton = document.getElementById('submit-button');
 submitButton.onclick = async function () {
     try {
-        const project = {
+        const executorsIDs = [];
+        currentExecutors.forEach(group => executorsIDs.push(group.id));
+        // currentExecutors.forEach(group => executorsIDs.push(`{"group": {"id": ${group.id}}}`));
+        const body = {
             name: document.getElementById('name').value,
-            priority: document.getElementById('prior-range').value,
-            deadline: document.getElementById('expires').value,
             description: document.getElementById('description').value,
-            //files: currentFiles,
-            groups: currentExecutors,
-            owner: currentUser
+            deadline: document.getElementById('expires').value,
+            priority: Number(document.getElementById('prior-range').value),
+            owner: {id: currentUser.group.id},
+            groupsId: executorsIDs, //id исполнителей
         };
-        console.log(JSON.stringify(project));
+        console.log(JSON.stringify(body));
         let response = (await fetch(serverURL, {
             method: 'POST',
-            mode: 'no-cors',
-            body: JSON.stringify(project),
+            body: JSON.stringify(body),
             headers: {'Content-Type': 'application/json'}
         })).json();
         console.log(response);
@@ -83,9 +84,9 @@ function validateForm () {
 function updateExecutorsList() {
     const listSpan = document.querySelector('.project-executors__list');
     listSpan.textContent = '';
-    currentExecutors.forEach(employee => {
+    currentExecutors.forEach(group => {
         var element = document.createElement('li');
-        element.textContent = `${employee.name} | ${employee.group}, `;
+        element.textContent = `${group.name} | ${group.id}, `;
         listSpan.appendChild(element);
     });
 }
@@ -93,10 +94,10 @@ function updateExecutorsList() {
 function createExecutorsList() {
     const optList = document.getElementById('load-executors');
     console.log(optList);
-    for (const employee of executorsList) {
+    for (const group of executorsList.filter(value => value.id !== currentUser.groupid)) {
         var option = document.createElement('option');
-        option.value = JSON.stringify(employee);
-        option.textContent = `${employee.name} | ${employee.group}`;
+        option.value = JSON.stringify(group);
+        option.textContent = `${group.name} | ${group.id}`;
         optList.appendChild(option);
     }
 }
@@ -108,9 +109,9 @@ function editExecutorsButtons(modalWin) {
             modalWin.show();
             const inputExecutor = document.getElementById('load-executors');
             inputExecutor.onchange = function () {
-                const employeeObj = JSON.parse(inputExecutor.value);
-                if (currentExecutors.every(value => {return value.name != employeeObj.name || value.group != employeeObj.group})) {
-                    currentExecutors.push(employeeObj);
+                const groupObj = JSON.parse(inputExecutor.value);
+                if (currentExecutors.every(value => value.id !== groupObj.id)) {
+                    currentExecutors.push(groupObj);
                     drawExecutorsListAdd();
                 }
                 this.value = '';
@@ -122,12 +123,12 @@ function editExecutorsButtons(modalWin) {
 function drawExecutorsListAdd() {
     const list = document.querySelector('.modal__body .executors-list');
     list.innerHTML = '';
-    for (const employee of currentExecutors) {
+    for (const group of currentExecutors) {
         const element = document.createElement('li');
         element.classList.add('file');
-        element.innerHTML = `<span class="executor">${employee.name} | ${employee.group}</span><span class="executor-delete">удалить</span>`;
+        element.innerHTML = `<span class="executor">${group.name} | ${group.id}</span><span class="executor-delete">удалить</span>`;
         element.querySelector('.executor-delete').onclick = function () {
-            currentExecutors = currentExecutors.filter(value => {return value.name != employee.name || value.group != employee.group});
+            currentExecutors = currentExecutors.filter(value => value.id !== group.id);
             drawExecutorsListAdd();
         };
         list.appendChild(element);
