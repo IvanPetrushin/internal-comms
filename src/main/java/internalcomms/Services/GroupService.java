@@ -14,7 +14,7 @@ public class GroupService {
     @Autowired
     private GroupRepo groupRepo;
     public String create(Group group) {
-        groupRepo.save(new GroupEntity(group.getName(), group.getDescription()));
+        groupRepo.save(new GroupEntity(group.getName(), group.getDescription(), group.getCreatable()));
         return"Group " + group.getName() + " created";
     }
     public Group get(Long id){

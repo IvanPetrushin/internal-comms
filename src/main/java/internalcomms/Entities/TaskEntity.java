@@ -47,6 +47,7 @@ public class TaskEntity {
         this.deadline = deadline;
         this.priority = priority;
     }
+    private static RestTemplate restTemplate = new RestTemplate();
 
     public Task entityToModel() {
         Group owner = null;
@@ -54,10 +55,7 @@ public class TaskEntity {
         List<Task.GroupForTask> groups = new ArrayList<>();
         for(var g: groupsForTask){
             GroupEntity ge = this.groups.stream().filter(x->x.getId()==g.groupID).findFirst().get();
-            List<ResponseData> rd = new ArrayList<>();
-            for (var f:g.files) {
-                rd.add(getFile(f.getId()));
-            }
+            List<ResponseData> rd = restTemplate.getForObject("http://localhost:8080/files/" + id+"/"+g.groupID, List.class);
             if(g.getIsHead()) {
                 owner = new Group(ge.getId(), ge.getName());
                 ownerFiles = rd;
@@ -68,9 +66,6 @@ public class TaskEntity {
         }
         List<Message> messages = this.messages.stream().map(x->x.entityToModel()).toList();
         return new Task(id,name, description, deadline,priority, owner, ownerFiles, groups, messages);
-    }
-    public ResponseData getFile(String id){
-        return new RestTemplate().getForObject("http://localhost:8080/load/" + id, ResponseData.class);
     }
     @Data
     @NoArgsConstructor

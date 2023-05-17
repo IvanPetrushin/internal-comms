@@ -43,9 +43,9 @@ public class AttachmentController {
                 file.getSize());
     }
     @PostMapping("/uploads")
-    public List<ResponseData> uploadFiles(@RequestParam("files")List<MultipartFile> files, @RequestParam("taskID")Long taskID) throws Exception {
+    public List<ResponseData> uploadFiles(@RequestParam("files")List<MultipartFile> files, @RequestParam("taskID")Long taskID, @RequestParam("groupID")Long groupID) throws Exception {
         List<ResponseData> responseData = new ArrayList<>();
-        List<Attachment> attachments = attachmentServiceImpl.saveAttachments(files, taskID);
+        List<Attachment> attachments = attachmentServiceImpl.saveAttachments(files, taskID, groupID);
         for (int i = 0; i < files.size(); i++) {
             String downloadURl = ServletUriComponentsBuilder.fromCurrentContextPath()
                     .path("/download/")
@@ -71,6 +71,22 @@ public class AttachmentController {
                 attachment.getFileType(),
                 attachment.getData().length);
 
+        return responseData;
+    }
+    @GetMapping("/{taskID}/{groupID}")
+    public List<ResponseData> loadFiles(@PathVariable Long taskID,@PathVariable Long groupID) throws Exception {
+        List<ResponseData> responseData = new ArrayList<>();
+        List<Attachment> attachments = attachmentServiceImpl.getAttachments(taskID, groupID);
+        for (var a:attachments) {
+            String downloadURl = ServletUriComponentsBuilder.fromCurrentContextPath()
+                    .path("/download/")
+                    .path(a.getId())
+                    .toUriString();
+            responseData.add(new ResponseData(a.getFileName(),
+                    downloadURl,
+                    a.getFileType(),
+                    a.getData().length));
+        }
         return responseData;
     }
     @GetMapping("/download/{fileId}")
