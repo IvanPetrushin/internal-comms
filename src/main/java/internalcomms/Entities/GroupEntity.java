@@ -23,7 +23,7 @@ public class GroupEntity {
     private Long id;
     @Column(name = "NAME", nullable = false)
     private String name;
-    @Column(name = "DESCRIPTION")
+    @Column(name = "DESCRIPTION",columnDefinition = "TEXT")
     private String description;
     @Column(name = "CREAT")
     private Boolean creatable;

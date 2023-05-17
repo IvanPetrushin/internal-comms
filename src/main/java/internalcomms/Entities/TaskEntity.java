@@ -25,7 +25,7 @@ public class TaskEntity {
     private Long id;
     @Column(name = "NAME", nullable = false)
     private String name;
-    @Column(name = "DESCRIPTION", nullable = false)
+    @Column(name = "DESCRIPTION", nullable = false, columnDefinition = "TEXT")
     private String description;
     @Column(name = "DEADLINE", nullable = false)
     private String deadline;
