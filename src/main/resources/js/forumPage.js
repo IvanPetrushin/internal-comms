@@ -1,11 +1,10 @@
 import {currentUser, URL} from "./data.js";
 import {expandButtonLogic} from "./expandButtonLogic.js";
+import "./headerProfile.js";
 
-const task = '679';
+const task = '12';
 let response = await fetch(`${URL}/tasks/${task}` );
 let project = JSON.parse(JSON.stringify(await response.json()));
-project.ownerFiles = [];
-project.groups = {123: [['file.jpg', 'another.pdf'], true], 302: [[], false]};
 console.log(project);
 
 document.getElementById('project-name').textContent = project.name;
@@ -14,9 +13,11 @@ expandButtonLogic();
 document.querySelector('.expand').click();
 
 document.querySelector('.pre-description').innerHTML = project.description;
-
+await drawMessages();
+document.querySelector('li.owner').innerHTML = `<li class="owner">Заказчик задачи: ${project.owner.name} (${project.owner.id})</li>`;
 
 const textarea = document.querySelector('.message-textarea');
+
 
 // Фокус/расфокус поля сообщения
 const placeholder = 'Ваше сообщение';
@@ -34,15 +35,16 @@ textarea.addEventListener('focusout', ()=> {
 const sendMessageButton = document.querySelector('.send-message');
 sendMessageButton.onclick = async function () {
     if (textarea.textContent.trim() !== '' && textarea.textContent.trim() !== placeholder) {
+        const body = {
+            'text': textarea.textContent.trim(),
+            'time': (new Date).toISOString().slice(0,16).replace('T', ' '), // Формат 2023-05-13 18:36
+            'user': {id: currentUser.id},
+            'task': {id: project.id}
+        };
         await fetch(`${URL}/messages`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: {
-                'text': textarea.innerHTML,
-                'time': (new Date).toISOString().slice(0,16).replace('T', ' '), // Формат 2023-05-13 18:36
-                'user': currentUser.id,
-                'task': project.id
-            },
+            body: JSON.stringify(body),
         });
         console.log(textarea.innerHTML);
         textarea.innerHTML = '';
@@ -53,10 +55,8 @@ sendMessageButton.onclick = async function () {
 };
 
 async function drawMessages() {
-    response = await fetch(`${URL}/tasks/${task}` );
+    response = await fetch(`${URL}/tasks/${task}`);
     let project = JSON.parse(JSON.stringify(await response.json()));
-    project.ownerFiles = [];
-    project.groups = {123: [['file.jpg', 'another.pdf'], true], 302: [[], false]};
     console.log(project);
     const chatWindow = document.querySelector('.chat-window');
     chatWindow.innerHTML = '';
@@ -65,22 +65,16 @@ async function drawMessages() {
         if (message.user.id !== currentUser.id) {
             messageTemplate.querySelector('.message-field').classList.add('foe');
         }
+        console.log(message.user.group.id, project.owner.id);
         if (message.user.group.id === project.owner.id) {
             messageTemplate.querySelector('.message.block').classList.add('admin');
         }
-        messageTemplate.querySelector('.message-owner').innerHTML = `<a href="${URL}/users/${message.user.id}"></a>`;
+        messageTemplate.querySelector('.message-owner').href = "${URL}/users/${message.user.id}";
+        messageTemplate.querySelector('.message-owner').textContent = `${message.user.username} | ${message.user.group.name}`;
         messageTemplate.querySelector('.message-text').innerHTML = message.text;
         messageTemplate.querySelector('.message-time').innerHTML = message.time;
 
         chatWindow.appendChild(messageTemplate);
-        // const messageField = document.createElement('div');
-        // messageField.classList.add('message-field');
-        // if (message.user.id !== currentUser.id) {messageField.classList.add('foe')}
-        //
-        // const messageBlock = document.createElement('div');
-        // messageBlock.classList.add('block', 'message');
-        // if (message.user.group.id === project.owner.id) {messageBlock.classList.add('admin')}
-
-
+        chatWindow.scrollTo(0, chatWindow.scrollHeight);
     }
 }

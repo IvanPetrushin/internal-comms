@@ -1,6 +1,6 @@
-import {equalsEmp, currentUser, URL} from "./data.js";
+import {equalsEmp, currentUser, URL, currentGroup, projects} from "./data.js";
 
-function drawProject(projects) {
+async function drawProject(projects) {
     for (let [index, project] of projects.entries()) {
 
         let block = document.createElement('div');
@@ -15,6 +15,7 @@ function drawProject(projects) {
         const tempString = '✦'.repeat(project.priority);
         headerItems.innerHTML += `<a class="priority">приоритет: ${tempString} </a>`;
         headerItems.innerHTML += `<a class="expires">до ${project.deadline}</a>`;
+
 
         projectHeader.appendChild(headerItems);
         projectHeader.innerHTML += `<a class="expand collapsed"><</a>`;
@@ -42,7 +43,7 @@ function drawProject(projects) {
 
         const userBlocks = document.createElement('div');
         // Отрисовка разного интерфейса для созданных и исполняемых проектов
-        if (project.owner.id !== currentUser.groupid) {
+        if (project.owner.id !== currentUser.group.id) {
             const userFiles = document.createElement('div');
             userFiles.classList.add('block', 'project-files', 'user');
 
@@ -69,7 +70,7 @@ function drawProject(projects) {
                 userFiles.classList.add('block', 'project-files', 'user');
 
                 div = document.createElement('div');
-                div.textContent = `Отчет ${tempGroup.group.name} (${tempGroup.group.id}): `
+                div.innerHTML = `<i class="status"></i>Отчет ${tempGroup.group.name}<i class="mini">(${tempGroup.group.id})</i>: `
 
                 let currentUserFiles = project.groups[tempGroup];
                 if (currentUserFiles !== undefined) {
@@ -79,7 +80,29 @@ function drawProject(projects) {
                 }
 
                 userFiles.appendChild(div);
-                userFiles.innerHTML += `<a class="action-file edit">Принять</a>`;
+                const userFilesBtn = document.createElement('div');
+
+                const cond = {true: 'Отозвать', false: 'Принять'};
+                if (tempGroup.condition) {
+                    div.querySelector('.status').textContent = '✔️';
+                }
+                userFilesBtn.innerHTML += `<a class="action-file accept">${cond[tempGroup.condition]}</a>`;
+                userFilesBtn.querySelector('.action-file.accept').addEventListener(
+                    'click',
+                    (evt) => {
+                        setCondition(tempGroup, project);
+                        if (evt.target.textContent === 'Отозвать') {
+                            evt.target.textContent = cond.false;
+                            evt.target.parentElement.parentElement.querySelector('.status').textContent = '';
+                        } else {
+                            evt.target.textContent = cond.true;
+                            evt.target.parentElement.parentElement.querySelector('.status').textContent = '✔️';
+                        }
+                    }
+                );
+
+                userFiles.appendChild(userFilesBtn);
+
                 userBlocks.appendChild(userFiles);
             }
         }
@@ -89,12 +112,11 @@ function drawProject(projects) {
 
         const projectBottomInfo = document.createElement('ul');
         projectBottomInfo.classList.add('project-bottom__info');
-        projectBottomInfo.innerHTML = `<li class="owner">Заказчик задачи: ${project.owner.name} (${project.owner.group})</li>`;
-        projectBottomInfo.innerHTML += `<li class="executor">Исполнитель: ${currentUser.name} (${currentUser.group})</li>`;
+        projectBottomInfo.innerHTML = `<li class="owner">Заказчик задачи: ${project.owner.name} (${project.owner.id})</li>`;
 
         const projectButtons = document.createElement('div');
         projectButtons.classList.add('project-buttons');
-        projectButtons.innerHTML = `<a class="block button" href="${URL}/tasks/${project.id}">Подробнее</a><a class="block button">Отправить</a>`;
+        projectButtons.innerHTML = `<a class="block button" href="${URL}/tasks/${project.id}">Подробнее</a>`;
 
         projectBottom.appendChild(projectBottomInfo);
         projectBottom.appendChild(projectButtons);
@@ -114,24 +136,45 @@ function drawProject(projects) {
 
 
         let projectWindow;
-        if (Date.parse(project.deadline) < Date.now()) {
+        if (projectCompleted(project)) { //Date.parse(project.deadline) < Date.now() ||
             projectWindow = document.querySelector('.projects-window.ended');
-            block.querySelector('.action-file.edit').textContent = '';
             block.querySelector('.project-buttons').textContent = '';
         }
         else {
             projectWindow = document.querySelector('.projects-window.current');
+            if (Date.parse(project.deadline) < Date.now()) {
+                block.querySelector('.expires').classList.add('expired');
+            }
         }
         projectWindow.appendChild(block);
     }
-    if (projects.filter(item => Date.parse(item.deadline) < Date.now()).length === 0) {
+    if (document.querySelector('.projects-window.ended').innerHTML.trim() === '') {
         let window = document.querySelector('.projects-window.ended');
         window.innerHTML = `<div class="block empty">В данной категории еще нет проектов</div>`;
     }
-    if (projects.filter(item => Date.parse(item.deadline) > Date.now()).length === 0) {
+    if (document.querySelector('.projects-window.current').innerHTML.trim() === '') {
         let window = document.querySelector('.projects-window.current');
         window.innerHTML = `<div class="block empty">В данной категории еще нет проектов</div>`;
     }
+}
+
+function projectCompleted(project) {
+    if (project.owner.id === currentGroup.id) {
+        if (project.groups.every(value => value.condition)) {
+            console.log(project.groups);
+            return true;
+        }
+    } else {
+        if (project.groups.find(value => value.group.id === currentGroup.id).condition) {
+            return true;
+        }
+    }
+    return false;
+}
+
+async function setCondition(tempGroup, project) {
+    const response = await fetch(`${URL}/tasks/${project.id}?groupID=${tempGroup.group.id}&condition=${!tempGroup.condition}`, {method: 'PUT'});
+    console.log(response);
 }
 
 export {drawProject};

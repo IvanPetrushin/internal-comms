@@ -49,20 +49,21 @@ const submitButton = document.getElementById('submit-button');
 submitButton.onclick = async function () {
     try {
         const executorsIDs = [];
-        currentExecutors.forEach(group => executorsIDs.push(`{"group": {"id": ${group.id}}}`));
+        currentExecutors.forEach(group => executorsIDs.push(group.id));
+        // currentExecutors.forEach(group => executorsIDs.push(`{"group": {"id": ${group.id}}}`));
         const body = {
             name: document.getElementById('name').value,
             description: document.getElementById('description').value,
             deadline: document.getElementById('expires').value,
             priority: Number(document.getElementById('prior-range').value),
             owner: {'id': currentUser.groupid},
-            // groups: executorsIDs.join(','), //id исполнителей
+            groupsId: executorsIDs, //id исполнителей
         };
         const jsonbody = JSON.stringify(body);
         console.log(JSON.stringify(body));
         let response = (await fetch(serverURL, {
             method: 'POST',
-            body: jsonbody.slice(0, jsonbody.length-1) + ',"groups":[' + executorsIDs.join(',') + ']}',
+            body: JSON.stringify(body), //jsonbody.slice(0, jsonbody.length-1) + ',"groups":[' + executorsIDs.join(',') + ']}',
             headers: {'Content-Type': 'application/json'}
         })).json();
         console.log(response);

@@ -97,6 +97,7 @@ a {
 
 .profile-list {
     list-style: none;
+    margin: 0;
 }
 
 .su {
@@ -252,6 +253,7 @@ a {
 .hidden {
     visibility: hidden;
     height: 0;
+    display: none;
 }
 
 .empty {
@@ -350,7 +352,8 @@ pre {
 }
 
 .message-owner {
-    font-size: 0.9em;
+    font-size: 0.85em;
+    color: #706f6f;
 }
 
 .message-field {
@@ -389,4 +392,20 @@ pre {
 
 .admin {
     border: 2px solid #e30616;
+}
+
+.expired {
+    color: #e30616;
+    padding-inline: 2px;
+    border: 1px solid #e30616;
+}
+
+.chat-placeholder {
+    display: flex;
+    justify-content: center;
+}
+
+.mini {
+    font-size: 0.8rem;
+    color: #706f6f;
 }
