@@ -41,10 +41,10 @@ public class UserController {
             return ResponseEntity.badRequest().body("Error");
         }
     }
-    @GetMapping("/mail")
-    public ResponseEntity findByMail(@RequestParam("mail") String mail){
+    @GetMapping("/login")
+    public ResponseEntity login(@RequestParam("mail") String mail, @RequestParam("password") String password){
         try{
-            return ResponseEntity.ok(userService.findByMail(mail));
+            return ResponseEntity.ok(userService.login(mail, password));
         }catch (UserNotFoundException e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }catch (Exception e){
