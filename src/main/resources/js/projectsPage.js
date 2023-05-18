@@ -4,7 +4,7 @@ import {expandButtonLogic} from "./expandButtonLogic.js";
 import {projects, currentGroup} from "./data.js";
 import "./headerProfile.js";
 
-if (currentGroup.isHead) {
+if (currentGroup.creatable) {
     document.querySelector('.new-project').classList.remove('hidden');
 }
 

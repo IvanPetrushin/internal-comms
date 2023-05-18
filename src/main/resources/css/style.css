@@ -22,7 +22,7 @@ body {
 
 footer {
     margin: 0 40px;
-    border-top: 1px black solid;
+    border-top: 1px #c6c6c6 solid;
 }
 
 label {
@@ -53,7 +53,7 @@ a {
     justify-content: space-between;
     padding: 15px 0 15px;
     margin: 0 40px;
-    border-bottom: black 1px solid;
+    border-bottom: #c6c6c6 1px solid;
 }
 
 .header-name {
@@ -64,7 +64,7 @@ a {
 .header-logo {
     height: 70px;
     width: 20%;
-    border-right: 1px black solid;
+    border-right: #c6c6c6 1px solid;
 }
 
 .user-name__header {
@@ -80,7 +80,7 @@ a {
     flex-direction: column;
     justify-content: center;
     padding: 5px 30px;
-    border-right: 1px black solid;
+    border-right: 1px #c6c6c6 solid;
 }
 
 .header-link:hover {
@@ -97,6 +97,7 @@ a {
 
 .profile-list {
     list-style: none;
+    margin: 0;
 }
 
 .su {
@@ -151,7 +152,7 @@ a {
 }
 
 .project-header__items {
-    color: #f9df13;
+    /* color: #f9df13; */
 }
 
 .project-name {
@@ -241,6 +242,7 @@ a {
     text-decoration: none;
     color: black;
     user-select: none;
+    align-items: center;
 }
 
 .button:hover {
@@ -251,6 +253,7 @@ a {
 .hidden {
     visibility: hidden;
     height: 0;
+    display: none;
 }
 
 .empty {
@@ -327,4 +330,82 @@ i {
 
 pre {
     font: inherit;
+}
+
+.chat-window {
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.message {
+    display: flex;
+    padding: 5px;
+    max-width: 70%;
+    min-width: 20%;
+}
+
+.message-time {
+    color: #706f6f;
+    font-size: 0.75em;
+    width: 100%;
+    text-align: end;
+}
+
+.message-owner {
+    font-size: 0.85em;
+    color: #706f6f;
+}
+
+.message-field {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.message-field.foe {
+    flex-direction: row;
+}
+
+.big-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* padding-inline: 5px; */
+    border-bottom: 1px #d6d6d6 solid;
+}
+
+.project-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.pre-description {
+    font-size: 1em;
+    margin-left: 20px;
+}
+
+.message-textarea {
+    background-color: white;
+    width: 70%;
+    padding: 5px 10px;
+}
+
+.admin {
+    border: 2px solid #e30616;
+}
+
+.expired {
+    color: #e30616;
+    padding-inline: 2px;
+    border: 1px solid #e30616;
+}
+
+.chat-placeholder {
+    display: flex;
+    justify-content: center;
+}
+
+.mini {
+    font-size: 0.8rem;
+    color: #706f6f;
 }

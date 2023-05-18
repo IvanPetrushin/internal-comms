@@ -9,6 +9,8 @@ import internalcomms.Repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 public class UserService {
     @Autowired
@@ -35,10 +37,13 @@ public class UserService {
         return user.entityToModel();
     }
 
-    public User findByMail(String mail) throws UserNotFoundException {
+    public User login(String mail, String password) throws UserNotFoundException {
         UserEntity user = userRepo.findByMail(mail);
         if (user == null) {
             throw new UserNotFoundException("User not found");
+        }
+        if(!Objects.equals(user.getPassword(), password)){
+            return null;
         }
         return user.entityToModel();
     }
