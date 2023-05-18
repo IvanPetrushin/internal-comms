@@ -6,12 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Rest-контроллер запросов для сообщений
+ */
 @CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/messages")
 public class MessageController {
     @Autowired
     private MessageService messageService;
+
+    /**
+     * POST-запрос на создание сообщения. На вход ожидается текст, время, ID пользователя и группы
+     */
     @PostMapping
     public ResponseEntity create(@RequestBody Message message){
         try{
@@ -21,6 +28,9 @@ public class MessageController {
         }
     }
 
+    /**
+     * GET-запрос на получение сообщения по ID
+     */
     @GetMapping("/{id}")
     public ResponseEntity get(@PathVariable Long id){
         try{
@@ -30,6 +40,9 @@ public class MessageController {
         }
     }
 
+    /**
+     * DELETE-запрос на удаление сообщения по ID
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id){
         try {

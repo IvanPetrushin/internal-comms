@@ -11,6 +11,9 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Сущность пользователя для базы данных. Хранит ID, имя пользователя, пароль, почту, ID группы
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

@@ -6,6 +6,9 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
+/**
+ * Сущность базы данных для файлов. Хранит ID, имя файла, тип файла, ID задания, ID группы, файл
+ */
 @Entity
 @Data@NoArgsConstructor
 public class Attachment {

@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Rest-контроллер запросов для сообщений
+ */
 @CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/tasks")
@@ -13,6 +16,9 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
+    /**
+     * POST-запрос на создание задания. На вход название, описание, дедлайн, приоритет, ID группы-создателя и групп-исполнителей
+     */
     @PostMapping
     public ResponseEntity create(@RequestBody Task task){
         try{
@@ -22,6 +28,9 @@ public class TaskController {
         }
     }
 
+    /**
+     * GET-запрос на получение задания по ID
+     */
     @GetMapping("/{id}")
     public ResponseEntity get(@PathVariable Long id){
         try{
@@ -30,6 +39,10 @@ public class TaskController {
             return ResponseEntity.badRequest().body("Error");
         }
     }
+
+    /**
+     * PUT-запрос на изменения состояния выполнения задания у группы
+     */
     @PutMapping("/{id}")
     public ResponseEntity putCondition(@PathVariable Long id, @RequestParam("groupID") Long groupID, @RequestParam("condition") Boolean cond){
         try{
@@ -38,6 +51,10 @@ public class TaskController {
             return ResponseEntity.badRequest().body("Error");
         }
     }
+
+    /**
+     * DELETE-запрос на удаление задания по ID
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity deleteTask(@PathVariable Long id){
         try {
