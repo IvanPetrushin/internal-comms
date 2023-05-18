@@ -19,12 +19,13 @@ const emailSignIn = document.getElementById("email-sign-in")
 const passwordSignIn =  document.getElementById('password-sign-in')
 
 if (signInButton) {
-    signInButton.addEventListener('click', () => {
+    signInButton.addEventListener('click', (evt) => {
+        evt.preventDefault();
         dataSignIn = {
             "mail": String(emailSignIn.value).trim(),
             "password": String(passwordSignIn.value).trim()
         }
-        dataSignIn = JSON.stringify(dataSignIn)
+        console.log(dataSignIn);
     })
 }
 

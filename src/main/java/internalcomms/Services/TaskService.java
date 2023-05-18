@@ -28,6 +28,7 @@ public class TaskService {
      * Сохранения задания
      * @return Task
      */
+
     public Task create(Task task){
         var savedTask = taskRepo.save(new TaskEntity(task.getName(), task.getDescription(), task.getDeadline(), task.getPriority()));
         List<TaskEntity.GroupForTask> groups = new ArrayList<>();
@@ -43,7 +44,9 @@ public class TaskService {
         }
         savedTask.setGroupsForTask(groups);
         savedTask.setGroups(groupEntities);
+
         taskRepo.save(savedTask); //Дополнительное сохранение с добавленными полями для групп-исполнителей и группы-создателя
+
         return new Task(savedTask.getId(), savedTask.getName());
     }
     public Task get(Long id){

@@ -357,6 +357,11 @@ pre {
     color: #706f6f;
 }
 
+.message-owner:hover {
+    color: black;
+    transition: color 0.15s;
+}
+
 .message-field {
     display: flex;
     flex-direction: row-reverse;
@@ -409,4 +414,9 @@ pre {
 .mini {
     font-size: 0.8rem;
     color: #706f6f;
+}
+
+.profile-link {
+    color: #706f6f;
+    transition: color 0.15s;
 }

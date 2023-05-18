@@ -1,27 +1,19 @@
 import {signInButton, dataSignIn} from "./registerLogic.js"
-const url = 'http://localhost:8080/users/login'
+const url = 'http://localhost:8080' //users/login'
 
 //let response = await fetch(url)
 
 if (signInButton) {
-       // response = await fetch(url)
-    signInButton.addEventListener('click', /*для отлади заменить 'submit' -> 'click' */ async () => {
-        let response = await fetch(url, { // Отправляем JSON
-            method: 'POST',
-            body: dataSignIn,
-            headers: {'Content-type': 'application.json'}
-        })
-        let incomeData = await response.json() // Читаем ответ
-        console.log(incomeData)
-    })
-
-    let response = await fetch(url);
-    signInButton.addEventListener('click', async () => {
-        let response = await fetch(url);
-        let info = JSON.parse(JSON.stringify(await response.json()));
-        if (info == null) {
-            alert("Ошибка")
-            signInButton.formAction = "";
+    signInButton.addEventListener('click', async (evt) => {
+        evt.preventDefault();
+        let response = await fetch(`${url}/users/login?mail=${dataSignIn.mail}&password=${dataSignIn.password}`);
+        if (response.status === 200) {
+            let userObj = JSON.parse(JSON.stringify(await response.json()));
+            console.log(userObj);
+            document.cookie = `loggedUserId=${userObj.id};max-age=3600`;
+            location.replace(url+'/projects');
+        } else {
+            alert('Неверная почта или пароль');
         }
     } )
 }

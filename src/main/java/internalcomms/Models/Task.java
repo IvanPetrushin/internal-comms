@@ -45,9 +45,11 @@ public class Task {
         this.name = name;
     }
 
+
     /**
      * Класс для хранения группы, состояния её выполнения задания и её файлов для данного задания
      */
+
     @Data
     @AllArgsConstructor
     @NoArgsConstructor

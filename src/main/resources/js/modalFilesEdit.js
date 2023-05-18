@@ -1,4 +1,4 @@
-import {currentUser, equalsEmp, projects} from "./data.js";
+import {projects} from "./data.js";
 
 function createModal(template) {
     const editFilesElement = document.querySelector(`.modal__temps .${template}`);
@@ -17,7 +17,7 @@ function editButtonsLogic(modalWin) {
             function () {
                 modalWin.show();
                 const index = Number(button.parentElement.parentElement.parentElement.classList.item(2));
-                drawFileList(projects[index].loadedFiles.find(value => equalsEmp(value.user, currentUser)).files);
+                drawFileList(projects[index].loadedFiles.find(value => value).files);
             });
     }
 }
