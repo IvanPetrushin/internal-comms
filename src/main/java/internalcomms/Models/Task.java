@@ -37,6 +37,11 @@ public class Task {
         this.messages = messages;
     }
 
+    public Task(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
