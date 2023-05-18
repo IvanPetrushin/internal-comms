@@ -8,5 +8,6 @@ let userObj = JSON.parse(JSON.stringify(await response.json()));
 console.log(userObj);
 
 document.querySelector('.profile-username').textContent = userObj.username;
-document.querySelector('.profile-group').innerHTML = `<a href="${URL}/group/${userObj.group.id}">${userObj.group.name}</a>`;
+document.querySelector('.profile-group').innerHTML =
+    `<a class="profile-link" href="${URL}/group/${userObj.group.id}">${userObj.group.name}</a>`;
 document.querySelector('.profile-group-mail').textContent = `e-mail: ${userObj.mail}`;

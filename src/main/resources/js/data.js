@@ -1,5 +1,9 @@
 const URL = 'http://localhost:8080'
 
+if (!(document.cookie.includes('loggedUserId'))) {
+    location.replace(URL+'/login');
+}
+console.log(document.cookie);
 
 function equalsEmp(a, b) {
     return a.name == b.name && a.group == b.group;
@@ -22,20 +26,26 @@ function sortProjects(projects, keyField, way = true) {
     return result
 }
 
-const currentUserId = 13;
+const currentUserId = getCookie().loggedUserId;
 const currentUser = JSON.parse(JSON.stringify(await (await fetch(`${URL}/users/${currentUserId}`)).json()));
 console.log(currentUser);
-const currentGroup = JSON.parse(JSON.stringify(await (await fetch(`${URL}/groups/${currentUser.group.id}`)).json()));
-console.log(currentGroup);
+// const currentGroup = JSON.parse(JSON.stringify(await (await fetch(`${URL}/groups/${currentUser.group.id}`)).json()));
+// console.log(currentGroup);
 
 // let response = await fetch(`${URL}/groups/${currentUser.group.id}`);
 // let tempProject = JSON.parse(JSON.stringify(await response.json()));
 // console.log(tempProject);
-let projects = currentGroup.executableTasks;
-projects.push.apply(projects, currentGroup.createdTasks);
+let projects = currentUser.group.executableTasks;
+projects.push.apply(projects, currentUser.group.createdTasks);
 console.log(projects);
 
-let response = await fetch(`${URL}/groups/`);
-const executorsList = JSON.parse(JSON.stringify(await response.json()));
+function getCookie() {
+    return document.cookie.split('; ').reduce((acc, item) => {
+        const [name, value] = item.split('=')
+        acc[name] = value
+        return acc
+    }, {})
+}
 
-export {equalsEmp, currentUser, projects, executorsList, currentGroup, URL};
+const currentGroup = currentUser.group;
+export {equalsEmp, currentUser, projects, currentGroup, URL};

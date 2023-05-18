@@ -3,7 +3,7 @@ import {expandButtonLogic} from "./expandButtonLogic.js";
 import "./headerProfile.js";
 
 const task = location.href.split('/')[4]; //'17';
-let response = await fetch(`${URL}/tasks/${task}` );
+let response = await fetch(`${URL}/tasks/${task}`, {'Content-Type': 'multipart/form-data'});
 let project = JSON.parse(JSON.stringify(await response.json()));
 console.log(project);
 
@@ -16,7 +16,7 @@ document.querySelector('.expand').click();
 
 document.querySelector('.pre-description').innerHTML = project.description;
 await drawMessages();
-document.querySelector('li.owner').innerHTML = `<li class="owner">Заказчик задачи: ${project.owner.name}<i class="mini">(${project.owner.id})</i></li>`;
+document.querySelector('li.owner').innerHTML = `<li class="owner"> <a class="profile-link" href="${URL}/group/${project.owner.id}">Заказчик задачи: ${project.owner.name}<i class="mini">(${project.owner.id})</i></a></li>`;
 
 const textarea = document.querySelector('.message-textarea');
 
