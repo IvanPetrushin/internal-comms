@@ -20,7 +20,7 @@ public class TaskService {
     private GroupRepo groupRepo;
     @Autowired
     private TaskCondRepo taskCondRepo;
-    public String create(Task task){
+    public Task create(Task task){
         var savedTask = taskRepo.save(new TaskEntity(task.getName(), task.getDescription(), task.getDeadline(), task.getPriority()));
         List<TaskEntity.GroupForTask> groups = new ArrayList<>();
         List<GroupEntity> groupEntities = new ArrayList<>();
@@ -35,7 +35,7 @@ public class TaskService {
         savedTask.setGroupsForTask(groups);
         savedTask.setGroups(groupEntities);
         taskRepo.save(savedTask);
-        return "Task " + task.getName() + " created.";
+        return new Task(savedTask.getId(), savedTask.getName());
     }
     public Task get(Long id){
         TaskEntity task = taskRepo.findById(id).get();

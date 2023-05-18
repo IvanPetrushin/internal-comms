@@ -43,7 +43,7 @@ public class UserService {
             throw new UserNotFoundException("User not found");
         }
         if(!Objects.equals(user.getPassword(), password)){
-            return null;
+            throw new UserNotFoundException("User not found");
         }
         return user.entityToModel();
     }

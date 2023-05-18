@@ -1,6 +1,9 @@
 import {createModal} from "./modalFilesEdit.js";
-import {currentUser, executorsList, URL} from "./data.js";
+import {currentUser, URL} from "./data.js";
 import "./headerProfile.js";
+
+let response = await fetch(`${URL}/groups/`);
+const executorsList = JSON.parse(JSON.stringify(await response.json()));
 
 let currentDate = new Date;
 currentDate.setTime(Date.now());
@@ -50,14 +53,13 @@ submitButton.onclick = async function () {
     try {
         const executorsIDs = [];
         currentExecutors.forEach(group => executorsIDs.push(group.id));
-        // currentExecutors.forEach(group => executorsIDs.push(`{"group": {"id": ${group.id}}}`));
         const body = {
             name: document.getElementById('name').value,
             description: document.getElementById('description').value,
             deadline: document.getElementById('expires').value,
             priority: Number(document.getElementById('prior-range').value),
             owner: {id: currentUser.group.id},
-            groupsId: executorsIDs, //id исполнителей
+            groupsId: executorsIDs,
         };
         console.log(JSON.stringify(body));
         let response = await fetch(serverURL, {
@@ -65,7 +67,10 @@ submitButton.onclick = async function () {
             body: JSON.stringify(body),
             headers: {'Content-Type': 'application/json'}
         });
-        console.log(response);
+        const projectID = JSON.parse(JSON.stringify(await response.json()))
+        console.log(projectID.id);
+        await sendFiles(currentFiles, currentUser.group.id, projectID.id);
+        // console.log(response.text());
         alert('Проект успешно создан!');
         location.reload();
     }catch (error) {
@@ -141,6 +146,18 @@ function drawExecutorsListAdd() {
 }
 
 // FILES PART -----------------------------------------------------------
+async function sendFiles(files, groupID, taskID) {
+    const body = new FormData();
+    body.append('files', files[0]);
+    body.append('groupID', groupID);
+    body.append('taskID', taskID);
+    await fetch(`${URL}/files/uploads`, {
+        method: 'POST',
+        headers: {'Content-Type' : 'multipart/form-data'},
+        body: body,
+    })
+}
+
 function updateFilesList() {
     const listSpan = document.querySelector('.project-files__list');
     listSpan.textContent = '';
@@ -155,7 +172,7 @@ function updateFilesList() {
 function namesOfFiles(files) {
     let names = [];
     for (let file of files) {
-        names.push(file[0].name);
+        names.push(file.name);
     }
     return names;
 }
@@ -183,9 +200,9 @@ function editButtonsLogic(modalWin) {
             const inputFile = document.getElementById('load-file');
             inputFile.onchange = function () {
                 if (namesOfFiles(currentFiles).every(value => inputFile.files[0].name != value)) {
-                    currentFiles.push(inputFile.files);
+                    currentFiles.push(inputFile.files[0]);
                 }
-                console.log(currentFiles.length);
+                console.log(currentFiles);
                 drawFileListAdd();
             };
             drawFileListAdd();
