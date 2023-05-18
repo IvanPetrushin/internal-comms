@@ -63,19 +63,6 @@ public class GroupController {
             return ResponseEntity.badRequest().body("Error");
         }
     }
-
-    /**
-     * GET-запрос на получение всех заданий конкретной группы
-     */
-    @GetMapping("/{id}/tasks")
-    public ResponseEntity getTasks(@PathVariable Long id){
-        try{
-            return ResponseEntity.ok(groupService.getTasks(id));
-        }catch (Exception e){
-            return ResponseEntity.badRequest().body("Error");
-        }
-    }
-
     /**
      * DELETE-запрос на удаление группы по ID
      */
