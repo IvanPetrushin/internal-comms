@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Rest-контроллер запросов для пользователей
+ */
 @CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/users")
@@ -14,6 +17,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * POST-запрос на регистрацию нового пользователя. На вход ожидается имя, пароль, почта, ID группы
+     */
     @PostMapping
     public ResponseEntity registration(@RequestBody User user){
         try{
@@ -23,6 +29,9 @@ public class UserController {
         }
     }
 
+    /**
+     * GET-запрос на получение пользователя по ID
+     */
     @GetMapping("/{id}")
     public ResponseEntity get(@PathVariable Long id){
         try{
@@ -31,6 +40,10 @@ public class UserController {
             return ResponseEntity.badRequest().body("Error");
         }
     }
+
+    /**
+     * GET-запрос на получение сообщения по имени
+     */
     @GetMapping("/username")
     public ResponseEntity findByUsername(@RequestParam("username") String username){
         try{
@@ -41,6 +54,10 @@ public class UserController {
             return ResponseEntity.badRequest().body("Error");
         }
     }
+
+    /**
+     * GET-запрос на логин
+     */
     @GetMapping("/login")
     public ResponseEntity login(@RequestParam("mail") String mail, @RequestParam("password") String password){
         try{
@@ -51,6 +68,10 @@ public class UserController {
             return ResponseEntity.badRequest().body("Error");
         }
     }
+
+    /**
+     * DELETE-запрос на удаление группы по ID
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity deleteUser(@PathVariable Long id){
         try {
@@ -59,6 +80,4 @@ public class UserController {
             return ResponseEntity.badRequest().body("Error");
         }
     }
-
-
 }

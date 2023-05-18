@@ -10,7 +10,11 @@ import org.hibernate.annotations.TypeDef;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+/**
+ * Сущность группы для базы данных. Хранит ID, название, описание, булеан на возможность создавать группы,
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,7 +30,7 @@ public class GroupEntity {
     @Column(name = "DESCRIPTION",columnDefinition = "TEXT")
     private String description;
     @Column(name = "CREAT")
-    private Boolean creatable;
+    private Boolean creatable; //Может ли группа создавать задания для других групп
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
     private List<UserEntity> users = new ArrayList<>();
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
@@ -43,7 +47,7 @@ public class GroupEntity {
         List<Task> createdTasks = new ArrayList<>();
         List<Task> executableTasks = new ArrayList<>();
         for (var t:tasks) {
-            if(t.getGroupsForTask().stream().filter(x->x.getGroupID()==id).findFirst().get().getIsHead()) {
+            if(t.getGroupsForTask().stream().filter(x-> Objects.equals(x.getGroupID(), id)).findFirst().get().getIsHead()) {
                 createdTasks.add(t.entityToModel());
             }else{
                 executableTasks.add(t.entityToModel());

@@ -14,7 +14,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+/**
+ * Сервис для файлов
+ */
 @Service
 public class AttachmentServiceImpl implements AttachmentService{
     @Autowired
@@ -28,15 +32,18 @@ public class AttachmentServiceImpl implements AttachmentService{
         this.attachmentRepository = attachmentRepository;
     }
 
+    /**
+     * Сохранение файла
+     * @return Attachment
+     */
     @Override
     public Attachment saveAttachment(MultipartFile file) throws Exception {
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
         try {
             if(fileName.contains("..")) {
                 throw  new Exception("Filename contains invalid path sequence "
                         + fileName);
             }
-
             Attachment attachment
                     = new Attachment(fileName,
                     file.getContentType(),
@@ -47,9 +54,14 @@ public class AttachmentServiceImpl implements AttachmentService{
             throw new Exception("Could not save File: " + fileName);
         }
     }
+
+    /**
+     * Сохранение файла для конкретного задания и группы
+     * @return Attachment
+     */
     @Override
     public Attachment saveAttachment(MultipartFile file, TaskEntity task, GroupEntity group) throws Exception {
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
         try {
             if(fileName.contains("..")) {
                 throw  new Exception("Filename contains invalid path sequence "
@@ -69,6 +81,10 @@ public class AttachmentServiceImpl implements AttachmentService{
         }
     }
 
+    /**
+     * Сохранение списка файлов для конкретного задания и группы
+     * @return List<Attachment>
+     */
     @Override
     public List<Attachment> saveAttachments(List<MultipartFile> files, Long taskID, Long groupID) throws Exception {
         TaskEntity task = taskRepo.findById(taskID).get();
@@ -77,11 +93,15 @@ public class AttachmentServiceImpl implements AttachmentService{
         for (var f:files) {
             attachments.add(saveAttachment(f, task, group));
         }
-        task.getGroupsForTask().stream().filter(x->x.getGroupID()==groupID).findFirst().get().setFiles(attachments);
+        task.getGroupsForTask().stream().filter(x-> Objects.equals(x.getGroupID(), groupID)).findFirst().get().setFiles(attachments);
         taskRepo.save(task);
         return attachments;
     }
 
+    /**
+     * Получение файла по ID
+     * @return Attachment
+     */
     @Override
     public Attachment getAttachment(String fileId) throws Exception {
         return attachmentRepository
@@ -89,11 +109,14 @@ public class AttachmentServiceImpl implements AttachmentService{
                 .orElseThrow(
                         () -> new Exception("File not found with Id: " + fileId));
     }
+
+    /**
+     * Получение списка файлов по ID задания и группы
+     * @return List<Attachment>
+     */
     @Transactional
     @Override
-    public List<Attachment> getAttachments(Long taskID, Long groupID) throws Exception {
-        List<Attachment> attachments = attachmentRepository.findByTaskIDAndGroupID(taskID,groupID);
-        return attachments;
+    public List<Attachment> getAttachments(Long taskID, Long groupID) {
+        return attachmentRepository.findByTaskIDAndGroupID(taskID,groupID);
     }
-
 }

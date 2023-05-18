@@ -11,6 +11,9 @@ import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 
+/**
+ * Сущность сообщений для базы данных. Хранит ID, текст, время написания, ID пользователя, ID задания
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -37,7 +40,16 @@ public class MessageEntity {
         this.user = user;
         this.task = task;
     }
+
     public Message entityToModel() {
-        return new Message(id,text,time,new User(user.getId(),user.getUsername(),new Group(user.getGroup().getId(),user.getGroup().getName())));
+        return new Message(id,text,time,
+                new User(
+                        user.getId(),
+                        user.getUsername(),
+                        new Group(
+                                user.getGroup().getId(),
+                                user.getGroup().getName()
+                        )
+                ));
     }
 }

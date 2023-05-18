@@ -11,6 +11,9 @@ import org.hibernate.annotations.TypeDef;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Модель задания для отправки JSON файлом
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -41,6 +44,11 @@ public class Task {
         this.id = id;
         this.name = name;
     }
+
+
+    /**
+     * Класс для хранения группы, состояния её выполнения задания и её файлов для данного задания
+     */
 
     @Data
     @AllArgsConstructor
