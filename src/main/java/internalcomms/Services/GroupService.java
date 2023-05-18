@@ -60,17 +60,6 @@ public class GroupService {
     }
 
     /**
-     * Возвращает все задание группы по её ID
-     * @return Group
-     */
-    public Group getTasks(Long id){
-        GroupEntity group;
-        if(groupRepo.existsById(id)) group = groupRepo.findById(id).get();
-        else return null;
-        return group.entityToModel();
-    }
-
-    /**
      * Удаляет группу
      * @return id
      */
