@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * Модель пользователя для отправки JSON файлом
+ */
 @Getter
 @Setter
 @AllArgsConstructor

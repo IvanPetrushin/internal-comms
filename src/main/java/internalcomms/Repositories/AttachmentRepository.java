@@ -10,9 +10,7 @@ import java.util.List;
 public interface AttachmentRepository extends CrudRepository<Attachment, String> {
     /**
      * Берет из базы данных файлы конкретного задания и группы
-     * @param t
-     * @param g
-     * @return
+     * @return List<Attachment>
      */
     @Query(value = "SELECT * FROM public.attachment a WHERE a.task_id= :t and a.group_id= :g", nativeQuery = true)
     List<Attachment> findByTaskIDAndGroupID(Long t, Long g);

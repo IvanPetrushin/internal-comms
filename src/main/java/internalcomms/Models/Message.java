@@ -1,6 +1,9 @@
 package internalcomms.Models;
 import lombok.*;
 
+/**
+ * Модель сообщения для отправки JSON файлом
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

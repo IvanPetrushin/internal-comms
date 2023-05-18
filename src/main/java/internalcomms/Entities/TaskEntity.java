@@ -6,13 +6,13 @@ import internalcomms.Models.Message;
 import internalcomms.Models.Task;
 import internalcomms.ResponseData;
 import org.springframework.web.client.RestTemplate;
-import internalcomms.Services.AttachmentServiceImpl;
 import lombok.*;
 import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static javax.persistence.CascadeType.ALL;
 
@@ -54,7 +54,7 @@ public class TaskEntity {
         List<ResponseData> ownerFiles = new ArrayList<>();
         List<Task.GroupForTask> groups = new ArrayList<>();
         for(var g: groupsForTask){
-            GroupEntity ge = this.groups.stream().filter(x->x.getId()==g.groupID).findFirst().get();
+            GroupEntity ge = this.groups.stream().filter(x-> Objects.equals(x.getId(), g.groupID)).findFirst().get();
             List<ResponseData> rd = restTemplate.getForObject("http://localhost:8080/files/" + id+"/"+g.groupID, List.class);
             if(g.getIsHead()) {
                 owner = new Group(ge.getId(), ge.getName());
@@ -64,7 +64,7 @@ public class TaskEntity {
                 groups.add(new Task.GroupForTask(g.condition, new Group(ge.getId(), ge.getName()), rd));
             }
         }
-        List<Message> messages = this.messages.stream().map(x->x.entityToModel()).toList();
+        List<Message> messages = this.messages.stream().map(MessageEntity::entityToModel).toList();
         return new Task(id,name, description, deadline,priority, owner, ownerFiles, groups, messages);
     }
     @Data

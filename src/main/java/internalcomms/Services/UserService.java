@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
+/**
+ * Сервис для пользователя
+ */
 @Service
 public class UserService {
     @Autowired
@@ -18,6 +21,10 @@ public class UserService {
     @Autowired
     private GroupRepo groupRepo;
 
+    /**
+     * Регистрация пользователя
+     * @return String
+     */
     public String registration(User user) {
         GroupEntity group = groupRepo.findById(user.getGroup().getId()).get();
         userRepo.save(new UserEntity(user.getUsername(), user.getPassword(), user.getMail(), group));
@@ -36,7 +43,6 @@ public class UserService {
         }
         return user.entityToModel();
     }
-
     public User login(String mail, String password) throws UserNotFoundException {
         UserEntity user = userRepo.findByMail(mail);
         if (user == null) {

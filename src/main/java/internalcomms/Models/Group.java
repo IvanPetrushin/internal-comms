@@ -5,6 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+
+/**
+ * Модель группы для отправки JSON файлом
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

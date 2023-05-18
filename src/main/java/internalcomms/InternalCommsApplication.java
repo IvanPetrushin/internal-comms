@@ -18,7 +18,8 @@ public class InternalCommsApplication {
 	@EnableWebMvc
 	public static class WebConfig implements WebMvcConfigurer {
 		@Override
-		public void addCorsMappings(CorsRegistry registry) {
+		public void addCorsMappings(CorsRegistry registry) //Эта функция исправляет проблему с no-cors
+		{
 			registry.addMapping("/**");
 		}
 	}
