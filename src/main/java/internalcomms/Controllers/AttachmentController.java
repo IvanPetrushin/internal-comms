@@ -99,18 +99,4 @@ public class AttachmentController {
                                 + "\"")
                 .body(new ByteArrayResource(attachment.getData()));
     }
-    //@GetMapping("/download")
-    //public List<ResponseEntity<Resource>> downloadFiles(@RequestParam("files")List<String> filesId) throws Exception {
-    //    List<ResponseEntity<Resource>> responseEntities = new ArrayList<>();
-    //    List<Attachment> attachments = attachmentServiceImpl.getAttachments(filesId);
-    //    for (int i = 0; i < filesId.size(); i++) {
-    //        responseEntities.add(ResponseEntity.ok()
-    //                .contentType(MediaType.parseMediaType(attachments.get(i).getFileType()))
-    //                .header(HttpHeaders.CONTENT_DISPOSITION,
-    //                        "attachment; filename=\"" + attachments.get(i).getFileName()
-    //                                + "\"")
-    //                .body(new ByteArrayResource(attachments.get(i).getData())));
-    //    }
-    //    return responseEntities;
-    //}
 }

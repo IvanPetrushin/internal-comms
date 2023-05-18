@@ -14,6 +14,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * Принимает POST-запрос на регистрацию нового пользователя
+     * На вход принимает юзернейм, пароль, почту и ID группы
+     * @param user
+     * @return
+     */
     @PostMapping
     public ResponseEntity registration(@RequestBody User user){
         try{
