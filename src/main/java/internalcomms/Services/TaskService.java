@@ -57,14 +57,14 @@ public class TaskService {
      */
     public String putCond(Long id, Long groupID, Boolean cond){
         TaskEntity task = null;
-        if(taskRepo.existsById(id)) taskRepo.findById(id).get();
+        if(taskRepo.existsById(id)) task = taskRepo.findById(id).get();
         var groups = task.getGroupsForTask();
         TaskEntity.GroupForTask group = groups.stream().filter(x -> x.getGroupID().equals(groupID)).findFirst().get();
         groups.remove(group);
         group.setCondition(cond);
         groups.add(group);
         taskRepo.save(task);
-        return "Состояние задания " +task.getName()+" изменено.";
+        return "Task condition " +task.getName()+" changed.";
     }
     public Long delete(Long id){
         taskRepo.deleteById(id);
