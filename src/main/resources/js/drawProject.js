@@ -1,10 +1,10 @@
-import {equalsEmp, currentUser, URL, currentGroup, projects} from "./data.js";
+// import {currentUser, URL, currentGroup} from "./data.js";
 
-async function drawProject(projects) {
-    for (let [index, project] of projects.entries()) {
+async function drawProject(projects, currentUser, URL) {
+    for (let project of projects) {
 
         let block = document.createElement('div');
-        block.classList.add('block', 'project', `${index}`);
+        block.classList.add('block', 'project', `${project.id}`);
 
         const projectHeader = document.createElement('div');
         projectHeader.classList.add('project-header');
@@ -70,7 +70,7 @@ async function drawProject(projects) {
                 userFiles.classList.add('block', 'project-files', 'user');
 
                 div = document.createElement('div');
-                div.innerHTML = `<i class="status"></i>Отчет <a href="${URL}/group/${tempGroup.group.id}">${tempGroup.group.name}</a><i class="mini">(${tempGroup.group.id})</i>: `
+                div.innerHTML = `<i class="status"></i>Отчет <a class="profile-link" href="${URL}/group/${tempGroup.group.id}">${tempGroup.group.name}</a><i class="mini">(${tempGroup.group.id})</i>: `
 
                 let currentUserFiles = project.groups[tempGroup];
                 if (currentUserFiles !== undefined) {
@@ -112,7 +112,7 @@ async function drawProject(projects) {
 
         const projectBottomInfo = document.createElement('ul');
         projectBottomInfo.classList.add('project-bottom__info');
-        projectBottomInfo.innerHTML = `<li class="owner">Заказчик задачи: ${project.owner.name} (${project.owner.id})</li>`;
+        projectBottomInfo.innerHTML = `<li class="owner">Заказчик задачи: <a class="profile-link" href="${URL}/group/${project.owner.id}">${project.owner.name} (${project.owner.id})</a></li>`;
 
         const projectButtons = document.createElement('div');
         projectButtons.classList.add('project-buttons');
@@ -136,7 +136,7 @@ async function drawProject(projects) {
 
 
         let projectWindow;
-        if (projectCompleted(project)) { //Date.parse(project.deadline) < Date.now() ||
+        if (projectCompleted(project, currentUser.group)) { //Date.parse(project.deadline) < Date.now() ||
             projectWindow = document.querySelector('.projects-window.ended');
             block.querySelector('.project-buttons').textContent = '';
         }
@@ -158,7 +158,7 @@ async function drawProject(projects) {
     }
 }
 
-function projectCompleted(project) {
+function projectCompleted(project, currentGroup) {
     if (project.owner.id === currentGroup.id) {
         if (project.groups.every(value => value.condition)) {
             console.log(project.groups);
