@@ -48,7 +48,7 @@
 .input span {
     position: absolute;
     display: block;
-    color: #d6d6d6;
+    color: black;
     right: 10px;
     top: 8px;
     font-size: 20px;
@@ -60,7 +60,7 @@
     border: 1px solid #d6d6d6;
     border-radius: 4px;
     transition: 0.2s ease-out;
-    color: #c6c6c6;
+    /*color: black;*/
 }
 .input input:focus {
     padding: 10px 5px 10px 10px;
