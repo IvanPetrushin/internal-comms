@@ -8,6 +8,12 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface AttachmentRepository extends CrudRepository<Attachment, String> {
-    @Query(value = "SELECT * FROM public.attachment WHERE attachment.task_id=task_id and attachment.group_id=group_id",nativeQuery = true)
-    List<Attachment> findByTaskIDAndGroupID(@Param("task_id")Long t, @Param("group_id")Long g);
+    /**
+     * Берет из базы данных файлы конкретного задания и группы
+     * @param t
+     * @param g
+     * @return
+     */
+    @Query(value = "SELECT * FROM public.attachment a WHERE a.task_id= :t and a.group_id= :g", nativeQuery = true)
+    List<Attachment> findByTaskIDAndGroupID(Long t, Long g);
 }
