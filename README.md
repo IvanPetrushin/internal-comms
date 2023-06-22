@@ -1,16 +1,40 @@
-## Краткое описание
-В рамках кейса, необходимо разработать инструмент, который позволит настроить коммуникацию между сотрудниками компании. Инструмент должен быть доступен любому сотруднику компании, у которого есть ПК.
-## Проблема
-В компании работает более 300 тыс. сотрудников. Коммуникация сейчас, в основном, происходит по почте. Создание инструмента позволит оптимизировать и ускорить коммуникацию между подразделениями, сократить сроки согласования и выполнения задач.
-## Результаты
-Должны быть реализованы возможности:
-1. Постановка задач подчиненным.
-2. Приоритезация задач.
-3. Оценка выполнения задач.
-4. Предоставление обратной связи по итогам выполнения задачи инициатору.
-5. Передача задач между подразделениями (руководитель-подчиненный).
-6. Отчетность.
-7. Предоставлять сотруднику магазина все необходимые для работы инструкции;
-8. Оперативно отвечать на проблемные вопросы;
-9. Проводить обучение и тестирование сотрудников;
-10. Возможность анализировать часто задаваемых вопросы от сотрудников по заданным критериям.
+## Web application written in Java and JavaScript is used for internal communication, assignment and prioritization of tasks, data exchange and reporting on the work among the employees.
+### MVC architecture pattern.
+## Technology stack
+* Spring Framework
+* Rest API
+* PostgreSQL
+* Gradle
+
+### Needed env variables
+```
+spring.datasource.username
+spring.datasource.password
+```
+
+### back-end:
+1. Connect PostgreSQL DB
+2. Build with Gradle
+```
+ ./gradlew build
+```
+3. Run locally with configuration:
+```
+-Djava.rmi.server.hostname=localhost
+internalcomms.InternalCommsApplication
+```
+4. Check locally
+```
+http://localhost:8080/
+```
+### Containerization - [DockerHub](https://hub.docker.com/r/nikitamakoveev/internal-comms2)
+1. Download [docker-compose.yml](dockerFile/docker-compose.yml)
+2. Run in cmd
+```
+docker compose build
+docker compose up
+```
+3. Check locally
+```
+http://localhost:8080/
+```
